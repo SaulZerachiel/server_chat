@@ -1,2 +1,1 @@
-import websocket as ws
-
+import websockets as ws
