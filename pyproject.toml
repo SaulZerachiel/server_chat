@@ -7,4 +7,5 @@ requires-python = ">=3.12,<3.14"
 dependencies = [
     "websocket>=0.2.1,<15.0.2",
     "websocket-client>=1.9.0",
+    "websockets>=15.0.1",
 ]
