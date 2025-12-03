@@ -3,10 +3,10 @@ import websockets
 import datetime
 
 async def chat():
-    uri = "ws://127.0.0.1:6789"
+    uri = "ws://192.168.1.25:6789"
 
     id = datetime.datetime.now()
-
+    print("Connecting to server...")
     async with websockets.connect(uri) as websocket:
         print(f"{id} Connected to server!")
 
