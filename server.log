@@ -1,0 +1,320 @@
+2025-12-09 20:43:32,336 - DEBUG: Using proactor: IocpProactor
+2025-12-09 20:43:32,412 - INFO: server listening on 0.0.0.0:20200
+2025-12-09 20:43:32,412 - INFO: Server running.
+2025-12-09 20:43:43,816 - DEBUG: = connection is CONNECTING
+2025-12-09 20:43:43,817 - DEBUG: < GET / HTTP/1.1
+2025-12-09 20:43:43,817 - DEBUG: < Host: 172.16.118.23:20200
+2025-12-09 20:43:43,817 - DEBUG: < Upgrade: websocket
+2025-12-09 20:43:43,817 - DEBUG: < Connection: Upgrade
+2025-12-09 20:43:43,819 - DEBUG: < Sec-WebSocket-Key: RycuWM99BOuEmGwaK6MN3g==
+2025-12-09 20:43:43,819 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-09 20:43:43,819 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-09 20:43:43,819 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-09 20:43:43,820 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-09 20:43:43,820 - DEBUG: > Date: Tue, 09 Dec 2025 19:43:43 GMT
+2025-12-09 20:43:43,820 - DEBUG: > Upgrade: websocket
+2025-12-09 20:43:43,820 - DEBUG: > Connection: Upgrade
+2025-12-09 20:43:43,820 - DEBUG: > Sec-WebSocket-Accept: CEi+0Wcw3CdYr/e+wXLumDa3u2M=
+2025-12-09 20:43:43,820 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-09 20:43:43,820 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-09 20:43:43,820 - DEBUG: = connection is OPEN
+2025-12-09 20:43:43,820 - INFO: connection open
+2025-12-09 20:43:43,821 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x00000248DFFB69F0>
+2025-12-09 20:43:43,821 - INFO: Connected clients: 1
+2025-12-09 20:43:43,821 - INFO: User: 2025-12-09 20:43:43.821107
+2025-12-09 20:43:43,821 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-09 20:44:03,822 - DEBUG: > PING 30 9a f1 50 [binary, 4 bytes]
+2025-12-09 20:44:03,822 - DEBUG: % sent keepalive ping
+2025-12-09 20:44:03,822 - DEBUG: < PONG 30 9a f1 50 [binary, 4 bytes]
+2025-12-09 20:44:03,823 - DEBUG: % received keepalive pong
+2025-12-09 20:44:03,823 - DEBUG: < PING d8 dc a9 d3 [binary, 4 bytes]
+2025-12-09 20:44:03,823 - DEBUG: > PONG d8 dc a9 d3 [binary, 4 bytes]
+2025-12-09 20:44:23,830 - DEBUG: > PING ea e9 c5 0d [binary, 4 bytes]
+2025-12-09 20:44:23,830 - DEBUG: % sent keepalive ping
+2025-12-09 20:44:23,830 - DEBUG: < PING 9f 08 92 40 [binary, 4 bytes]
+2025-12-09 20:44:23,831 - DEBUG: > PONG 9f 08 92 40 [binary, 4 bytes]
+2025-12-09 20:44:23,831 - DEBUG: < PONG ea e9 c5 0d [binary, 4 bytes]
+2025-12-09 20:44:23,831 - DEBUG: % received keepalive pong
+2025-12-09 20:44:43,841 - DEBUG: > PING 29 aa 89 b2 [binary, 4 bytes]
+2025-12-09 20:44:43,841 - DEBUG: % sent keepalive ping
+2025-12-09 20:44:43,842 - DEBUG: < PING 59 be 8d df [binary, 4 bytes]
+2025-12-09 20:44:43,842 - DEBUG: > PONG 59 be 8d df [binary, 4 bytes]
+2025-12-09 20:44:43,842 - DEBUG: < PONG 29 aa 89 b2 [binary, 4 bytes]
+2025-12-09 20:44:43,842 - DEBUG: % received keepalive pong
+2025-12-09 20:45:03,833 - DEBUG: > PING 1c c5 ba a3 [binary, 4 bytes]
+2025-12-09 20:45:03,833 - DEBUG: % sent keepalive ping
+2025-12-09 20:45:03,833 - DEBUG: < PING d6 71 8e 2d [binary, 4 bytes]
+2025-12-09 20:45:03,833 - DEBUG: > PONG d6 71 8e 2d [binary, 4 bytes]
+2025-12-09 20:45:03,833 - DEBUG: < PONG 1c c5 ba a3 [binary, 4 bytes]
+2025-12-09 20:45:03,833 - DEBUG: % received keepalive pong
+2025-12-09 20:45:23,846 - DEBUG: > PING ba 4e 72 5b [binary, 4 bytes]
+2025-12-09 20:45:23,846 - DEBUG: % sent keepalive ping
+2025-12-09 20:45:23,846 - DEBUG: < PING 99 c3 a5 61 [binary, 4 bytes]
+2025-12-09 20:45:23,847 - DEBUG: > PONG 99 c3 a5 61 [binary, 4 bytes]
+2025-12-09 20:45:23,847 - DEBUG: < PONG ba 4e 72 5b [binary, 4 bytes]
+2025-12-09 20:45:23,847 - DEBUG: % received keepalive pong
+2025-12-09 20:45:43,855 - DEBUG: > PING 0c 8c d2 eb [binary, 4 bytes]
+2025-12-09 20:45:43,855 - DEBUG: % sent keepalive ping
+2025-12-09 20:45:43,855 - DEBUG: < PING 91 75 ce 43 [binary, 4 bytes]
+2025-12-09 20:45:43,855 - DEBUG: > PONG 91 75 ce 43 [binary, 4 bytes]
+2025-12-09 20:45:43,855 - DEBUG: < PONG 0c 8c d2 eb [binary, 4 bytes]
+2025-12-09 20:45:43,855 - DEBUG: % received keepalive pong
+2025-12-09 20:46:03,863 - DEBUG: > PING 66 25 be 9c [binary, 4 bytes]
+2025-12-09 20:46:03,863 - DEBUG: % sent keepalive ping
+2025-12-09 20:46:03,865 - DEBUG: < PING 98 bf 12 86 [binary, 4 bytes]
+2025-12-09 20:46:03,865 - DEBUG: > PONG 98 bf 12 86 [binary, 4 bytes]
+2025-12-09 20:46:03,865 - DEBUG: < PONG 66 25 be 9c [binary, 4 bytes]
+2025-12-09 20:46:03,865 - DEBUG: % received keepalive pong
+2025-12-09 20:46:23,878 - DEBUG: > PING 75 25 83 d0 [binary, 4 bytes]
+2025-12-09 20:46:23,878 - DEBUG: % sent keepalive ping
+2025-12-09 20:46:23,879 - DEBUG: < PING 'z.N\t' [text, 4 bytes]
+2025-12-09 20:46:23,879 - DEBUG: > PONG 'z.N\t' [text, 4 bytes]
+2025-12-09 20:46:23,879 - DEBUG: < PONG 75 25 83 d0 [binary, 4 bytes]
+2025-12-09 20:46:23,879 - DEBUG: % received keepalive pong
+2025-12-09 20:46:43,884 - DEBUG: > PING '\r\x07\u04ef' [text, 4 bytes]
+2025-12-09 20:46:43,884 - DEBUG: % sent keepalive ping
+2025-12-09 20:46:43,884 - DEBUG: < PING 05 91 18 ef [binary, 4 bytes]
+2025-12-09 20:46:43,884 - DEBUG: > PONG 05 91 18 ef [binary, 4 bytes]
+2025-12-09 20:46:43,884 - DEBUG: < PONG '\r\x07\u04ef' [text, 4 bytes]
+2025-12-09 20:46:43,884 - DEBUG: % received keepalive pong
+2025-12-09 20:47:03,891 - DEBUG: > PING 92 79 29 7e [binary, 4 bytes]
+2025-12-09 20:47:03,891 - DEBUG: % sent keepalive ping
+2025-12-09 20:47:03,891 - DEBUG: < PING '\tx\x19r' [text, 4 bytes]
+2025-12-09 20:47:03,891 - DEBUG: > PONG '\tx\x19r' [text, 4 bytes]
+2025-12-09 20:47:03,892 - DEBUG: < PONG 92 79 29 7e [binary, 4 bytes]
+2025-12-09 20:47:03,892 - DEBUG: % received keepalive pong
+2025-12-09 20:47:23,894 - DEBUG: > PING e7 35 5c 22 [binary, 4 bytes]
+2025-12-09 20:47:23,894 - DEBUG: % sent keepalive ping
+2025-12-09 20:47:23,894 - DEBUG: < PING f7 58 69 c2 [binary, 4 bytes]
+2025-12-09 20:47:23,894 - DEBUG: > PONG f7 58 69 c2 [binary, 4 bytes]
+2025-12-09 20:47:23,894 - DEBUG: < PONG e7 35 5c 22 [binary, 4 bytes]
+2025-12-09 20:47:23,894 - DEBUG: % received keepalive pong
+2025-12-09 20:47:43,903 - DEBUG: > PING d1 a7 0c bf [binary, 4 bytes]
+2025-12-09 20:47:43,903 - DEBUG: % sent keepalive ping
+2025-12-09 20:47:43,903 - DEBUG: < PING c7 63 2b f3 [binary, 4 bytes]
+2025-12-09 20:47:43,904 - DEBUG: > PONG c7 63 2b f3 [binary, 4 bytes]
+2025-12-09 20:47:43,904 - DEBUG: < PONG d1 a7 0c bf [binary, 4 bytes]
+2025-12-09 20:47:43,904 - DEBUG: % received keepalive pong
+2025-12-09 20:48:03,891 - DEBUG: > PING 04 90 4b 0c [binary, 4 bytes]
+2025-12-09 20:48:03,891 - DEBUG: % sent keepalive ping
+2025-12-09 20:48:03,892 - DEBUG: < PING 8e 81 b4 8d [binary, 4 bytes]
+2025-12-09 20:48:03,892 - DEBUG: > PONG 8e 81 b4 8d [binary, 4 bytes]
+2025-12-09 20:48:03,892 - DEBUG: < PONG 04 90 4b 0c [binary, 4 bytes]
+2025-12-09 20:48:03,892 - DEBUG: % received keepalive pong
+2025-12-09 20:48:23,896 - DEBUG: > PING 30 ab b2 59 [binary, 4 bytes]
+2025-12-09 20:48:23,896 - DEBUG: % sent keepalive ping
+2025-12-09 20:48:23,896 - DEBUG: < PING 2d 19 8b 18 [binary, 4 bytes]
+2025-12-09 20:48:23,896 - DEBUG: > PONG 2d 19 8b 18 [binary, 4 bytes]
+2025-12-09 20:48:23,896 - DEBUG: < PONG 30 ab b2 59 [binary, 4 bytes]
+2025-12-09 20:48:23,897 - DEBUG: % received keepalive pong
+2025-12-09 20:48:43,897 - DEBUG: > PING 5b 25 2d d2 [binary, 4 bytes]
+2025-12-09 20:48:43,897 - DEBUG: % sent keepalive ping
+2025-12-09 20:48:43,897 - DEBUG: < PING fd 84 d8 6e [binary, 4 bytes]
+2025-12-09 20:48:43,898 - DEBUG: > PONG fd 84 d8 6e [binary, 4 bytes]
+2025-12-09 20:48:43,898 - DEBUG: < PONG 5b 25 2d d2 [binary, 4 bytes]
+2025-12-09 20:48:43,898 - DEBUG: % received keepalive pong
+2025-12-09 20:49:03,906 - DEBUG: > PING aa d9 67 a2 [binary, 4 bytes]
+2025-12-09 20:49:03,906 - DEBUG: % sent keepalive ping
+2025-12-09 20:49:03,906 - DEBUG: < PING '|^>\x0f' [text, 4 bytes]
+2025-12-09 20:49:03,906 - DEBUG: > PONG '|^>\x0f' [text, 4 bytes]
+2025-12-09 20:49:03,907 - DEBUG: < PONG aa d9 67 a2 [binary, 4 bytes]
+2025-12-09 20:49:03,907 - DEBUG: % received keepalive pong
+2025-12-09 20:49:23,914 - DEBUG: > PING e4 f4 f9 47 [binary, 4 bytes]
+2025-12-09 20:49:23,914 - DEBUG: % sent keepalive ping
+2025-12-09 20:49:23,914 - DEBUG: < PING f5 fb 92 ae [binary, 4 bytes]
+2025-12-09 20:49:23,915 - DEBUG: > PONG f5 fb 92 ae [binary, 4 bytes]
+2025-12-09 20:49:23,915 - DEBUG: < PONG e4 f4 f9 47 [binary, 4 bytes]
+2025-12-09 20:49:23,915 - DEBUG: % received keepalive pong
+2025-12-09 20:49:43,924 - DEBUG: > PING 1d d2 5d af [binary, 4 bytes]
+2025-12-09 20:49:43,924 - DEBUG: % sent keepalive ping
+2025-12-09 20:49:43,924 - DEBUG: < PING 0a 4e fa ff [binary, 4 bytes]
+2025-12-09 20:49:43,924 - DEBUG: > PONG 0a 4e fa ff [binary, 4 bytes]
+2025-12-09 20:49:43,924 - DEBUG: < PONG 1d d2 5d af [binary, 4 bytes]
+2025-12-09 20:49:43,925 - DEBUG: % received keepalive pong
+2025-12-09 20:50:03,930 - DEBUG: > PING db de 62 e7 [binary, 4 bytes]
+2025-12-09 20:50:03,930 - DEBUG: % sent keepalive ping
+2025-12-09 20:50:03,930 - DEBUG: < PING b6 4f 4c 3c [binary, 4 bytes]
+2025-12-09 20:50:03,930 - DEBUG: > PONG b6 4f 4c 3c [binary, 4 bytes]
+2025-12-09 20:50:03,931 - DEBUG: < PONG db de 62 e7 [binary, 4 bytes]
+2025-12-09 20:50:03,931 - DEBUG: % received keepalive pong
+2025-12-09 20:50:23,932 - DEBUG: > PING '=s\x0b~' [text, 4 bytes]
+2025-12-09 20:50:23,932 - DEBUG: % sent keepalive ping
+2025-12-09 20:50:23,932 - DEBUG: < PING d1 09 7e 92 [binary, 4 bytes]
+2025-12-09 20:50:23,932 - DEBUG: > PONG d1 09 7e 92 [binary, 4 bytes]
+2025-12-09 20:50:23,934 - DEBUG: < PONG '=s\x0b~' [text, 4 bytes]
+2025-12-09 20:50:23,934 - DEBUG: % received keepalive pong
+2025-12-09 20:50:43,942 - DEBUG: > PING b4 e3 20 24 [binary, 4 bytes]
+2025-12-09 20:50:43,942 - DEBUG: % sent keepalive ping
+2025-12-09 20:50:43,942 - DEBUG: < PING 62 92 6e 1b [binary, 4 bytes]
+2025-12-09 20:50:43,942 - DEBUG: > PONG 62 92 6e 1b [binary, 4 bytes]
+2025-12-09 20:50:43,942 - DEBUG: < PONG b4 e3 20 24 [binary, 4 bytes]
+2025-12-09 20:50:43,942 - DEBUG: % received keepalive pong
+2025-12-09 20:51:03,951 - DEBUG: > PING 60 12 ff 77 [binary, 4 bytes]
+2025-12-09 20:51:03,951 - DEBUG: % sent keepalive ping
+2025-12-09 20:51:03,951 - DEBUG: < PING a4 f1 d5 57 [binary, 4 bytes]
+2025-12-09 20:51:03,952 - DEBUG: > PONG a4 f1 d5 57 [binary, 4 bytes]
+2025-12-09 20:51:03,952 - DEBUG: < PONG 60 12 ff 77 [binary, 4 bytes]
+2025-12-09 20:51:03,952 - DEBUG: % received keepalive pong
+2025-12-09 20:51:23,949 - DEBUG: > PING "\x00dN'" [text, 4 bytes]
+2025-12-09 20:51:23,949 - DEBUG: % sent keepalive ping
+2025-12-09 20:51:23,949 - DEBUG: < PING 8c c3 c2 1d [binary, 4 bytes]
+2025-12-09 20:51:23,949 - DEBUG: > PONG 8c c3 c2 1d [binary, 4 bytes]
+2025-12-09 20:51:23,949 - DEBUG: < PONG "\x00dN'" [text, 4 bytes]
+2025-12-09 20:51:23,949 - DEBUG: % received keepalive pong
+2025-12-09 20:51:43,955 - DEBUG: > PING e5 ae 18 4b [binary, 4 bytes]
+2025-12-09 20:51:43,955 - DEBUG: % sent keepalive ping
+2025-12-09 20:51:43,955 - DEBUG: < PING bd 3b 98 79 [binary, 4 bytes]
+2025-12-09 20:51:43,956 - DEBUG: > PONG bd 3b 98 79 [binary, 4 bytes]
+2025-12-09 20:51:43,956 - DEBUG: < PONG e5 ae 18 4b [binary, 4 bytes]
+2025-12-09 20:51:43,956 - DEBUG: % received keepalive pong
+2025-12-09 20:52:03,957 - DEBUG: > PING 61 e6 f4 57 [binary, 4 bytes]
+2025-12-09 20:52:03,957 - DEBUG: % sent keepalive ping
+2025-12-09 20:52:03,957 - DEBUG: < PING de ec 1b 08 [binary, 4 bytes]
+2025-12-09 20:52:03,957 - DEBUG: > PONG de ec 1b 08 [binary, 4 bytes]
+2025-12-09 20:52:03,957 - DEBUG: < PONG 61 e6 f4 57 [binary, 4 bytes]
+2025-12-09 20:52:03,957 - DEBUG: % received keepalive pong
+2025-12-09 20:52:23,965 - DEBUG: > PING 79 75 45 d5 [binary, 4 bytes]
+2025-12-09 20:52:23,965 - DEBUG: % sent keepalive ping
+2025-12-09 20:52:23,965 - DEBUG: < PING a7 b6 9c 00 [binary, 4 bytes]
+2025-12-09 20:52:23,965 - DEBUG: > PONG a7 b6 9c 00 [binary, 4 bytes]
+2025-12-09 20:52:23,965 - DEBUG: < PONG 79 75 45 d5 [binary, 4 bytes]
+2025-12-09 20:52:23,965 - DEBUG: % received keepalive pong
+2025-12-09 20:52:43,971 - DEBUG: > PING 8b c3 68 60 [binary, 4 bytes]
+2025-12-09 20:52:43,971 - DEBUG: % sent keepalive ping
+2025-12-09 20:52:43,971 - DEBUG: < PING fe 52 e5 c9 [binary, 4 bytes]
+2025-12-09 20:52:43,971 - DEBUG: > PONG fe 52 e5 c9 [binary, 4 bytes]
+2025-12-09 20:52:43,971 - DEBUG: < PONG 8b c3 68 60 [binary, 4 bytes]
+2025-12-09 20:52:43,971 - DEBUG: % received keepalive pong
+2025-12-09 20:53:03,978 - DEBUG: > PING 48 93 3b 94 [binary, 4 bytes]
+2025-12-09 20:53:03,978 - DEBUG: % sent keepalive ping
+2025-12-09 20:53:03,978 - DEBUG: < PING 83 3f be ad [binary, 4 bytes]
+2025-12-09 20:53:03,979 - DEBUG: > PONG 83 3f be ad [binary, 4 bytes]
+2025-12-09 20:53:03,979 - DEBUG: < PONG 48 93 3b 94 [binary, 4 bytes]
+2025-12-09 20:53:03,979 - DEBUG: % received keepalive pong
+2025-12-09 20:53:23,985 - DEBUG: > PING 'A\x19yN' [text, 4 bytes]
+2025-12-09 20:53:23,985 - DEBUG: % sent keepalive ping
+2025-12-09 20:53:23,985 - DEBUG: < PING ec a1 6b 12 [binary, 4 bytes]
+2025-12-09 20:53:23,986 - DEBUG: > PONG ec a1 6b 12 [binary, 4 bytes]
+2025-12-09 20:53:23,986 - DEBUG: < PONG 'A\x19yN' [text, 4 bytes]
+2025-12-09 20:53:23,986 - DEBUG: % received keepalive pong
+2025-12-09 20:53:43,997 - DEBUG: > PING 16 28 6f e5 [binary, 4 bytes]
+2025-12-09 20:53:43,997 - DEBUG: % sent keepalive ping
+2025-12-09 20:53:43,997 - DEBUG: < PING 8b c8 03 97 [binary, 4 bytes]
+2025-12-09 20:53:43,998 - DEBUG: > PONG 8b c8 03 97 [binary, 4 bytes]
+2025-12-09 20:53:43,998 - DEBUG: < PONG 16 28 6f e5 [binary, 4 bytes]
+2025-12-09 20:53:43,998 - DEBUG: % received keepalive pong
+2025-12-09 20:54:03,998 - DEBUG: > PING 2b 7f 06 ac [binary, 4 bytes]
+2025-12-09 20:54:03,998 - DEBUG: % sent keepalive ping
+2025-12-09 20:54:03,999 - DEBUG: < PING aa c1 d4 0d [binary, 4 bytes]
+2025-12-09 20:54:03,999 - DEBUG: > PONG aa c1 d4 0d [binary, 4 bytes]
+2025-12-09 20:54:03,999 - DEBUG: < PONG 2b 7f 06 ac [binary, 4 bytes]
+2025-12-09 20:54:03,999 - DEBUG: % received keepalive pong
+2025-12-09 20:54:24,014 - DEBUG: > PING 0e e9 46 8d [binary, 4 bytes]
+2025-12-09 20:54:24,014 - DEBUG: % sent keepalive ping
+2025-12-09 20:54:24,014 - DEBUG: < PING 1b d8 f3 3d [binary, 4 bytes]
+2025-12-09 20:54:24,014 - DEBUG: > PONG 1b d8 f3 3d [binary, 4 bytes]
+2025-12-09 20:54:24,016 - DEBUG: < PONG 0e e9 46 8d [binary, 4 bytes]
+2025-12-09 20:54:24,016 - DEBUG: % received keepalive pong
+2025-12-09 20:54:44,029 - DEBUG: > PING 0d f6 82 3f [binary, 4 bytes]
+2025-12-09 20:54:44,030 - DEBUG: % sent keepalive ping
+2025-12-09 20:54:44,030 - DEBUG: < PING '-b\x12y' [text, 4 bytes]
+2025-12-09 20:54:44,030 - DEBUG: > PONG '-b\x12y' [text, 4 bytes]
+2025-12-09 20:54:44,030 - DEBUG: < PONG 0d f6 82 3f [binary, 4 bytes]
+2025-12-09 20:54:44,030 - DEBUG: % received keepalive pong
+2025-12-09 20:55:04,032 - DEBUG: > PING 60 f8 de 2f [binary, 4 bytes]
+2025-12-09 20:55:04,033 - DEBUG: % sent keepalive ping
+2025-12-09 20:55:04,033 - DEBUG: < PING f2 6f 30 1f [binary, 4 bytes]
+2025-12-09 20:55:04,033 - DEBUG: > PONG f2 6f 30 1f [binary, 4 bytes]
+2025-12-09 20:55:04,033 - DEBUG: < PONG 60 f8 de 2f [binary, 4 bytes]
+2025-12-09 20:55:04,033 - DEBUG: % received keepalive pong
+2025-12-09 20:55:24,042 - DEBUG: > PING f5 59 31 9b [binary, 4 bytes]
+2025-12-09 20:55:24,042 - DEBUG: % sent keepalive ping
+2025-12-09 20:55:24,042 - DEBUG: < PING 5e 37 de 03 [binary, 4 bytes]
+2025-12-09 20:55:24,042 - DEBUG: > PONG 5e 37 de 03 [binary, 4 bytes]
+2025-12-09 20:55:24,043 - DEBUG: < PONG f5 59 31 9b [binary, 4 bytes]
+2025-12-09 20:55:24,043 - DEBUG: % received keepalive pong
+2025-12-09 20:55:44,055 - DEBUG: > PING ed 3b a1 54 [binary, 4 bytes]
+2025-12-09 20:55:44,055 - DEBUG: % sent keepalive ping
+2025-12-09 20:55:44,055 - DEBUG: < PING 14 56 b5 75 [binary, 4 bytes]
+2025-12-09 20:55:44,055 - DEBUG: > PONG 14 56 b5 75 [binary, 4 bytes]
+2025-12-09 20:55:44,055 - DEBUG: < PONG ed 3b a1 54 [binary, 4 bytes]
+2025-12-09 20:55:44,055 - DEBUG: % received keepalive pong
+2025-12-09 20:56:04,063 - DEBUG: > PING e5 4d c5 98 [binary, 4 bytes]
+2025-12-09 20:56:04,063 - DEBUG: % sent keepalive ping
+2025-12-09 20:56:04,063 - DEBUG: < PING ef 6e 0f 31 [binary, 4 bytes]
+2025-12-09 20:56:04,063 - DEBUG: > PONG ef 6e 0f 31 [binary, 4 bytes]
+2025-12-09 20:56:04,063 - DEBUG: < PONG e5 4d c5 98 [binary, 4 bytes]
+2025-12-09 20:56:04,064 - DEBUG: % received keepalive pong
+2025-12-09 20:56:24,066 - DEBUG: > PING '6J:3' [text, 4 bytes]
+2025-12-09 20:56:24,066 - DEBUG: % sent keepalive ping
+2025-12-09 20:56:24,067 - DEBUG: < PING 87 48 43 48 [binary, 4 bytes]
+2025-12-09 20:56:24,067 - DEBUG: > PONG 87 48 43 48 [binary, 4 bytes]
+2025-12-09 20:56:24,067 - DEBUG: < PONG '6J:3' [text, 4 bytes]
+2025-12-09 20:56:24,067 - DEBUG: % received keepalive pong
+2025-12-09 20:56:44,070 - DEBUG: > PING e7 d5 f3 72 [binary, 4 bytes]
+2025-12-09 20:56:44,070 - DEBUG: % sent keepalive ping
+2025-12-09 20:56:44,070 - DEBUG: < PING e4 4d c5 c6 [binary, 4 bytes]
+2025-12-09 20:56:44,070 - DEBUG: > PONG e4 4d c5 c6 [binary, 4 bytes]
+2025-12-09 20:56:44,070 - DEBUG: < PONG e7 d5 f3 72 [binary, 4 bytes]
+2025-12-09 20:56:44,070 - DEBUG: % received keepalive pong
+2025-12-09 20:57:04,076 - DEBUG: > PING fa 8b 12 fd [binary, 4 bytes]
+2025-12-09 20:57:04,076 - DEBUG: % sent keepalive ping
+2025-12-09 20:57:04,077 - DEBUG: < PING b5 63 0a b1 [binary, 4 bytes]
+2025-12-09 20:57:04,077 - DEBUG: > PONG b5 63 0a b1 [binary, 4 bytes]
+2025-12-09 20:57:04,077 - DEBUG: < PONG fa 8b 12 fd [binary, 4 bytes]
+2025-12-09 20:57:04,077 - DEBUG: % received keepalive pong
+2025-12-09 20:57:24,090 - DEBUG: > PING b7 60 b3 6c [binary, 4 bytes]
+2025-12-09 20:57:24,090 - DEBUG: % sent keepalive ping
+2025-12-09 20:57:24,090 - DEBUG: < PING 81 06 a3 1f [binary, 4 bytes]
+2025-12-09 20:57:24,091 - DEBUG: > PONG 81 06 a3 1f [binary, 4 bytes]
+2025-12-09 20:57:24,091 - DEBUG: < PONG b7 60 b3 6c [binary, 4 bytes]
+2025-12-09 20:57:24,091 - DEBUG: % received keepalive pong
+2025-12-09 20:57:44,102 - DEBUG: > PING 91 d1 54 41 [binary, 4 bytes]
+2025-12-09 20:57:44,102 - DEBUG: % sent keepalive ping
+2025-12-09 20:57:44,102 - DEBUG: < PING ec 3c 79 c8 [binary, 4 bytes]
+2025-12-09 20:57:44,102 - DEBUG: > PONG ec 3c 79 c8 [binary, 4 bytes]
+2025-12-09 20:57:44,102 - DEBUG: < PONG 91 d1 54 41 [binary, 4 bytes]
+2025-12-09 20:57:44,103 - DEBUG: % received keepalive pong
+2025-12-09 20:58:04,119 - DEBUG: > PING 69 e4 6e 6a [binary, 4 bytes]
+2025-12-09 20:58:04,119 - DEBUG: % sent keepalive ping
+2025-12-09 20:58:04,119 - DEBUG: < PING f5 24 00 32 [binary, 4 bytes]
+2025-12-09 20:58:04,119 - DEBUG: > PONG f5 24 00 32 [binary, 4 bytes]
+2025-12-09 20:58:04,119 - DEBUG: < PONG 69 e4 6e 6a [binary, 4 bytes]
+2025-12-09 20:58:04,119 - DEBUG: % received keepalive pong
+2025-12-09 20:58:24,123 - DEBUG: > PING 04 2d 1b d4 [binary, 4 bytes]
+2025-12-09 20:58:24,123 - DEBUG: % sent keepalive ping
+2025-12-09 20:58:24,123 - DEBUG: < PING 48 94 a8 1c [binary, 4 bytes]
+2025-12-09 20:58:24,123 - DEBUG: > PONG 48 94 a8 1c [binary, 4 bytes]
+2025-12-09 20:58:24,123 - DEBUG: < PONG 04 2d 1b d4 [binary, 4 bytes]
+2025-12-09 20:58:24,123 - DEBUG: % received keepalive pong
+2025-12-09 20:58:44,133 - DEBUG: > PING 1b 5d b1 45 [binary, 4 bytes]
+2025-12-09 20:58:44,133 - DEBUG: % sent keepalive ping
+2025-12-09 20:58:44,133 - DEBUG: < PING 98 1b 60 6d [binary, 4 bytes]
+2025-12-09 20:58:44,133 - DEBUG: > PONG 98 1b 60 6d [binary, 4 bytes]
+2025-12-09 20:58:44,133 - DEBUG: < PONG 1b 5d b1 45 [binary, 4 bytes]
+2025-12-09 20:58:44,133 - DEBUG: % received keepalive pong
+2025-12-09 20:59:04,133 - DEBUG: > PING d6 93 e6 1e [binary, 4 bytes]
+2025-12-09 20:59:04,133 - DEBUG: % sent keepalive ping
+2025-12-09 20:59:04,133 - DEBUG: < PING a0 fc 4f e6 [binary, 4 bytes]
+2025-12-09 20:59:04,133 - DEBUG: > PONG a0 fc 4f e6 [binary, 4 bytes]
+2025-12-09 20:59:04,135 - DEBUG: < PONG d6 93 e6 1e [binary, 4 bytes]
+2025-12-09 20:59:04,135 - DEBUG: % received keepalive pong
+2025-12-09 20:59:24,148 - DEBUG: > PING 06 be 8b ae [binary, 4 bytes]
+2025-12-09 20:59:24,148 - DEBUG: % sent keepalive ping
+2025-12-09 20:59:24,148 - DEBUG: < PING 44 75 b8 c5 [binary, 4 bytes]
+2025-12-09 20:59:24,149 - DEBUG: > PONG 44 75 b8 c5 [binary, 4 bytes]
+2025-12-09 20:59:24,149 - DEBUG: < PONG 06 be 8b ae [binary, 4 bytes]
+2025-12-09 20:59:24,149 - DEBUG: % received keepalive pong
+2025-12-09 20:59:44,150 - DEBUG: > PING 1f 97 b4 79 [binary, 4 bytes]
+2025-12-09 20:59:44,151 - DEBUG: % sent keepalive ping
+2025-12-09 20:59:44,151 - DEBUG: < PING 9e de cc a7 [binary, 4 bytes]
+2025-12-09 20:59:44,151 - DEBUG: > PONG 9e de cc a7 [binary, 4 bytes]
+2025-12-09 20:59:44,151 - DEBUG: < PONG 1f 97 b4 79 [binary, 4 bytes]
+2025-12-09 20:59:44,151 - DEBUG: % received keepalive pong
+2025-12-09 21:00:04,163 - DEBUG: > PING 53 c5 ed 29 [binary, 4 bytes]
+2025-12-09 21:00:04,163 - DEBUG: % sent keepalive ping
+2025-12-09 21:00:04,163 - DEBUG: < PING ad 54 d8 2d [binary, 4 bytes]
+2025-12-09 21:00:04,164 - DEBUG: > PONG ad 54 d8 2d [binary, 4 bytes]
+2025-12-09 21:00:04,164 - DEBUG: < PONG 53 c5 ed 29 [binary, 4 bytes]
+2025-12-09 21:00:04,164 - DEBUG: % received keepalive pong
+2025-12-09 21:00:17,852 - WARNING: Client disconnected.
