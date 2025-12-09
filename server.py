@@ -130,8 +130,7 @@ async def handle_client(websocket):
                     }
                                         
                     for client in rooms[current_room]:
-                        if client != websocket:
-                            await client.send(json.dumps(message_obj))
+                        await client.send(json.dumps(message_obj))
 
                 case "receiveMessage":
                     msg = action["message"] 

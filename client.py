@@ -89,7 +89,7 @@ class ChatClientUI:
         top.pack(padx=8, pady=6, anchor="w")
 
         tk.Label(top, text="Host:").grid(row=0, column=0, sticky="w")
-        self.host_var = tk.StringVar(value="172.16.118.55")
+        self.host_var = tk.StringVar(value="127.0.0.1")
         tk.Entry(top, textvariable=self.host_var, width=15).grid(row=0, column=1, padx=4)
 
         tk.Label(top, text="Port:").grid(row=0, column=2, sticky="w")
