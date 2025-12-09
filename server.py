@@ -2,17 +2,24 @@ import asyncio
 import websockets as ws
 import json
 import datetime
+import logging
 
 # Notes:
 # ° variable "websocket" is a websocket connection object that represents one connected client (like an ID)
 # ° List of actions: "createRoom, joinRoom, leaveRoom, sendMessage, receiveMessage, identify, rename"
-
 
 connected_clients = set()   # Build unordered object of unique elements
 rooms = {"default":set()}   # Default room has clients in room,
                             # when a client sends a message all other clients in same room receive that message
 client_rooms = dict()
 users = dict()
+
+# Setup logging
+logging.basicConfig(
+    filename="server.log",
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s: %(message)s"
+)
 
 # CLI
 async def cli():
@@ -26,8 +33,8 @@ async def cli():
                 print(f"Connected clients: {connected_clients}")
             case "quit" | "exit":
                 print(f"Shutting down server...")
-                for ws in list(connected_clients):
-                    await ws.close()
+                for client in list(connected_clients):
+                    await client.close()
                 break
             case _:
                 print("Not a command.")
@@ -40,13 +47,13 @@ async def sendjson(websocket, obj):
 # This function is called each time a new client connects
 async def handle_client(websocket):
     # Register the new client
-    print(f"Client connected: {websocket}")
+    logging.info(f"Client connected: {websocket}")
     connected_clients.add(websocket)
-    print(f"Connected clients: {connected_clients}")
-
+    logging.info(f"Connected clients: {len(connected_clients)}")
+    
     # Give random username to client
-    users[websocket] = datetime.datetime.now() # TODO: change this
-    print(f"User: {users[websocket]}")
+    users[websocket] = datetime.datetime.now() # TODO: change this to proper username (maybe strip or something like that)
+    logging.info(f"User: {users[websocket]}")
 
     # Add client to "default" room.
     rooms["default"].add(websocket)
@@ -67,11 +74,7 @@ async def handle_client(websocket):
                 case "createRoom":
                     if action["room"] and action["room"] not in rooms:
                         rooms[action["room"]] = set()
-                        print(f"Created room: {action['room']}")
-                        # Envoyer la liste mise à jour à tous les clients
-                        for client in connected_clients:
-                            await sendjson(client, {"action": "roomsList", "rooms": list(rooms.keys())})
-
+                        logging.info(f"Created room: {action['room']}")
                 
                 case "joinRoom":
                     # Join room
@@ -92,7 +95,7 @@ async def handle_client(websocket):
                         rooms["default"].add(websocket)
                         client_rooms[websocket] = "default"
                         current_room = "default"
-                        print(f"Client left room and joined default.")
+                        logging.info("Client left room and joined default.")
 
                 case "sendMessage":
                     msg = action.get("message")
@@ -120,7 +123,9 @@ async def handle_client(websocket):
                     await sendjson(websocket, {"action": "roomsList", "rooms": list(rooms.keys())})
                 case _:
                     print("Not an action...")
-    
+                    logging.error("Not an action...")
+    except Exception as e:
+        logging.exception(f"Error handling client: {e}")
     # If client disconnect -> async loop ends and finally block gets executed
     finally:
         # Remove client from rooms
@@ -130,7 +135,7 @@ async def handle_client(websocket):
         client_rooms.pop(websocket, None)
 
         # Unregister the client
-        print("Client disconnected.")
+        logging.warning("Client disconnected.")
         connected_clients.remove(websocket)
 
 # Function to start the WebSocket server
@@ -139,7 +144,8 @@ async def main():
     # Every time a client connects, server will handle the
     # connection using the handle_client function  
     server = await ws.serve(handle_client, "0.0.0.0", 20200)
-    print("Server running")
+    logging.info("Server running.")
+    print("Server running.")
 
     await asyncio.gather(
         cli(), # CLI
