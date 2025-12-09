@@ -318,3 +318,364 @@
 2025-12-09 21:00:04,164 - DEBUG: < PONG 53 c5 ed 29 [binary, 4 bytes]
 2025-12-09 21:00:04,164 - DEBUG: % received keepalive pong
 2025-12-09 21:00:17,852 - WARNING: Client disconnected.
+2025-12-09 21:11:34,350 - DEBUG: Using proactor: IocpProactor
+2025-12-09 21:11:34,384 - INFO: server listening on 0.0.0.0:20200
+2025-12-09 21:11:34,384 - INFO: Server running.
+2025-12-09 21:11:44,911 - DEBUG: = connection is CONNECTING
+2025-12-09 21:11:44,922 - DEBUG: < GET / HTTP/1.1
+2025-12-09 21:11:44,922 - DEBUG: < Host: 127.0.0.1:20200
+2025-12-09 21:11:44,922 - DEBUG: < Upgrade: websocket
+2025-12-09 21:11:44,922 - DEBUG: < Connection: Upgrade
+2025-12-09 21:11:44,922 - DEBUG: < Sec-WebSocket-Key: M0YqClQ84MfaY9Oc72oV4g==
+2025-12-09 21:11:44,922 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-09 21:11:44,922 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-09 21:11:44,922 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-09 21:11:44,922 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-09 21:11:44,922 - DEBUG: > Date: Tue, 09 Dec 2025 20:11:44 GMT
+2025-12-09 21:11:44,922 - DEBUG: > Upgrade: websocket
+2025-12-09 21:11:44,922 - DEBUG: > Connection: Upgrade
+2025-12-09 21:11:44,922 - DEBUG: > Sec-WebSocket-Accept: pD/kUUf5JAndnG+YkN2kbcOGjbo=
+2025-12-09 21:11:44,922 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-09 21:11:44,922 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-09 21:11:44,922 - DEBUG: = connection is OPEN
+2025-12-09 21:11:44,922 - INFO: connection open
+2025-12-09 21:11:44,922 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x000001C83E376870>
+2025-12-09 21:11:44,922 - INFO: Connected clients: 1
+2025-12-09 21:11:44,922 - INFO: User: 2025-12-09 21:11:44.922371
+2025-12-09 21:11:44,922 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-09 21:11:44,922 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "User"}}' [55 bytes]
+2025-12-09 21:11:44,922 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:11:44,922 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-09 21:11:45,424 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:11:45,424 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-09 21:11:50,650 - DEBUG: < TEXT '{"action": "createRoom", "room": "test"}' [40 bytes]
+2025-12-09 21:11:50,650 - INFO: Created room: test
+2025-12-09 21:11:55,368 - DEBUG: < TEXT '{"action": "joinRoom", "room": "default"}' [41 bytes]
+2025-12-09 21:12:00,469 - DEBUG: < EOF
+2025-12-09 21:12:00,469 - DEBUG: > EOF
+2025-12-09 21:12:00,469 - DEBUG: < EOF
+2025-12-09 21:12:00,469 - DEBUG: = connection is CLOSED
+2025-12-09 21:12:00,470 - ERROR: Error handling client: no close frame received or sent
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+    return ov.getresult()
+           ^^^^^^^^^^^^^^
+OSError: [WinError 64] The specified network name is no longer available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+             ^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
+    value = callback(transferred, key, ov)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] The specified network name is no longer available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\server.py", line 69, in handle_client
+    async for raw in websocket:
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
+    yield await self.recv()
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
+    raise self.protocol.close_exc from self.recv_exc
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+2025-12-09 21:12:00,500 - WARNING: Client disconnected.
+2025-12-09 21:56:18,235 - DEBUG: Using proactor: IocpProactor
+2025-12-09 21:57:53,853 - DEBUG: Using proactor: IocpProactor
+2025-12-09 21:57:53,912 - INFO: server listening on 0.0.0.0:20200
+2025-12-09 21:57:53,912 - INFO: Server running.
+2025-12-09 21:58:06,908 - DEBUG: = connection is CONNECTING
+2025-12-09 21:58:06,910 - DEBUG: < GET / HTTP/1.1
+2025-12-09 21:58:06,910 - DEBUG: < Host: 127.0.0.1:20200
+2025-12-09 21:58:06,910 - DEBUG: < Upgrade: websocket
+2025-12-09 21:58:06,910 - DEBUG: < Connection: Upgrade
+2025-12-09 21:58:06,910 - DEBUG: < Sec-WebSocket-Key: DbtyN+43+yAm2F1VNOwqfw==
+2025-12-09 21:58:06,910 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-09 21:58:06,910 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-09 21:58:06,911 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-09 21:58:06,911 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-09 21:58:06,911 - DEBUG: > Date: Tue, 09 Dec 2025 20:58:06 GMT
+2025-12-09 21:58:06,911 - DEBUG: > Upgrade: websocket
+2025-12-09 21:58:06,911 - DEBUG: > Connection: Upgrade
+2025-12-09 21:58:06,911 - DEBUG: > Sec-WebSocket-Accept: GpRrVvZDE+ZiWtwQa/P0EK4s7/8=
+2025-12-09 21:58:06,911 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-09 21:58:06,911 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-09 21:58:06,911 - DEBUG: = connection is OPEN
+2025-12-09 21:58:06,912 - INFO: connection open
+2025-12-09 21:58:06,912 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x00000223E4DC1A00>
+2025-12-09 21:58:06,912 - INFO: Connected clients: 1
+2025-12-09 21:58:06,912 - INFO: User: User_1765313886.912146
+2025-12-09 21:58:06,912 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-09 21:58:06,913 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "User"}}' [55 bytes]
+2025-12-09 21:58:06,913 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:58:06,913 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-09 21:58:07,340 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:58:07,342 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-09 21:58:12,081 - DEBUG: < TEXT '{"action": "createRoom", "room": "cc"}' [38 bytes]
+2025-12-09 21:58:12,081 - INFO: Created room: cc
+2025-12-09 21:58:12,083 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:58:13,751 - DEBUG: < TEXT '{"action": "joinRoom", "room": "cc"}' [36 bytes]
+2025-12-09 21:58:13,752 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "cc"}}' [47 bytes]
+2025-12-09 21:58:19,737 - DEBUG: < TEXT '{"action": "sendMessage", "message": "hello la tcheam"}' [55 bytes]
+2025-12-09 21:58:21,926 - DEBUG: < EOF
+2025-12-09 21:58:21,926 - DEBUG: > EOF
+2025-12-09 21:58:21,926 - DEBUG: < EOF
+2025-12-09 21:58:21,926 - DEBUG: = connection is CLOSED
+2025-12-09 21:58:21,928 - ERROR: Error handling client: no close frame received or sent
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+    return ov.getresult()
+           ^^^^^^^^^^^^^^
+OSError: [WinError 64] The specified network name is no longer available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+             ^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
+    value = callback(transferred, key, ov)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] The specified network name is no longer available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\server.py", line 69, in handle_client
+    async for raw in websocket:
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
+    yield await self.recv()
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
+    raise self.protocol.close_exc from self.recv_exc
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+2025-12-09 21:58:21,932 - WARNING: Client disconnected.
+2025-12-09 21:58:39,660 - DEBUG: = connection is CONNECTING
+2025-12-09 21:58:39,661 - DEBUG: < GET / HTTP/1.1
+2025-12-09 21:58:39,661 - DEBUG: < Host: 127.0.0.1:20200
+2025-12-09 21:58:39,661 - DEBUG: < Upgrade: websocket
+2025-12-09 21:58:39,661 - DEBUG: < Connection: Upgrade
+2025-12-09 21:58:39,661 - DEBUG: < Sec-WebSocket-Key: RxoLhiWTbesO5FX9FjkYsQ==
+2025-12-09 21:58:39,661 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-09 21:58:39,662 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-09 21:58:39,662 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-09 21:58:39,662 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-09 21:58:39,662 - DEBUG: > Date: Tue, 09 Dec 2025 20:58:39 GMT
+2025-12-09 21:58:39,662 - DEBUG: > Upgrade: websocket
+2025-12-09 21:58:39,662 - DEBUG: > Connection: Upgrade
+2025-12-09 21:58:39,662 - DEBUG: > Sec-WebSocket-Accept: sihMyCr8XPTdcyBHdXSbXdmpZL4=
+2025-12-09 21:58:39,662 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-09 21:58:39,662 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-09 21:58:39,662 - DEBUG: = connection is OPEN
+2025-12-09 21:58:39,662 - INFO: connection open
+2025-12-09 21:58:39,663 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x00000223E4D61790>
+2025-12-09 21:58:39,663 - INFO: Connected clients: 1
+2025-12-09 21:58:39,663 - INFO: User: User_1765313919.663111
+2025-12-09 21:58:39,663 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:58:39,664 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "User"}}' [55 bytes]
+2025-12-09 21:58:39,664 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:58:39,664 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:58:40,156 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:58:40,156 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:58:43,879 - DEBUG: = connection is CONNECTING
+2025-12-09 21:58:43,880 - DEBUG: < GET / HTTP/1.1
+2025-12-09 21:58:43,880 - DEBUG: < Host: 127.0.0.1:20200
+2025-12-09 21:58:43,880 - DEBUG: < Upgrade: websocket
+2025-12-09 21:58:43,881 - DEBUG: < Connection: Upgrade
+2025-12-09 21:58:43,881 - DEBUG: < Sec-WebSocket-Key: SxRnK5WlSG2V7/jxxt0oqQ==
+2025-12-09 21:58:43,881 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-09 21:58:43,881 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-09 21:58:43,881 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-09 21:58:43,881 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-09 21:58:43,881 - DEBUG: > Date: Tue, 09 Dec 2025 20:58:43 GMT
+2025-12-09 21:58:43,881 - DEBUG: > Upgrade: websocket
+2025-12-09 21:58:43,881 - DEBUG: > Connection: Upgrade
+2025-12-09 21:58:43,881 - DEBUG: > Sec-WebSocket-Accept: ey+pwNeYCL56MGdJpSbEM/tG/T0=
+2025-12-09 21:58:43,882 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-09 21:58:43,882 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-09 21:58:43,882 - DEBUG: = connection is OPEN
+2025-12-09 21:58:43,882 - INFO: connection open
+2025-12-09 21:58:43,882 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x00000223E4DC3B90>
+2025-12-09 21:58:43,882 - INFO: Connected clients: 2
+2025-12-09 21:58:43,882 - INFO: User: User_1765313923.88286
+2025-12-09 21:58:43,882 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:58:43,883 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "User"}}' [55 bytes]
+2025-12-09 21:58:43,883 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:58:43,884 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:58:44,322 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:58:44,322 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:58:59,663 - DEBUG: < PING 4a 9b ce 79 [binary, 4 bytes]
+2025-12-09 21:58:59,664 - DEBUG: > PONG 4a 9b ce 79 [binary, 4 bytes]
+2025-12-09 21:58:59,664 - DEBUG: > PING '\x10.N>' [text, 4 bytes]
+2025-12-09 21:58:59,664 - DEBUG: % sent keepalive ping
+2025-12-09 21:58:59,665 - DEBUG: < PONG '\x10.N>' [text, 4 bytes]
+2025-12-09 21:58:59,665 - DEBUG: % received keepalive pong
+2025-12-09 21:59:03,888 - DEBUG: > PING '\x01mu3' [text, 4 bytes]
+2025-12-09 21:59:03,888 - DEBUG: % sent keepalive ping
+2025-12-09 21:59:03,888 - DEBUG: < PING dc 5d 45 32 [binary, 4 bytes]
+2025-12-09 21:59:03,888 - DEBUG: > PONG dc 5d 45 32 [binary, 4 bytes]
+2025-12-09 21:59:03,888 - DEBUG: < PONG '\x01mu3' [text, 4 bytes]
+2025-12-09 21:59:03,888 - DEBUG: % received keepalive pong
+2025-12-09 21:59:19,664 - DEBUG: > PING 7d b8 1a e1 [binary, 4 bytes]
+2025-12-09 21:59:19,664 - DEBUG: % sent keepalive ping
+2025-12-09 21:59:19,664 - DEBUG: < PING 92 3b 2e f3 [binary, 4 bytes]
+2025-12-09 21:59:19,664 - DEBUG: > PONG 92 3b 2e f3 [binary, 4 bytes]
+2025-12-09 21:59:19,664 - DEBUG: < PONG 7d b8 1a e1 [binary, 4 bytes]
+2025-12-09 21:59:19,664 - DEBUG: % received keepalive pong
+2025-12-09 21:59:23,904 - DEBUG: > PING d3 e2 2b 26 [binary, 4 bytes]
+2025-12-09 21:59:23,904 - DEBUG: % sent keepalive ping
+2025-12-09 21:59:23,904 - DEBUG: < PONG d3 e2 2b 26 [binary, 4 bytes]
+2025-12-09 21:59:23,904 - DEBUG: % received keepalive pong
+2025-12-09 21:59:23,904 - DEBUG: < PING 6d c5 fb 7b [binary, 4 bytes]
+2025-12-09 21:59:23,904 - DEBUG: > PONG 6d c5 fb 7b [binary, 4 bytes]
+2025-12-09 21:59:33,694 - DEBUG: < EOF
+2025-12-09 21:59:33,695 - DEBUG: > EOF
+2025-12-09 21:59:33,695 - DEBUG: < EOF
+2025-12-09 21:59:33,695 - DEBUG: = connection is CLOSED
+2025-12-09 21:59:33,695 - ERROR: Error handling client: no close frame received or sent
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+    return ov.getresult()
+           ^^^^^^^^^^^^^^
+OSError: [WinError 64] The specified network name is no longer available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+             ^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
+    value = callback(transferred, key, ov)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] The specified network name is no longer available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\server.py", line 69, in handle_client
+    async for raw in websocket:
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
+    yield await self.recv()
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
+    raise self.protocol.close_exc from self.recv_exc
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+2025-12-09 21:59:33,697 - WARNING: Client disconnected.
+2025-12-09 21:59:42,208 - DEBUG: = connection is CONNECTING
+2025-12-09 21:59:42,210 - DEBUG: < GET / HTTP/1.1
+2025-12-09 21:59:42,210 - DEBUG: < Host: 127.0.0.1:20200
+2025-12-09 21:59:42,210 - DEBUG: < Upgrade: websocket
+2025-12-09 21:59:42,210 - DEBUG: < Connection: Upgrade
+2025-12-09 21:59:42,210 - DEBUG: < Sec-WebSocket-Key: blOHVMYAW9bJCMQXXfB4SA==
+2025-12-09 21:59:42,210 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-09 21:59:42,210 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-09 21:59:42,210 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-09 21:59:42,210 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-09 21:59:42,210 - DEBUG: > Date: Tue, 09 Dec 2025 20:59:42 GMT
+2025-12-09 21:59:42,210 - DEBUG: > Upgrade: websocket
+2025-12-09 21:59:42,210 - DEBUG: > Connection: Upgrade
+2025-12-09 21:59:42,210 - DEBUG: > Sec-WebSocket-Accept: zRrd7LEu55WJy/FuJXe+luBN6q4=
+2025-12-09 21:59:42,210 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-09 21:59:42,210 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-09 21:59:42,210 - DEBUG: = connection is OPEN
+2025-12-09 21:59:42,210 - INFO: connection open
+2025-12-09 21:59:42,210 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x00000223E4DC3B30>
+2025-12-09 21:59:42,210 - INFO: Connected clients: 2
+2025-12-09 21:59:42,210 - INFO: User: User_1765313982.210852
+2025-12-09 21:59:42,210 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:59:42,210 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "User01"}}' [57 bytes]
+2025-12-09 21:59:42,210 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:59:42,210 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:59:42,656 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-09 21:59:42,656 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "cc"]}' [51 bytes]
+2025-12-09 21:59:43,921 - DEBUG: > PING d2 e3 19 67 [binary, 4 bytes]
+2025-12-09 21:59:43,922 - DEBUG: % sent keepalive ping
+2025-12-09 21:59:43,922 - DEBUG: < PONG d2 e3 19 67 [binary, 4 bytes]
+2025-12-09 21:59:43,922 - DEBUG: % received keepalive pong
+2025-12-09 21:59:43,922 - DEBUG: < PING 15 db 48 08 [binary, 4 bytes]
+2025-12-09 21:59:43,923 - DEBUG: > PONG 15 db 48 08 [binary, 4 bytes]
+2025-12-09 21:59:43,971 - DEBUG: < EOF
+2025-12-09 21:59:43,971 - DEBUG: > EOF
+2025-12-09 21:59:43,971 - DEBUG: < EOF
+2025-12-09 21:59:43,971 - DEBUG: = connection is CLOSED
+2025-12-09 21:59:43,972 - ERROR: Error handling client: no close frame received or sent
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+    return ov.getresult()
+           ^^^^^^^^^^^^^^
+OSError: [WinError 64] The specified network name is no longer available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+             ^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
+    value = callback(transferred, key, ov)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] The specified network name is no longer available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\server.py", line 69, in handle_client
+    async for raw in websocket:
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
+    yield await self.recv()
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
+    raise self.protocol.close_exc from self.recv_exc
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+2025-12-09 21:59:43,974 - WARNING: Client disconnected.
+2025-12-09 21:59:50,129 - DEBUG: < EOF
+2025-12-09 21:59:50,129 - DEBUG: > EOF
+2025-12-09 21:59:50,129 - DEBUG: < EOF
+2025-12-09 21:59:50,129 - DEBUG: = connection is CLOSED
+2025-12-09 21:59:50,130 - ERROR: Error handling client: no close frame received or sent
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+    return ov.getresult()
+           ^^^^^^^^^^^^^^
+OSError: [WinError 64] The specified network name is no longer available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+             ^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
+    value = callback(transferred, key, ov)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] The specified network name is no longer available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\server.py", line 69, in handle_client
+    async for raw in websocket:
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
+    yield await self.recv()
+          ^^^^^^^^^^^^^^^^^
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
+    raise self.protocol.close_exc from self.recv_exc
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+2025-12-09 21:59:50,133 - WARNING: Client disconnected.
