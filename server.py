@@ -134,7 +134,7 @@ async def main():
     # Set up WebSocket server that listens on port 6789
     # Every time a client connects, server will handle the
     # connection using the handle_client function  
-    server = await ws.serve(handle_client, "0.0.0.0", 6789)
+    server = await ws.serve(handle_client, "0.0.0.0", 20200)
     print("Server running")
 
     await asyncio.gather(
