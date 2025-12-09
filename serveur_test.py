@@ -131,9 +131,9 @@ async def handle_client(websocket):
                         }
                     }
 
+                    # Send to everyone, INCLUDING the sender
                     for client in rooms[current_room]:
-                        if client != websocket:
-                            await client.send(json.dumps(message_obj))
+                        await client.send(json.dumps(message_obj))
 
                 # ----------------------------------------
                 case _:
