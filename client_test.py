@@ -10,7 +10,7 @@ async def get_input(prompt):
 async def main():
     # Use 127.0.0.1 if running client on the same machine as server
     # If running on a different device, ensure 192.168.1.25 is correct
-    uri = "ws://192.168.1.25:6789"
+    uri = "ws://10.108.199.96:20200"
     print(f"Attempting to connect to {uri}...")
     try:
         async with websockets.connect(uri) as websocket:

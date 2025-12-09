@@ -65,10 +65,13 @@ async def handle_client(websocket):
             # Listen to the action
             match action.get("action"):
                 case "createRoom":
-                    # Create room
                     if action["room"] and action["room"] not in rooms:
                         rooms[action["room"]] = set()
-                        print(f"Created room: {action["room"]}")
+                        print(f"Created room: {action['room']}")
+                        # Envoyer la liste mise à jour à tous les clients
+                        for client in connected_clients:
+                            await sendjson(client, {"action": "roomsList", "rooms": list(rooms.keys())})
+
                 
                 case "joinRoom":
                     # Join room
@@ -113,7 +116,8 @@ async def handle_client(websocket):
                 
                 case "rename":
                     ...
-
+                case "roomsList":
+                    await sendjson(websocket, {"action": "roomsList", "rooms": list(rooms.keys())})
                 case _:
                     print("Not an action...")
     
@@ -134,7 +138,7 @@ async def main():
     # Set up WebSocket server that listens on port 6789
     # Every time a client connects, server will handle the
     # connection using the handle_client function  
-    server = await ws.serve(handle_client, "0.0.0.0", 6789)
+    server = await ws.serve(handle_client, "0.0.0.0", 20200)
     print("Server running")
 
     await asyncio.gather(
