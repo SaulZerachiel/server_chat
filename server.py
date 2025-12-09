@@ -32,8 +32,8 @@ async def cli():
             case _:
                 print("Not a command.")
 
-
-# Send json object to client
+# Converts python object to json text
+# And send json object to specific client
 async def sendjson(websocket, obj):
     await websocket.send(json.dumps(obj))
 
