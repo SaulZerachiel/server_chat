@@ -6,6 +6,7 @@ import customtkinter as ctk
 import tkinter as tk
 from tkinter import ttk
 import websockets
+from datetime import datetime
 
 # ------------------------------------------------------------------
 # Queues réseau
@@ -144,6 +145,7 @@ class ChatClientUI:
         ctk.set_default_color_theme("dark-blue")
 
         self.last_sender = None  # Pour espacement des messages
+        self.last_sender_time = None  # Pour ne pas réafficher le pseudo + heure si même utilisateur
 
         # ------------------------------------------------------------------
         # TOP CONNECTION
@@ -240,8 +242,29 @@ class ChatClientUI:
         lbl_chat = ctk.CTkLabel(chat_frame, text="CHAT", font=("Segoe UI", 16, "bold"))
         lbl_chat.pack(pady=(10, 6), fill="x")
 
-        self.chat_box = ctk.CTkTextbox(chat_frame, width=500, height=350, corner_radius=10, state="disabled", font=("Segoe UI", 12))
-        self.chat_box.pack(fill="both", expand=True, padx=10, pady=(0,10))
+        # Chat Text + Scrollbar
+        self.chat_container = tk.Frame(chat_frame, bg="#2B2D31")
+        self.chat_container.pack(fill="both", expand=True, padx=10, pady=(0,10))
+
+        self.chat_scrollbar = tk.Scrollbar(self.chat_container, bg="#2B2D31", troughcolor="#1E1F22", width=12)
+        self.chat_scrollbar.pack(side="right", fill="y")
+
+        self.chat_box = tk.Text(
+            self.chat_container,
+            bg="#2B2D31",
+            fg="white",
+            font=("Segoe UI", 12),
+            state="disabled",
+            wrap="word",
+            yscrollcommand=self.chat_scrollbar.set,
+            bd=0,
+            highlightthickness=0
+        )
+        self.chat_box.pack(side="left", fill="both", expand=True)
+        self.chat_scrollbar.config(command=self.chat_box.yview)
+
+        self.chat_box.tag_configure("pseudo", font=("Segoe UI", 12, "bold"))
+        self.chat_box.tag_configure("system", font=("Segoe UI", 12, "italic"), foreground="#ff6b6b")
 
         # BOTTOM
         bottom = ctk.CTkFrame(master, corner_radius=12)
@@ -332,26 +355,25 @@ class ChatClientUI:
         self.msg_entry.delete(0, "end")
 
     # ------------------------------------------------------------------
-    # Append chat avec espacement utilisateur
+    # Append chat avec pseudo + heure
     # ------------------------------------------------------------------
-    def append_chat(self, text):
+    def append_chat(self, sender, message, system=False):
         self.chat_box.configure(state="normal")
 
-        # Extraire l'auteur si format [room] user: message
-        sender = None
-        if "] " in text and ": " in text:
-            try:
-                sender = text.split("] ")[1].split(": ")[0]
-            except IndexError:
-                sender = None
+        now = datetime.now().strftime("%H:%M")
 
-        if sender != self.last_sender and self.last_sender is not None:
-            self.chat_box.insert("end", "\n")  # Saut de ligne entre auteurs différents
+        # Si le message vient du même utilisateur que le précédent, on n'affiche pas pseudo+heure
+        show_header = not (sender == self.last_sender)
 
-        self.chat_box.insert("end", text + "\n")
+        if system:
+            self.chat_box.insert("end", f"{message}\n", "system")
+        else:
+            if show_header:
+                self.chat_box.insert("end", f"{sender} [{now}]\n", "pseudo")
+            self.chat_box.insert("end", f"{message}\n")
+
         self.chat_box.see("end")
         self.chat_box.configure(state="disabled")
-
         self.last_sender = sender
 
     # ------------------------------------------------------------------
@@ -371,27 +393,27 @@ class ChatClientUI:
 
             elif action == "joined":
                 room = payload.get("room")
-                self.append_chat(f"*** You joined {room} ***")
+                self.append_chat("SYSTEM", f"You joined {room}", system=True)
                 current_room = room
 
             elif action == "left":
-                self.append_chat("*** You left the room ***")
+                self.append_chat("SYSTEM", f"You left the room", system=True)
                 current_room = None
 
             elif action == "message":
                 frm = payload.get("from")
                 room = payload.get("room", "")
                 msg = payload.get("message", "")
-                self.append_chat(f"[{room}] {frm}: {msg}")
+                self.append_chat(frm, msg)
 
             elif action == "error":
                 reason = payload.get("reason", "")
                 detail = payload.get("detail", "")
                 show_error("Server error", f"{reason}\n{detail}")
-                self.append_chat(f"[ERROR] {reason} {detail}")
+                self.append_chat("SYSTEM", f"{reason} {detail}", system=True)
 
             else:
-                self.append_chat(f"[DEBUG] {obj}")
+                self.append_chat("SYSTEM", f"[DEBUG] {obj}", system=True)
 
         self.master.after(100, self.poll_incoming)
 
