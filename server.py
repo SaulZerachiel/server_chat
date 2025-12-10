@@ -67,7 +67,7 @@ async def sendjson(websocket, obj):
 # This function is called each time a new client connects
 async def handle_client(websocket):
     # Send the IP-address of the server to the client
-    await sendjson(websocket, {"action": "getIP", "IP": ipaddress})
+    # await sendjson(websocket, {"action": "getIP", "IP": ipaddress})
 
     # Register the new client
     logging.info(f"Client connected: {websocket}")
