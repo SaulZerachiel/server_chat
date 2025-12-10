@@ -1,12 +1,7 @@
 WebSocket URL:
-    ws://192.168.1.25:20200
+    ws://HOST_IP:20200
 
-Every message uses the following structure:
-```json
-{
-  "action": "<string>",
-  "payload": { ... }
-}
+// TODO: Uniformity the client -> server messages and the error format. Add the payload.
 
 Client → Server messages:
 
@@ -19,19 +14,30 @@ Client → Server messages:
 2) Create room
 {
   "action": "createRoom",
-  "room": "<string>" # Change this, needs to be in payload
+  "room": "<string>" // Optional, change this so it's inside the payload. Makes it more uniform.
 }
 
 3) Join room
 {
   "action": "joinRoom",
-  "payload": { "room": string }
+  "room": "<string>"
 }
 
-4) Send message
+4) Leave room
+{
+  "action": "leaveRoom",
+}
+
+5) Send message
 {
   "action": "sendMessage",
-  "payload": { "message": string }
+  "message": "<string>"
+}
+
+6) Rename
+{
+  "action": "rename",
+  "newUsername": "<string>" 
 }
 
 ---
@@ -65,8 +71,5 @@ Error format:
 1) Error
 {
   "action": "error",
-  "payload": {
-    "reason": "<string>",
-    "detail": "<optional>"
-  }
+  "message": "<string>"
 }

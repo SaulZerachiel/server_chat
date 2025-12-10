@@ -122,6 +122,7 @@ class ChatClientUI:
         tk.Button(rooms_frame, text="Create room", command=self.create_room_prompt).pack(fill="x", pady=(6,2))
         tk.Button(rooms_frame, text="Join selected", command=self.join_selected_room).pack(fill="x", pady=2)
         tk.Button(rooms_frame, text="Leave room", command=self.leave_room).pack(fill="x", pady=2)
+        tk.Button(rooms_frame, text="Rename",command=self.rename).pack(fill="x", pady=2) # Changed this
 
         # Chat area
         chat_frame = tk.Frame(middle)
@@ -216,6 +217,11 @@ class ChatClientUI:
         self.chat_box.insert(tk.END, text + "\n")
         self.chat_box.see(tk.END)
         self.chat_box.config(state=tk.DISABLED)
+
+    def rename(self):
+        newUsername = simpledialog.askstring("New Username", "Nouveau nom d'utilisateur")
+        if newUsername:
+            send_action("rename", {"newUsername": newUsername})
 
     # -------- Poller : consomme in_queue et met à jour l'UI ----------
     def poll_incoming(self):

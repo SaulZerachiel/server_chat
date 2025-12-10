@@ -4,7 +4,7 @@ import json
 import datetime
 import logging
 
-# TODO: change logging system, maybe override old logging file so we don't get an infinite long .log file
+# TODO: Update rename and ?identify? 
 
 # Notes:
 # ° variable "websocket" is a websocket connection object that represents one connected client (like an ID)
@@ -23,8 +23,12 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s: %(message)s"
 )
 
+# Overwrite previous logs
+with open("server.log", "w+"):
+    pass
+
 # CLI
-async def cli():
+async def cli(server):
     while True:
         cmd = await asyncio.get_event_loop().run_in_executor(None, input, "> ")
 
@@ -32,11 +36,15 @@ async def cli():
             case "rooms":
                 print(f"Rooms: {rooms.keys()}")
             case "clients":
-                print(f"Connected clients: {connected_clients}")
+                print(f"Connected clients: {connected_clients}, count: {len(connected_clients)}")
             case "quit" | "exit":
                 print(f"Shutting down server...")
+                # Close client connections
                 for client in list(connected_clients):
                     await client.close()
+                # Close server
+                server.close()
+                await server.wait_closed()
                 break
             case _:
                 print("Not a command.")
@@ -131,10 +139,7 @@ async def handle_client(websocket):
                                         
                     for client in rooms[current_room]:
                         await client.send(json.dumps(message_obj))
-
-                case "receiveMessage":
-                    msg = action["message"] 
-
+                        
                 case "identify":
                     # Identify user
                     username = action.get("payload", {}).get("username", "")
@@ -142,7 +147,9 @@ async def handle_client(websocket):
                         users[websocket] = username
                 
                 case "rename":
-                    ...
+                    username = action.get("newUsername")
+                    if username:
+                        users[websocket] = username
 
                 case "roomsList":
                     await sendjson(websocket, {"action": "roomsList", "rooms": list(rooms.keys())})
@@ -150,6 +157,7 @@ async def handle_client(websocket):
                 case _:
                     print("Not an action...")
                     logging.error("Not an action...")
+
     except Exception as e:
         logging.exception(f"Error handling client: {e}")
 
@@ -175,7 +183,7 @@ async def main():
     print("Server running.")
 
     await asyncio.gather(
-        cli(), # CLI
+        cli(server), # CLI
         server.wait_closed() # Websocket task
     )
 
