@@ -36,6 +36,7 @@ def getIPAddress():
 
 ipaddress = getIPAddress()
 print(ipaddress)
+
 # CLI
 async def cli(server):
     while True:
@@ -131,7 +132,7 @@ async def handle_client(websocket):
 
                     await sendjson(websocket, {
                         "action": "left",
-                        "payload": {"room": current_room} # TODO: change current_room to previous room
+                        "payload": {"room": current_room} 
                     })
 
                 case "sendMessage":
@@ -187,7 +188,7 @@ async def handle_client(websocket):
 
 # Function to start the WebSocket server
 async def main():                                      
-    # Set up WebSocket server that listens on port 6789
+    # Set up WebSocket server that listens on port 20200
     # Every time a client connects, server will handle the
     # connection using the handle_client function  
     server = await ws.serve(handle_client, "0.0.0.0", 20200)
