@@ -1,5 +1,3 @@
-2025-12-10 11:21:30,438 - DEBUG: Using proactor: IocpProactor
-2025-12-10 11:21:30,479 - INFO: server listening on 0.0.0.0:20200
-2025-12-10 11:21:30,479 - INFO: Server running.
-2025-12-10 11:21:33,477 - INFO: server closing
-2025-12-10 11:21:33,480 - INFO: server closed
+2025-12-10 11:43:38,537 - DEBUG: Using proactor: IocpProactor
+2025-12-10 11:43:38,579 - INFO: server listening on 0.0.0.0:20200
+2025-12-10 11:43:38,579 - INFO: Server running.

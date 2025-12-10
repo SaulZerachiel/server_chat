@@ -89,7 +89,7 @@ class ChatClientUI:
         top.pack(padx=8, pady=6, anchor="w")
 
         tk.Label(top, text="Host:").grid(row=0, column=0, sticky="w")
-        self.host_var = tk.StringVar(value="127.0.0.1")
+        self.host_var = tk.StringVar(value="")
         tk.Entry(top, textvariable=self.host_var, width=15).grid(row=0, column=1, padx=4)
 
         tk.Label(top, text="Port:").grid(row=0, column=2, sticky="w")
@@ -226,6 +226,7 @@ class ChatClientUI:
     # -------- Poller : consomme in_queue et met à jour l'UI ----------
     def poll_incoming(self):
         global current_room
+        global ipaddress
         while not in_queue.empty():
             obj = in_queue.get()
             action = obj.get("action")
@@ -244,7 +245,7 @@ class ChatClientUI:
 
             elif action == "left":
                 room = payload.get("room")
-                self.append_chat(f"*** You left {room} ***")
+                self.append_chat(f"*** You left the room ***")
                 current_room = None
 
             elif action == "message":

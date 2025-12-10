@@ -4,8 +4,6 @@ import json
 import datetime
 import logging
 
-# TODO: Update rename and ?identify? 
-
 # Notes:
 # ° variable "websocket" is a websocket connection object that represents one connected client (like an ID)
 # ° List of actions: "createRoom, joinRoom, leaveRoom, sendMessage, receiveMessage, identify, rename"
@@ -27,6 +25,17 @@ logging.basicConfig(
 with open("server.log", "w+"):
     pass
 
+# Get IP-address
+def getIPAddress():
+    import socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    ipaddress = s.getsockname()[0]
+    s.close()
+    return ipaddress
+
+ipaddress = getIPAddress()
+print(ipaddress)
 # CLI
 async def cli(server):
     while True:
@@ -56,6 +65,9 @@ async def sendjson(websocket, obj):
 
 # This function is called each time a new client connects
 async def handle_client(websocket):
+    # Send the IP-address of the server to the client
+    await sendjson(websocket, {"action": "getIP", "IP": ipaddress})
+
     # Register the new client
     logging.info(f"Client connected: {websocket}")
     connected_clients.add(websocket)
@@ -139,7 +151,7 @@ async def handle_client(websocket):
                                         
                     for client in rooms[current_room]:
                         await client.send(json.dumps(message_obj))
-                        
+
                 case "identify":
                     # Identify user
                     username = action.get("payload", {}).get("username", "")
