@@ -97,7 +97,7 @@ class ChatClientUI:
         tk.Entry(top, textvariable=self.port_var, width=6).grid(row=0, column=3, padx=4)
 
         tk.Label(top, text="Username:").grid(row=0, column=4, sticky="w")
-        self.username_var = tk.StringVar(value="Lorian")
+        self.username_var = tk.StringVar(value="")
         tk.Entry(top, textvariable=self.username_var, width=12).grid(row=0, column=5, padx=4)
 
         self.connect_btn = tk.Button(top, text="Connect", command=self.on_connect)
@@ -148,7 +148,7 @@ class ChatClientUI:
     # -------- UI callbacks / helpers ----------
     def on_connect(self):
         if connected:
-            messagebox.showinfo("Info", "Déjà connecté.")
+            messagebox.showinfo("Info", "Already connected.")
             return
 
         host = self.host_var.get().strip()
@@ -156,13 +156,13 @@ class ChatClientUI:
         username = self.username_var.get().strip()
 
         if not host or not port or not username:
-            messagebox.showerror("Erreur", "Host, port et username sont requis.")
+            messagebox.showerror("Error", "Host, port and username are required.")
             return
 
         try:
             int(port)
         except ValueError:
-            messagebox.showerror("Erreur", "Port invalide.")
+            messagebox.showerror("Error", "Invalid port")
             return
 
         # démarre le thread réseau
@@ -179,32 +179,32 @@ class ChatClientUI:
 
     def create_room_prompt(self):
         if not connected:
-            messagebox.showerror("Erreur", "Connecte-toi d'abord.")
+            messagebox.showerror("Error", "Connect first.")
             return
-        room = simpledialog.askstring("Create room", "Nom du salon :")
+        room = simpledialog.askstring("Create room", "Name of the room :")
         if room:
             send_action("createRoom", {"room": room})
 
     def join_selected_room(self, event=None):
         if not connected:
-            messagebox.showerror("Erreur", "Connecte-toi d'abord.")
+            messagebox.showerror("Error", "Connect first.")
             return
         sel = self.rooms_listbox.curselection()
         if not sel:
-            messagebox.showinfo("Info", "Sélectionne d'abord un salon.")
+            messagebox.showinfo("Info", "Select a room first.")
             return
         room = self.rooms_listbox.get(sel[0])
         send_action("joinRoom", {"room": room})
 
     def leave_room(self):
         if not connected:
-            messagebox.showerror("Erreur", "Connecte-toi d'abord.")
+            messagebox.showerror("Error", "Connect first.")
             return
         send_action("leaveRoom", {})
 
     def send_message(self):
         if not connected:
-            messagebox.showerror("Erreur", "Connecte-toi d'abord.")
+            messagebox.showerror("Error", "Connect first.")
             return
         text = self.msg_entry.get().strip()
         if not text:
@@ -219,7 +219,7 @@ class ChatClientUI:
         self.chat_box.config(state=tk.DISABLED)
 
     def rename(self):
-        newUsername = simpledialog.askstring("New Username", "Nouveau nom d'utilisateur")
+        newUsername = simpledialog.askstring("New Username", "New username")
         if newUsername:
             send_action("rename", {"newUsername": newUsername})
 
@@ -261,7 +261,7 @@ class ChatClientUI:
                 detail = payload.get("detail", "")
                 self.append_chat(f"[ERROR] {reason} {detail}")
                 if reason in ("username_taken", "unable_to_connect"):
-                    messagebox.showerror("Erreur serveur", f"{reason}\n{detail}")
+                    messagebox.showerror("Server error", f"{reason}\n{detail}")
 
             else:
                 self.append_chat(f"[DEBUG] {obj}")
