@@ -3,10 +3,6 @@ import websockets as ws
 import json
 import datetime
 
-# Notes:
-# ° variable "websocket" is a websocket connection object that represents one connected client (like an ID)
-# ° List of actions: "createRoom, joinRoom, leaveRoom, sendMessage, receiveMessage, identify, rename"
-
 connected_clients = set()
 rooms = {"default": set()}
 client_rooms = dict()
