@@ -1,55 +1,89 @@
-2025-12-10 20:02:43,473 - DEBUG: Using proactor: IocpProactor
-2025-12-10 20:02:43,570 - INFO: server listening on 0.0.0.0:20200
-2025-12-10 20:02:43,572 - INFO: Server running.
-2025-12-10 20:03:16,118 - DEBUG: = connection is CONNECTING
-2025-12-10 20:03:16,120 - DEBUG: < GET / HTTP/1.1
-2025-12-10 20:03:16,120 - DEBUG: < Host: 10.74.154.158:20200
-2025-12-10 20:03:16,120 - DEBUG: < Upgrade: websocket
-2025-12-10 20:03:16,120 - DEBUG: < Connection: Upgrade
-2025-12-10 20:03:16,120 - DEBUG: < Sec-WebSocket-Key: QH52QRIJUupFg+Ek+iNMIA==
-2025-12-10 20:03:16,120 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-10 20:03:16,120 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-10 20:03:16,120 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-10 20:03:16,120 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-10 20:03:16,120 - DEBUG: > Date: Wed, 10 Dec 2025 19:03:16 GMT
-2025-12-10 20:03:16,120 - DEBUG: > Upgrade: websocket
-2025-12-10 20:03:16,120 - DEBUG: > Connection: Upgrade
-2025-12-10 20:03:16,120 - DEBUG: > Sec-WebSocket-Accept: mNHXTWbUgeEsC+NPLduHks9XMWg=
-2025-12-10 20:03:16,120 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-10 20:03:16,122 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-10 20:03:16,122 - DEBUG: = connection is OPEN
-2025-12-10 20:03:16,122 - INFO: connection open
-2025-12-10 20:03:16,122 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000022367DB7200>
-2025-12-10 20:03:16,122 - INFO: Connected clients: 1
-2025-12-10 20:03:16,122 - INFO: User: User_1765393396.122311
-2025-12-10 20:03:16,122 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
-2025-12-10 20:03:16,122 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lorian"}}' [57 bytes]
-2025-12-10 20:03:16,632 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-10 20:03:16,632 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
-2025-12-10 20:03:25,828 - DEBUG: < TEXT '{"room": "Lol", "action": "createRoom"}' [39 bytes]
-2025-12-10 20:03:25,828 - INFO: Created room: Lol
-2025-12-10 20:03:25,828 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "Lol"]}' [52 bytes]
-2025-12-10 20:03:27,584 - DEBUG: < TEXT '{"room": "Lol", "action": "joinRoom"}' [37 bytes]
-2025-12-10 20:03:27,584 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "Lol"}}' [48 bytes]
-2025-12-10 20:03:30,576 - DEBUG: < TEXT '{"message": "hello", "action": "sendMessage"}' [45 bytes]
-2025-12-10 20:03:30,576 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...", "message": "hello"}}' [87 bytes]
-2025-12-10 20:03:32,086 - DEBUG: < TEXT '{"message": "ddd", "action": "sendMessage"}' [43 bytes]
-2025-12-10 20:03:32,086 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...ol", "message": "ddd"}}' [85 bytes]
-2025-12-10 20:03:32,532 - DEBUG: < TEXT '{"message": "d", "action": "sendMessage"}' [41 bytes]
-2025-12-10 20:03:32,532 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori..."Lol", "message": "d"}}' [83 bytes]
-2025-12-10 20:03:35,213 - DEBUG: < TEXT '{"message": "xxx", "action": "sendMessage"}' [43 bytes]
-2025-12-10 20:03:35,213 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...ol", "message": "xxx"}}' [85 bytes]
-2025-12-10 20:03:36,130 - DEBUG: > PING 52 72 a0 27 [binary, 4 bytes]
-2025-12-10 20:03:36,130 - DEBUG: % sent keepalive ping
-2025-12-10 20:03:36,130 - DEBUG: < PING '`-K:' [text, 4 bytes]
-2025-12-10 20:03:36,131 - DEBUG: > PONG '`-K:' [text, 4 bytes]
-2025-12-10 20:03:36,131 - DEBUG: < PONG 52 72 a0 27 [binary, 4 bytes]
-2025-12-10 20:03:36,131 - DEBUG: % received keepalive pong
-2025-12-10 20:03:36,660 - DEBUG: < EOF
-2025-12-10 20:03:36,661 - DEBUG: > EOF
-2025-12-10 20:03:36,661 - DEBUG: < EOF
-2025-12-10 20:03:36,661 - DEBUG: = connection is CLOSED
-2025-12-10 20:03:36,661 - ERROR: Error handling client: no close frame received or sent
+2025-12-10 20:26:06,420 - DEBUG: Using proactor: IocpProactor
+2025-12-10 20:26:06,458 - INFO: server listening on 0.0.0.0:20200
+2025-12-10 20:26:06,458 - INFO: Server running.
+2025-12-10 20:26:54,299 - DEBUG: = connection is CONNECTING
+2025-12-10 20:26:54,299 - DEBUG: < GET / HTTP/1.1
+2025-12-10 20:26:54,299 - DEBUG: < Host: 10.74.154.158:20200
+2025-12-10 20:26:54,299 - DEBUG: < Upgrade: websocket
+2025-12-10 20:26:54,299 - DEBUG: < Connection: Upgrade
+2025-12-10 20:26:54,299 - DEBUG: < Sec-WebSocket-Key: PIUDUwDancgCd9hBT9pT5w==
+2025-12-10 20:26:54,299 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-10 20:26:54,299 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-10 20:26:54,299 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-10 20:26:54,299 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-10 20:26:54,299 - DEBUG: > Date: Wed, 10 Dec 2025 19:26:54 GMT
+2025-12-10 20:26:54,299 - DEBUG: > Upgrade: websocket
+2025-12-10 20:26:54,299 - DEBUG: > Connection: Upgrade
+2025-12-10 20:26:54,299 - DEBUG: > Sec-WebSocket-Accept: WbFSaOi71Wa5q9kygjtu0aralLs=
+2025-12-10 20:26:54,299 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-10 20:26:54,299 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-10 20:26:54,299 - DEBUG: = connection is OPEN
+2025-12-10 20:26:54,299 - INFO: connection open
+2025-12-10 20:26:54,299 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x000001AB8A5950A0>
+2025-12-10 20:26:54,299 - INFO: Connected clients: 1
+2025-12-10 20:26:54,299 - INFO: User: User_1765394814.299054
+2025-12-10 20:26:54,299 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-10 20:26:54,315 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "LE bG nword"}}' [62 bytes]
+2025-12-10 20:26:54,768 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-10 20:26:54,768 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-10 20:26:56,763 - DEBUG: = connection is CONNECTING
+2025-12-10 20:26:56,763 - DEBUG: < GET / HTTP/1.1
+2025-12-10 20:26:56,763 - DEBUG: < Host: 10.74.154.158:20200
+2025-12-10 20:26:56,763 - DEBUG: < Upgrade: websocket
+2025-12-10 20:26:56,763 - DEBUG: < Connection: Upgrade
+2025-12-10 20:26:56,763 - DEBUG: < Sec-WebSocket-Key: wgpK+q3PfwBpjS72JggbYw==
+2025-12-10 20:26:56,763 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-10 20:26:56,763 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-10 20:26:56,763 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-10 20:26:56,763 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-10 20:26:56,763 - DEBUG: > Date: Wed, 10 Dec 2025 19:26:56 GMT
+2025-12-10 20:26:56,763 - DEBUG: > Upgrade: websocket
+2025-12-10 20:26:56,763 - DEBUG: > Connection: Upgrade
+2025-12-10 20:26:56,763 - DEBUG: > Sec-WebSocket-Accept: zwoSCv9tqK6jXGCabArzfFX6i/k=
+2025-12-10 20:26:56,763 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-10 20:26:56,763 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-10 20:26:56,763 - DEBUG: = connection is OPEN
+2025-12-10 20:26:56,763 - INFO: connection open
+2025-12-10 20:26:56,763 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x000001AB8A5C6FC0>
+2025-12-10 20:26:56,763 - INFO: Connected clients: 2
+2025-12-10 20:26:56,763 - INFO: User: User_1765394816.763098
+2025-12-10 20:26:56,763 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-10 20:26:56,763 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lorian"}}' [57 bytes]
+2025-12-10 20:26:56,956 - DEBUG: < TEXT '{"room": "default", "action": "joinRoom"}' [41 bytes]
+2025-12-10 20:26:56,956 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "default"}}' [52 bytes]
+2025-12-10 20:26:57,268 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-10 20:26:57,269 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-10 20:27:01,605 - DEBUG: < TEXT '{"room": "caca", "action": "createRoom"}' [40 bytes]
+2025-12-10 20:27:01,605 - INFO: Created room: caca
+2025-12-10 20:27:01,605 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "caca"]}' [53 bytes]
+2025-12-10 20:27:01,605 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "caca"]}' [53 bytes]
+2025-12-10 20:27:03,498 - DEBUG: < TEXT '{"room": "caca", "action": "joinRoom"}' [38 bytes]
+2025-12-10 20:27:03,498 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "caca"}}' [49 bytes]
+2025-12-10 20:27:04,138 - DEBUG: < TEXT '{"room": "caca", "action": "joinRoom"}' [38 bytes]
+2025-12-10 20:27:04,138 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "caca"}}' [49 bytes]
+2025-12-10 20:27:10,156 - DEBUG: < TEXT '{"message": "coucou je mpl caca", "action": "sendMessage"}' [58 bytes]
+2025-12-10 20:27:10,156 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "LE b... "coucou je mpl caca"}}' [106 bytes]
+2025-12-10 20:27:10,156 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "LE b... "coucou je mpl caca"}}' [106 bytes]
+2025-12-10 20:27:14,299 - DEBUG: > PING 80 ed 65 fa [binary, 4 bytes]
+2025-12-10 20:27:14,299 - DEBUG: % sent keepalive ping
+2025-12-10 20:27:14,331 - DEBUG: < PING 9a 2c b9 f7 [binary, 4 bytes]
+2025-12-10 20:27:14,331 - DEBUG: > PONG 9a 2c b9 f7 [binary, 4 bytes]
+2025-12-10 20:27:14,347 - DEBUG: < PONG 80 ed 65 fa [binary, 4 bytes]
+2025-12-10 20:27:14,347 - DEBUG: % received keepalive pong
+2025-12-10 20:27:16,769 - DEBUG: < PING 19 ba 88 c2 [binary, 4 bytes]
+2025-12-10 20:27:16,769 - DEBUG: > PONG 19 ba 88 c2 [binary, 4 bytes]
+2025-12-10 20:27:16,769 - DEBUG: > PING df a5 c5 14 [binary, 4 bytes]
+2025-12-10 20:27:16,769 - DEBUG: % sent keepalive ping
+2025-12-10 20:27:16,769 - DEBUG: < PONG df a5 c5 14 [binary, 4 bytes]
+2025-12-10 20:27:16,769 - DEBUG: % received keepalive pong
+2025-12-10 20:27:22,997 - DEBUG: < TEXT '{"message": "hey cv", "action": "sendMessage"}' [46 bytes]
+2025-12-10 20:27:22,997 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori..., "message": "hey cv"}}' [89 bytes]
+2025-12-10 20:27:22,997 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori..., "message": "hey cv"}}' [89 bytes]
+2025-12-10 20:27:25,411 - DEBUG: < EOF
+2025-12-10 20:27:25,411 - DEBUG: > EOF
+2025-12-10 20:27:25,411 - DEBUG: < EOF
+2025-12-10 20:27:25,411 - DEBUG: = connection is CLOSED
+2025-12-10 20:27:25,411 - ERROR: Error handling client: no close frame received or sent
 Traceback (most recent call last):
   File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
     return ov.getresult()
@@ -80,43 +114,18 @@ Traceback (most recent call last):
   File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
     raise self.protocol.close_exc from self.recv_exc
 websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-10 20:03:36,727 - WARNING: Client disconnected.
-2025-12-10 20:07:17,392 - DEBUG: = connection is CONNECTING
-2025-12-10 20:07:17,392 - DEBUG: < GET / HTTP/1.1
-2025-12-10 20:07:17,392 - DEBUG: < Host: 10.74.154.158:20200
-2025-12-10 20:07:17,392 - DEBUG: < Upgrade: websocket
-2025-12-10 20:07:17,392 - DEBUG: < Connection: Upgrade
-2025-12-10 20:07:17,392 - DEBUG: < Sec-WebSocket-Key: YFF9+ElmgIrOvpZUribQbw==
-2025-12-10 20:07:17,392 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-10 20:07:17,392 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-10 20:07:17,392 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-10 20:07:17,392 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-10 20:07:17,392 - DEBUG: > Date: Wed, 10 Dec 2025 19:07:17 GMT
-2025-12-10 20:07:17,392 - DEBUG: > Upgrade: websocket
-2025-12-10 20:07:17,392 - DEBUG: > Connection: Upgrade
-2025-12-10 20:07:17,392 - DEBUG: > Sec-WebSocket-Accept: 1gUSK4RGzbcNIllh70rviYSXzNo=
-2025-12-10 20:07:17,392 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-10 20:07:17,392 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-10 20:07:17,392 - DEBUG: = connection is OPEN
-2025-12-10 20:07:17,392 - INFO: connection open
-2025-12-10 20:07:17,392 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000022367D2E9C0>
-2025-12-10 20:07:17,392 - INFO: Connected clients: 1
-2025-12-10 20:07:17,392 - INFO: User: User_1765393637.392446
-2025-12-10 20:07:17,392 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "Lol"]}' [52 bytes]
-2025-12-10 20:07:17,392 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lorian"}}' [57 bytes]
-2025-12-10 20:07:17,894 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-10 20:07:17,894 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "Lol"]}' [52 bytes]
-2025-12-10 20:07:19,975 - DEBUG: < TEXT '{"room": "Lol", "action": "joinRoom"}' [37 bytes]
-2025-12-10 20:07:19,975 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "Lol"}}' [48 bytes]
-2025-12-10 20:07:22,262 - DEBUG: < TEXT '{"message": "Hey", "action": "sendMessage"}' [43 bytes]
-2025-12-10 20:07:22,262 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...ol", "message": "Hey"}}' [85 bytes]
-2025-12-10 20:07:25,544 - DEBUG: < TEXT '{"message": "Comment cv", "action": "sendMessage"}' [50 bytes]
-2025-12-10 20:07:25,546 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...essage": "Comment cv"}}' [92 bytes]
-2025-12-10 20:07:35,286 - DEBUG: < EOF
-2025-12-10 20:07:35,286 - DEBUG: > EOF
-2025-12-10 20:07:35,287 - DEBUG: < EOF
-2025-12-10 20:07:35,287 - DEBUG: = connection is CLOSED
-2025-12-10 20:07:35,287 - ERROR: Error handling client: no close frame received or sent
+2025-12-10 20:27:25,411 - WARNING: Client disconnected.
+2025-12-10 20:27:36,778 - DEBUG: > PING bb 20 6a 8b [binary, 4 bytes]
+2025-12-10 20:27:36,778 - DEBUG: % sent keepalive ping
+2025-12-10 20:27:36,778 - DEBUG: < PING 6e de c5 5b [binary, 4 bytes]
+2025-12-10 20:27:36,778 - DEBUG: > PONG 6e de c5 5b [binary, 4 bytes]
+2025-12-10 20:27:36,778 - DEBUG: < PONG bb 20 6a 8b [binary, 4 bytes]
+2025-12-10 20:27:36,778 - DEBUG: % received keepalive pong
+2025-12-10 20:27:41,151 - DEBUG: < EOF
+2025-12-10 20:27:41,151 - DEBUG: > EOF
+2025-12-10 20:27:41,151 - DEBUG: < EOF
+2025-12-10 20:27:41,151 - DEBUG: = connection is CLOSED
+2025-12-10 20:27:41,151 - ERROR: Error handling client: no close frame received or sent
 Traceback (most recent call last):
   File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
     return ov.getresult()
@@ -147,91 +156,116 @@ Traceback (most recent call last):
   File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
     raise self.protocol.close_exc from self.recv_exc
 websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-10 20:07:35,289 - WARNING: Client disconnected.
-2025-12-10 20:14:38,740 - DEBUG: = connection is CONNECTING
-2025-12-10 20:14:38,742 - DEBUG: < GET / HTTP/1.1
-2025-12-10 20:14:38,742 - DEBUG: < Host: 10.74.154.158:20200
-2025-12-10 20:14:38,742 - DEBUG: < Upgrade: websocket
-2025-12-10 20:14:38,742 - DEBUG: < Connection: Upgrade
-2025-12-10 20:14:38,742 - DEBUG: < Sec-WebSocket-Key: +1O5mv73v0dW4UEg5xQt0g==
-2025-12-10 20:14:38,742 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-10 20:14:38,742 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-10 20:14:38,742 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-10 20:14:38,742 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-10 20:14:38,742 - DEBUG: > Date: Wed, 10 Dec 2025 19:14:38 GMT
-2025-12-10 20:14:38,742 - DEBUG: > Upgrade: websocket
-2025-12-10 20:14:38,742 - DEBUG: > Connection: Upgrade
-2025-12-10 20:14:38,742 - DEBUG: > Sec-WebSocket-Accept: CjpeK4uLr3erb66xcIXRrPPA0Nk=
-2025-12-10 20:14:38,742 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-10 20:14:38,744 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-10 20:14:38,744 - DEBUG: = connection is OPEN
-2025-12-10 20:14:38,744 - INFO: connection open
-2025-12-10 20:14:38,744 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000022367DB7E00>
-2025-12-10 20:14:38,744 - INFO: Connected clients: 1
-2025-12-10 20:14:38,744 - INFO: User: User_1765394078.744287
-2025-12-10 20:14:38,744 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "Lol"]}' [52 bytes]
-2025-12-10 20:14:38,744 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lorian"}}' [57 bytes]
-2025-12-10 20:14:39,192 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-10 20:14:39,192 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "Lol"]}' [52 bytes]
-2025-12-10 20:14:40,893 - DEBUG: < TEXT '{"room": "Lol", "action": "joinRoom"}' [37 bytes]
-2025-12-10 20:14:40,893 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "Lol"}}' [48 bytes]
-2025-12-10 20:14:43,804 - DEBUG: < TEXT '{"message": "Hello", "action": "sendMessage"}' [45 bytes]
-2025-12-10 20:14:43,804 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...", "message": "Hello"}}' [87 bytes]
-2025-12-10 20:14:47,573 - DEBUG: < TEXT '{"message": "COmment \\u00e7a va", "action": "sendMessage"}' [58 bytes]
-2025-12-10 20:14:47,573 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori..."COmment \\u00e7a va"}}' [100 bytes]
-2025-12-10 20:14:58,745 - DEBUG: < PING be c7 59 d8 [binary, 4 bytes]
-2025-12-10 20:14:58,745 - DEBUG: > PONG be c7 59 d8 [binary, 4 bytes]
-2025-12-10 20:14:58,746 - DEBUG: > PING b2 ae 6c 7b [binary, 4 bytes]
-2025-12-10 20:14:58,746 - DEBUG: % sent keepalive ping
-2025-12-10 20:14:58,747 - DEBUG: < PONG b2 ae 6c 7b [binary, 4 bytes]
-2025-12-10 20:14:58,747 - DEBUG: % received keepalive pong
-2025-12-10 20:15:18,757 - DEBUG: > PING 8b 43 c6 3a [binary, 4 bytes]
-2025-12-10 20:15:18,757 - DEBUG: % sent keepalive ping
-2025-12-10 20:15:18,757 - DEBUG: < PING 28 18 6c cc [binary, 4 bytes]
-2025-12-10 20:15:18,757 - DEBUG: > PONG 28 18 6c cc [binary, 4 bytes]
-2025-12-10 20:15:18,757 - DEBUG: < PONG 8b 43 c6 3a [binary, 4 bytes]
-2025-12-10 20:15:18,757 - DEBUG: % received keepalive pong
-2025-12-10 20:15:38,769 - DEBUG: > PING e0 f3 50 1b [binary, 4 bytes]
-2025-12-10 20:15:38,769 - DEBUG: % sent keepalive ping
-2025-12-10 20:15:38,770 - DEBUG: < PING 6a d8 67 29 [binary, 4 bytes]
-2025-12-10 20:15:38,770 - DEBUG: > PONG 6a d8 67 29 [binary, 4 bytes]
-2025-12-10 20:15:38,770 - DEBUG: < PONG e0 f3 50 1b [binary, 4 bytes]
-2025-12-10 20:15:38,770 - DEBUG: % received keepalive pong
-2025-12-10 20:15:58,768 - DEBUG: < PING ab 01 bb ad [binary, 4 bytes]
-2025-12-10 20:15:58,768 - DEBUG: > PONG ab 01 bb ad [binary, 4 bytes]
-2025-12-10 20:15:58,768 - DEBUG: > PING 17 9d 53 0c [binary, 4 bytes]
-2025-12-10 20:15:58,768 - DEBUG: % sent keepalive ping
-2025-12-10 20:15:58,769 - DEBUG: < PONG 17 9d 53 0c [binary, 4 bytes]
-2025-12-10 20:15:58,769 - DEBUG: % received keepalive pong
-2025-12-10 20:16:18,762 - DEBUG: < PING be 10 6e 13 [binary, 4 bytes]
-2025-12-10 20:16:18,762 - DEBUG: > PONG be 10 6e 13 [binary, 4 bytes]
-2025-12-10 20:16:18,763 - DEBUG: > PING 10 a3 d7 b7 [binary, 4 bytes]
-2025-12-10 20:16:18,763 - DEBUG: % sent keepalive ping
-2025-12-10 20:16:18,763 - DEBUG: < PONG 10 a3 d7 b7 [binary, 4 bytes]
-2025-12-10 20:16:18,763 - DEBUG: % received keepalive pong
-2025-12-10 20:16:38,771 - DEBUG: > PING cf ea ec a5 [binary, 4 bytes]
-2025-12-10 20:16:38,771 - DEBUG: % sent keepalive ping
-2025-12-10 20:16:38,771 - DEBUG: < PING 08 b4 8e 0b [binary, 4 bytes]
-2025-12-10 20:16:38,771 - DEBUG: > PONG 08 b4 8e 0b [binary, 4 bytes]
-2025-12-10 20:16:38,772 - DEBUG: < PONG cf ea ec a5 [binary, 4 bytes]
-2025-12-10 20:16:38,772 - DEBUG: % received keepalive pong
-2025-12-10 20:16:58,759 - DEBUG: < PING e4 77 54 e0 [binary, 4 bytes]
-2025-12-10 20:16:58,759 - DEBUG: > PONG e4 77 54 e0 [binary, 4 bytes]
-2025-12-10 20:16:58,759 - DEBUG: > PING 57 c0 8a dd [binary, 4 bytes]
-2025-12-10 20:16:58,759 - DEBUG: % sent keepalive ping
-2025-12-10 20:16:58,759 - DEBUG: < PONG 57 c0 8a dd [binary, 4 bytes]
-2025-12-10 20:16:58,759 - DEBUG: % received keepalive pong
-2025-12-10 20:17:18,761 - DEBUG: > PING 2c 15 a5 b8 [binary, 4 bytes]
-2025-12-10 20:17:18,761 - DEBUG: % sent keepalive ping
-2025-12-10 20:17:18,762 - DEBUG: < PONG 2c 15 a5 b8 [binary, 4 bytes]
-2025-12-10 20:17:18,762 - DEBUG: % received keepalive pong
-2025-12-10 20:17:18,762 - DEBUG: < PING cb 19 93 84 [binary, 4 bytes]
-2025-12-10 20:17:18,762 - DEBUG: > PONG cb 19 93 84 [binary, 4 bytes]
-2025-12-10 20:17:20,060 - DEBUG: < EOF
-2025-12-10 20:17:20,060 - DEBUG: > EOF
-2025-12-10 20:17:20,060 - DEBUG: < EOF
-2025-12-10 20:17:20,060 - DEBUG: = connection is CLOSED
-2025-12-10 20:17:20,060 - ERROR: Error handling client: no close frame received or sent
+2025-12-10 20:27:41,154 - WARNING: Client disconnected.
+2025-12-10 20:33:15,497 - DEBUG: = connection is CONNECTING
+2025-12-10 20:33:15,497 - DEBUG: < GET / HTTP/1.1
+2025-12-10 20:33:15,497 - DEBUG: < Host: 10.74.154.158:20200
+2025-12-10 20:33:15,497 - DEBUG: < Upgrade: websocket
+2025-12-10 20:33:15,497 - DEBUG: < Connection: Upgrade
+2025-12-10 20:33:15,497 - DEBUG: < Sec-WebSocket-Key: FJ10eZmTBMDU6GoZUk82sQ==
+2025-12-10 20:33:15,497 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-10 20:33:15,497 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-10 20:33:15,497 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-10 20:33:15,497 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-10 20:33:15,497 - DEBUG: > Date: Wed, 10 Dec 2025 19:33:15 GMT
+2025-12-10 20:33:15,497 - DEBUG: > Upgrade: websocket
+2025-12-10 20:33:15,497 - DEBUG: > Connection: Upgrade
+2025-12-10 20:33:15,497 - DEBUG: > Sec-WebSocket-Accept: NIVH+hjS8aGKWhLX6A5B/UdDhzE=
+2025-12-10 20:33:15,497 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-10 20:33:15,497 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-10 20:33:15,497 - DEBUG: = connection is OPEN
+2025-12-10 20:33:15,497 - INFO: connection open
+2025-12-10 20:33:15,497 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x000001AB8A5C7440>
+2025-12-10 20:33:15,497 - INFO: Connected clients: 1
+2025-12-10 20:33:15,497 - INFO: User: User_1765395195.497277
+2025-12-10 20:33:15,497 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "caca"]}' [53 bytes]
+2025-12-10 20:33:15,497 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lorian"}}' [57 bytes]
+2025-12-10 20:33:15,998 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-10 20:33:15,998 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "caca"]}' [53 bytes]
+2025-12-10 20:33:18,967 - DEBUG: = connection is CONNECTING
+2025-12-10 20:33:18,967 - DEBUG: < GET / HTTP/1.1
+2025-12-10 20:33:18,967 - DEBUG: < Host: 10.74.154.158:20200
+2025-12-10 20:33:18,967 - DEBUG: < Upgrade: websocket
+2025-12-10 20:33:18,967 - DEBUG: < Connection: Upgrade
+2025-12-10 20:33:18,967 - DEBUG: < Sec-WebSocket-Key: WSzKrQdykv0k5IxV31oKFw==
+2025-12-10 20:33:18,967 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-10 20:33:18,967 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-10 20:33:18,967 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-10 20:33:18,967 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-10 20:33:18,967 - DEBUG: > Date: Wed, 10 Dec 2025 19:33:18 GMT
+2025-12-10 20:33:18,967 - DEBUG: > Upgrade: websocket
+2025-12-10 20:33:18,967 - DEBUG: > Connection: Upgrade
+2025-12-10 20:33:18,967 - DEBUG: > Sec-WebSocket-Accept: JevdWsQL1GjTFcm8xEZ1d2fBDew=
+2025-12-10 20:33:18,967 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-10 20:33:18,967 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-10 20:33:18,967 - DEBUG: = connection is OPEN
+2025-12-10 20:33:18,967 - INFO: connection open
+2025-12-10 20:33:18,967 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x000001AB8A6102F0>
+2025-12-10 20:33:18,967 - INFO: Connected clients: 2
+2025-12-10 20:33:18,967 - INFO: User: User_1765395198.967129
+2025-12-10 20:33:18,967 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "caca"]}' [53 bytes]
+2025-12-10 20:33:18,985 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "le n"}}' [55 bytes]
+2025-12-10 20:33:19,474 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-10 20:33:19,474 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "caca"]}' [53 bytes]
+2025-12-10 20:33:20,838 - DEBUG: < TEXT '{"room": "caca", "action": "joinRoom"}' [38 bytes]
+2025-12-10 20:33:20,838 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "caca"}}' [49 bytes]
+2025-12-10 20:33:22,830 - DEBUG: < TEXT '{"room": "caca", "action": "joinRoom"}' [38 bytes]
+2025-12-10 20:33:22,830 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "caca"}}' [49 bytes]
+2025-12-10 20:33:26,181 - DEBUG: < TEXT '{"message": "caca", "action": "sendMessage"}' [44 bytes]
+2025-12-10 20:33:26,181 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "le n...a", "message": "caca"}}' [85 bytes]
+2025-12-10 20:33:26,181 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "le n...a", "message": "caca"}}' [85 bytes]
+2025-12-10 20:33:30,278 - DEBUG: < TEXT '{"message": "Ouais ouais zizi", "action": "sendMessage"}' [56 bytes]
+2025-12-10 20:33:30,278 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...": "Ouais ouais zizi"}}' [99 bytes]
+2025-12-10 20:33:30,278 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...": "Ouais ouais zizi"}}' [99 bytes]
+2025-12-10 20:33:35,501 - DEBUG: > PING d9 e5 19 58 [binary, 4 bytes]
+2025-12-10 20:33:35,501 - DEBUG: % sent keepalive ping
+2025-12-10 20:33:35,501 - DEBUG: < PING ef 2e 4d 29 [binary, 4 bytes]
+2025-12-10 20:33:35,501 - DEBUG: > PONG ef 2e 4d 29 [binary, 4 bytes]
+2025-12-10 20:33:35,501 - DEBUG: < PONG d9 e5 19 58 [binary, 4 bytes]
+2025-12-10 20:33:35,501 - DEBUG: % received keepalive pong
+2025-12-10 20:33:38,976 - DEBUG: > PING b4 6a 03 e5 [binary, 4 bytes]
+2025-12-10 20:33:38,976 - DEBUG: % sent keepalive ping
+2025-12-10 20:33:38,976 - DEBUG: < PONG b4 6a 03 e5 [binary, 4 bytes]
+2025-12-10 20:33:38,976 - DEBUG: < PING 40 0a f7 f4 [binary, 4 bytes]
+2025-12-10 20:33:38,976 - DEBUG: > PONG 40 0a f7 f4 [binary, 4 bytes]
+2025-12-10 20:33:38,976 - DEBUG: % received keepalive pong
+2025-12-10 20:33:55,491 - DEBUG: > PING a3 e2 ef dc [binary, 4 bytes]
+2025-12-10 20:33:55,491 - DEBUG: % sent keepalive ping
+2025-12-10 20:33:55,491 - DEBUG: < PING 95 a7 ba 4f [binary, 4 bytes]
+2025-12-10 20:33:55,491 - DEBUG: > PONG 95 a7 ba 4f [binary, 4 bytes]
+2025-12-10 20:33:55,491 - DEBUG: < PONG a3 e2 ef dc [binary, 4 bytes]
+2025-12-10 20:33:55,491 - DEBUG: % received keepalive pong
+2025-12-10 20:33:58,978 - DEBUG: > PING 5b 78 4e f3 [binary, 4 bytes]
+2025-12-10 20:33:58,978 - DEBUG: % sent keepalive ping
+2025-12-10 20:33:58,989 - DEBUG: < PONG 5b 78 4e f3 [binary, 4 bytes]
+2025-12-10 20:33:58,989 - DEBUG: < PING 6e 58 2d 8c [binary, 4 bytes]
+2025-12-10 20:33:58,989 - DEBUG: > PONG 6e 58 2d 8c [binary, 4 bytes]
+2025-12-10 20:33:58,989 - DEBUG: % received keepalive pong
+2025-12-10 20:34:11,213 - DEBUG: < TEXT '{"action": "leaveRoom"}' [23 bytes]
+2025-12-10 20:34:11,213 - INFO: Client left room and joined default.
+2025-12-10 20:34:11,213 - DEBUG: > TEXT '{"action": "left", "payload": {"room": "default"}}' [50 bytes]
+2025-12-10 20:34:15,504 - DEBUG: > PING b4 bd 78 de [binary, 4 bytes]
+2025-12-10 20:34:15,504 - DEBUG: % sent keepalive ping
+2025-12-10 20:34:15,504 - DEBUG: < PING d3 0e 34 b7 [binary, 4 bytes]
+2025-12-10 20:34:15,504 - DEBUG: > PONG d3 0e 34 b7 [binary, 4 bytes]
+2025-12-10 20:34:15,504 - DEBUG: < PONG b4 bd 78 de [binary, 4 bytes]
+2025-12-10 20:34:15,504 - DEBUG: % received keepalive pong
+2025-12-10 20:34:15,593 - DEBUG: < TEXT '{"message": "f", "action": "sendMessage"}' [41 bytes]
+2025-12-10 20:34:15,593 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "le n...ault", "message": "f"}}' [85 bytes]
+2025-12-10 20:34:18,999 - DEBUG: > PING 44 0a f5 43 [binary, 4 bytes]
+2025-12-10 20:34:18,999 - DEBUG: % sent keepalive ping
+2025-12-10 20:34:19,033 - DEBUG: < PING "\x17\x19>'" [text, 4 bytes]
+2025-12-10 20:34:19,033 - DEBUG: > PONG "\x17\x19>'" [text, 4 bytes]
+2025-12-10 20:34:19,040 - DEBUG: < PONG 44 0a f5 43 [binary, 4 bytes]
+2025-12-10 20:34:19,040 - DEBUG: % received keepalive pong
+2025-12-10 20:34:27,051 - DEBUG: < TEXT '{"newUsername": "le big n", "action": "rename"}' [47 bytes]
+2025-12-10 20:34:28,981 - DEBUG: < TEXT '{"message": "f", "action": "sendMessage"}' [41 bytes]
+2025-12-10 20:34:28,981 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "le b...ault", "message": "f"}}' [89 bytes]
+2025-12-10 20:34:31,553 - DEBUG: < EOF
+2025-12-10 20:34:31,553 - DEBUG: > EOF
+2025-12-10 20:34:31,553 - DEBUG: < EOF
+2025-12-10 20:34:31,553 - DEBUG: = connection is CLOSED
+2025-12-10 20:34:31,553 - ERROR: Error handling client: no close frame received or sent
 Traceback (most recent call last):
   File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
     return ov.getresult()
@@ -262,45 +296,12 @@ Traceback (most recent call last):
   File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
     raise self.protocol.close_exc from self.recv_exc
 websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-10 20:17:20,062 - WARNING: Client disconnected.
-2025-12-10 20:17:47,413 - DEBUG: = connection is CONNECTING
-2025-12-10 20:17:47,413 - DEBUG: < GET / HTTP/1.1
-2025-12-10 20:17:47,413 - DEBUG: < Host: 10.74.154.158:20200
-2025-12-10 20:17:47,413 - DEBUG: < Upgrade: websocket
-2025-12-10 20:17:47,413 - DEBUG: < Connection: Upgrade
-2025-12-10 20:17:47,413 - DEBUG: < Sec-WebSocket-Key: 2ZJqnuFtfm5VyNf5nsQXSA==
-2025-12-10 20:17:47,413 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-10 20:17:47,413 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-10 20:17:47,413 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-10 20:17:47,413 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-10 20:17:47,413 - DEBUG: > Date: Wed, 10 Dec 2025 19:17:47 GMT
-2025-12-10 20:17:47,413 - DEBUG: > Upgrade: websocket
-2025-12-10 20:17:47,413 - DEBUG: > Connection: Upgrade
-2025-12-10 20:17:47,413 - DEBUG: > Sec-WebSocket-Accept: IwLsU/CzgQkAidYTa14HZ3TDNgU=
-2025-12-10 20:17:47,413 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-10 20:17:47,413 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-10 20:17:47,413 - DEBUG: = connection is OPEN
-2025-12-10 20:17:47,413 - INFO: connection open
-2025-12-10 20:17:47,413 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000022367E5C320>
-2025-12-10 20:17:47,413 - INFO: Connected clients: 1
-2025-12-10 20:17:47,413 - INFO: User: User_1765394267.413809
-2025-12-10 20:17:47,413 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "Lol"]}' [52 bytes]
-2025-12-10 20:17:47,413 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lorian"}}' [57 bytes]
-2025-12-10 20:17:47,913 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-10 20:17:47,913 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "Lol"]}' [52 bytes]
-2025-12-10 20:17:50,022 - DEBUG: < TEXT '{"room": "Lol", "action": "joinRoom"}' [37 bytes]
-2025-12-10 20:17:50,022 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "Lol"}}' [48 bytes]
-2025-12-10 20:17:52,413 - DEBUG: < TEXT '{"message": "salut", "action": "sendMessage"}' [45 bytes]
-2025-12-10 20:17:52,413 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...", "message": "salut"}}' [87 bytes]
-2025-12-10 20:17:53,725 - DEBUG: < TEXT '{"message": "cv", "action": "sendMessage"}' [42 bytes]
-2025-12-10 20:17:53,725 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...Lol", "message": "cv"}}' [84 bytes]
-2025-12-10 20:17:55,213 - DEBUG: < TEXT '{"message": "mdrr", "action": "sendMessage"}' [44 bytes]
-2025-12-10 20:17:55,214 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...l", "message": "mdrr"}}' [86 bytes]
-2025-12-10 20:18:04,852 - DEBUG: < EOF
-2025-12-10 20:18:04,852 - DEBUG: > EOF
-2025-12-10 20:18:04,852 - DEBUG: < EOF
-2025-12-10 20:18:04,852 - DEBUG: = connection is CLOSED
-2025-12-10 20:18:04,852 - ERROR: Error handling client: no close frame received or sent
+2025-12-10 20:34:31,553 - WARNING: Client disconnected.
+2025-12-10 20:34:34,901 - DEBUG: < EOF
+2025-12-10 20:34:34,901 - DEBUG: > EOF
+2025-12-10 20:34:34,901 - DEBUG: < EOF
+2025-12-10 20:34:34,901 - DEBUG: = connection is CLOSED
+2025-12-10 20:34:34,903 - ERROR: Error handling client: no close frame received or sent
 Traceback (most recent call last):
   File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
     return ov.getresult()
@@ -331,73 +332,4 @@ Traceback (most recent call last):
   File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
     raise self.protocol.close_exc from self.recv_exc
 websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-10 20:18:04,852 - WARNING: Client disconnected.
-2025-12-10 20:22:35,307 - DEBUG: = connection is CONNECTING
-2025-12-10 20:22:35,307 - DEBUG: < GET / HTTP/1.1
-2025-12-10 20:22:35,307 - DEBUG: < Host: 10.74.154.158:20200
-2025-12-10 20:22:35,307 - DEBUG: < Upgrade: websocket
-2025-12-10 20:22:35,307 - DEBUG: < Connection: Upgrade
-2025-12-10 20:22:35,307 - DEBUG: < Sec-WebSocket-Key: 2Bt+OpdPwSqhkUMlzpeNeg==
-2025-12-10 20:22:35,319 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-10 20:22:35,319 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-10 20:22:35,319 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-10 20:22:35,319 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-10 20:22:35,319 - DEBUG: > Date: Wed, 10 Dec 2025 19:22:35 GMT
-2025-12-10 20:22:35,319 - DEBUG: > Upgrade: websocket
-2025-12-10 20:22:35,319 - DEBUG: > Connection: Upgrade
-2025-12-10 20:22:35,319 - DEBUG: > Sec-WebSocket-Accept: 8sj4KC1camVRYHYb/ccJqGqrN5w=
-2025-12-10 20:22:35,319 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-10 20:22:35,319 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-10 20:22:35,319 - DEBUG: = connection is OPEN
-2025-12-10 20:22:35,319 - INFO: connection open
-2025-12-10 20:22:35,319 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000022367E5C860>
-2025-12-10 20:22:35,319 - INFO: Connected clients: 1
-2025-12-10 20:22:35,319 - INFO: User: User_1765394555.319006
-2025-12-10 20:22:35,321 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "Lol"]}' [52 bytes]
-2025-12-10 20:22:35,321 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lorian"}}' [57 bytes]
-2025-12-10 20:22:35,830 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-10 20:22:35,830 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "Lol"]}' [52 bytes]
-2025-12-10 20:22:38,109 - DEBUG: < TEXT '{"room": "Lol", "action": "joinRoom"}' [37 bytes]
-2025-12-10 20:22:38,109 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "Lol"}}' [48 bytes]
-2025-12-10 20:22:43,159 - DEBUG: < TEXT '{"message": "Hello", "action": "sendMessage"}' [45 bytes]
-2025-12-10 20:22:43,159 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...", "message": "Hello"}}' [87 bytes]
-2025-12-10 20:22:45,291 - DEBUG: < TEXT '{"message": "comment \\u00e7a va", "action": "sendMessage"}' [58 bytes]
-2025-12-10 20:22:45,291 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori..."comment \\u00e7a va"}}' [100 bytes]
-2025-12-10 20:22:46,547 - DEBUG: < TEXT '{"message": "mdrr", "action": "sendMessage"}' [44 bytes]
-2025-12-10 20:22:46,548 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lori...l", "message": "mdrr"}}' [86 bytes]
-2025-12-10 20:22:51,567 - DEBUG: < EOF
-2025-12-10 20:22:51,567 - DEBUG: > EOF
-2025-12-10 20:22:51,569 - DEBUG: < EOF
-2025-12-10 20:22:51,569 - DEBUG: = connection is CLOSED
-2025-12-10 20:22:51,570 - ERROR: Error handling client: no close frame received or sent
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
-    return ov.getresult()
-           ^^^^^^^^^^^^^^
-OSError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
-    length = fut.result()
-             ^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
-    value = callback(transferred, key, ov)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
-    raise ConnectionResetError(*exc.args)
-ConnectionResetError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "c:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\server.py", line 92, in handle_client
-    async for raw in websocket:
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
-    yield await self.recv()
-          ^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
-    raise self.protocol.close_exc from self.recv_exc
-websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-10 20:22:51,573 - WARNING: Client disconnected.
+2025-12-10 20:34:34,903 - WARNING: Client disconnected.
