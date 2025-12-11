@@ -135,6 +135,33 @@ async def handle_client(websocket):
                         "payload": {"room": current_room} 
                     })
 
+                case "deleteRoom":
+                    # Delete room if it exists and client has permission
+                    room = action.get("room")
+                    if room == "default":
+                        await sendjson(websocket, {"action": "error", "reason": "cannot_delete_default", "detail": "Cannot delete the default room."})
+                        continue
+                    
+                    if room and room in rooms:
+                        # Move all clients in room to default
+                        for client in list(rooms[room]):
+                            rooms["default"].add(client)
+                            client_rooms[client] = "default"
+                            await sendjson(client, {
+                                "action": "left",
+                                "payload": {"room": room}
+                            })
+                        
+                        # Delete the room
+                        del rooms[room]
+                        logging.info(f"Room deleted: {room}")
+                        
+                        # Broadcast updated room list to all clients
+                        for client in connected_clients:
+                            await sendjson(client, {"action": "roomsList", "rooms": list(rooms.keys())})
+                    else:
+                        await sendjson(websocket, {"action": "error", "reason": "room_not_found", "detail": f"Room '{room}' does not exist."})
+
                 case "sendMessage":
                     msg = action.get("message")
                     if not msg:

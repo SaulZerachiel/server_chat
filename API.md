@@ -1,75 +1,172 @@
-WebSocket URL:
-    ws://HOST_IP:20200
+# WebSocket Chat API Documentation
 
-// TODO: Uniformity the client -> server messages and the error format. Add the payload.
-
-Client → Server messages:
-
-1) Identify
-{
-  "action": "identify",
-  "payload": { "username": string }
-}
-
-2) Create room
-{
-  "action": "createRoom",
-  "room": "<string>" // Optional, change this so it's inside the payload. Makes it more uniform.
-}
-
-3) Join room
-{
-  "action": "joinRoom",
-  "room": "<string>"
-}
-
-4) Leave room
-{
-  "action": "leaveRoom",
-}
-
-5) Send message
-{
-  "action": "sendMessage",
-  "message": "<string>"
-}
-
-6) Rename
-{
-  "action": "rename",
-  "newUsername": "<string>" 
-}
+**Server**: `ws://HOST_IP:20200`
 
 ---
 
-Server → Client messages:
+## Client → Server Messages
 
-1) Rooms list
+### 1) Identify
+Sent when connecting to the server.
+```json
+{
+  "action": "identify",
+  "payload": {
+    "username": "string"
+  }
+}
+```
+
+### 2) Create Room
+Create a new chat room.
+```json
+{
+  "action": "createRoom",
+  "payload": {
+    "room": "string"
+  }
+}
+```
+
+### 3) Join Room
+Join an existing room (can be in multiple rooms simultaneously).
+```json
+{
+  "action": "joinRoom",
+  "payload": {
+    "room": "string"
+  }
+}
+```
+
+### 4) Leave Room
+Leave a specific room (stays in other joined rooms).
+```json
+{
+  "action": "leaveRoom",
+  "payload": {
+    "room": "string"
+  }
+}
+```
+
+### 5) Send Message
+Send a message to a specific room.
+```json
+{
+  "action": "sendMessage",
+  "payload": {
+    "message": "string",
+    "room": "string"
+  }
+}
+```
+
+### 6) Delete Room
+Delete a room (admin only or creator).
+```json
+{
+  "action": "deleteRoom",
+  "payload": {
+    "room": "string"
+  }
+}
+```
+
+### 7) Rename User
+Change your username.
+```json
+{
+  "action": "rename",
+  "payload": {
+    "newUsername": "string"
+  }
+}
+```
+
+---
+
+## Server → Client Messages
+
+### 1) Rooms List
+Broadcast list of all rooms with user counts.
+```json
 {
   "action": "roomsList",
-  "rooms": [string]
+  "payload": {
+    "rooms": {
+      "room_name_1": 3,
+      "room_name_2": 1,
+      "default": 5
+    }
+  }
 }
+```
 
-2) Joined room
+### 2) Joined
+Confirmation that user joined a room.
+```json
 {
   "action": "joined",
-  "payload": { "room": string }
+  "payload": {
+    "room": "string"
+  }
 }
+```
 
-3) Chat message
+### 3) Chat Message
+A message sent in a room.
+```json
 {
   "action": "message",
   "payload": {
-    "from": string,
-    "room": string,
-    "message": string
+    "from": "string",
+    "room": "string",
+    "message": "string"
   }
 }
+```
 
-Error format:
+### 4) Left
+Confirmation that user left a room.
+```json
+{
+  "action": "left",
+  "payload": {
+    "room": "string"
+  }
+}
+```
 
-1) Error
+### 5) Error
+Error response.
+```json
 {
   "action": "error",
-  "message": "<string>"
+  "payload": {
+    "reason": "string",
+    "detail": "string"
+  }
 }
+```
+
+---
+
+## Features
+
+- **Multi-room Support**: Users can join and stay in multiple rooms simultaneously
+- **View Without Join**: Click a room to view chat history without joining
+- **Message Persistence**: Messages are stored per room in client memory (session-based)
+- **User Counts**: Real-time tracking of users per room
+- **Emoji Picker**: Built-in emoji selector for messages
+- **Username Changes**: Change username at any time
+- **Room Management**: Create, join, leave, and delete rooms
+
+---
+
+## Architecture
+
+- **Server**: Async WebSocket server (Python asyncio + websockets)
+- **Client**: Threaded Tkinter GUI (customtkinter) with async network thread
+- **Communication**: JSON-based protocol over WebSocket
+- **Port**: 20200 (default)
