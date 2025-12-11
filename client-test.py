@@ -1,3 +1,23 @@
+"""
+WebSocket Chat Client - CustomTkinter GUI
+==========================================
+A multi-room Discord-style chat application using WebSocket for real-time messaging.
+
+Features:
+- Multi-room support (join multiple rooms simultaneously)
+- View room chat without joining
+- Real-time user count per room
+- Emoji picker for messages
+- Custom username management
+- Async networking with threaded GUI
+
+Architecture:
+- Async WebSocket network thread handles all server communication
+- Main thread runs CustomTkinter GUI
+- Queue-based message passing between threads
+- Session-based message storage (in-memory per room)
+"""
+
 import asyncio
 import json
 import threading
@@ -8,34 +28,55 @@ from tkinter import ttk
 import websockets
 from datetime import datetime
 
-# ------------------------------------------------------------------
-# Queues réseau
-# ------------------------------------------------------------------
-out_queue = queue.Queue()
-in_queue = queue.Queue()
+# ==================================================================
+# GLOBAL STATE - Inter-thread communication
+# ==================================================================
+out_queue = queue.Queue()        # Messages FROM GUI TO server
+in_queue = queue.Queue()         # Messages FROM server TO GUI
+connected = False                # Global connection status
 
-current_room = None
-connected = False
-
-# ------------------------------------------------------------------
-# Protocol helper
-# ------------------------------------------------------------------
+# ==================================================================
+# NETWORK PROTOCOL HELPERS
+# ==================================================================
 def send_action(action, payload=None):
+    """
+    Send an action to the server through the outgoing queue.
+    
+    Args:
+        action (str): The action name (e.g., "joinRoom", "sendMessage")
+        payload (dict): Optional payload data to send with the action
+    """
     if payload is None:
         payload = {}
     out_queue.put({**payload, "action": action})
 
-# ------------------------------------------------------------------
-# Boucle réseau
-# ------------------------------------------------------------------
+# ==================================================================
+# ASYNC NETWORK LOOP
+# ==================================================================
 async def network_loop(uri, username):
+    """
+    Main async network loop - handles all WebSocket communication.
+    
+    This function:
+    1. Connects to the WebSocket server
+    2. Sends identify message with username
+    3. Continuously receives messages from server
+    4. Continuously sends queued messages to server
+    5. Handles disconnections and errors gracefully
+    
+    Args:
+        uri (str): WebSocket URI (e.g., "ws://localhost:20200")
+        username (str): Username to identify with on the server
+    """
     global connected
     try:
         async with websockets.connect(uri, ping_interval=20, ping_timeout=10) as ws:
             connected = True
+            # Identify ourselves to the server
             await ws.send(json.dumps({"action": "identify", "payload": {"username": username}}))
 
             async def receiver():
+                """Continuously receive and parse messages from server."""
                 async for raw in ws:
                     try:
                         obj = json.loads(raw)
@@ -47,6 +88,7 @@ async def network_loop(uri, username):
             recv_task = asyncio.create_task(receiver())
 
             try:
+                # Main send loop - continuously check for outgoing messages
                 while True:
                     try:
                         data = out_queue.get_nowait()
@@ -66,6 +108,14 @@ async def network_loop(uri, username):
         connected = False
 
 def start_network_thread(host, port, username):
+    """
+    Start the async network loop in a separate daemon thread.
+    
+    Args:
+        host (str): Server host IP address
+        port (str): Server port number
+        username (str): Username to use for this session
+    """
     uri = f"ws://{host}:{port}"
     t = threading.Thread(target=lambda: asyncio.run(network_loop(uri, username)), daemon=True)
     t.start()
@@ -73,7 +123,15 @@ def start_network_thread(host, port, username):
 # ----------------------------------------------------------------------
 # DIALOGUES CUSTOM (style Discord)
 # ----------------------------------------------------------------------
+# ==================================================================
+# CUSTOM DIALOG WINDOWS (Discord-style)
+# ==================================================================
+
 class CTkInputDialog(ctk.CTkToplevel):
+    """
+    Custom input dialog window for collecting text input from user.
+    Example: Room names, usernames, etc.
+    """
     def __init__(self, title="Input", message="Enter value:"):
         super().__init__()
         self.title(title)
@@ -81,7 +139,7 @@ class CTkInputDialog(ctk.CTkToplevel):
         self.resizable(False, False)
         self.result = None
         
-        # Centrer la fenêtre sur l'écran
+        # Center window on screen
         self.update_idletasks()
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
@@ -91,39 +149,49 @@ class CTkInputDialog(ctk.CTkToplevel):
         y = (screen_height - window_height) // 2
         self.geometry(f"+{x}+{y}")
 
+        # Create frame with rounded corners
         frame = ctk.CTkFrame(self, corner_radius=12)
         frame.pack(fill="both", expand=True, padx=15, pady=15)
 
+        # Message label
         lbl = ctk.CTkLabel(frame, text=message, wraplength=300, font=("Segoe UI", 12))
         lbl.pack(pady=(8, 6), anchor="center")
 
+        # Text entry field
         self.entry = ctk.CTkEntry(frame, width=300, corner_radius=10, font=("Segoe UI", 12))
         self.entry.pack(pady=6)
         self.entry.focus()
 
+        # OK button
         btn = ctk.CTkButton(frame, text="OK", command=self.ok, corner_radius=12, font=("Segoe UI", 12))
         btn.pack(pady=(8, 4))
 
+        # Allow Enter key to submit
         self.bind("<Return>", lambda e: self.ok())
-        self.grab_set()
+        self.grab_set()  # Make window modal
         self.wait_window()
 
     def ok(self):
+        """Confirm input and close dialog."""
         self.result = self.entry.get()
         self.destroy()
 
 def ask_string(title, text):
+    """Helper function to show input dialog and return result."""
     dialog = CTkInputDialog(title=title, message=text)
     return dialog.result
 
 class CTkMessageBox(ctk.CTkToplevel):
+    """
+    Custom message dialog for displaying info/error messages to user.
+    """
     def __init__(self, title="Message", message="Information:", error=False):
         super().__init__()
         self.title(title)
         self.geometry("360x150")
         self.resizable(False, False)
         
-        # Centrer la fenêtre sur l'écran
+        # Center window on screen
         self.update_idletasks()
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
@@ -133,15 +201,18 @@ class CTkMessageBox(ctk.CTkToplevel):
         y = (screen_height - window_height) // 2
         self.geometry(f"+{x}+{y}")
 
+        # Frame with rounded corners
         frame = ctk.CTkFrame(self, corner_radius=12)
         frame.pack(fill="both", expand=True, padx=15, pady=15)
 
+        # Message text - red for errors, white for info
         color = "#ff6b6b" if error else "white"
         ctk.CTkLabel(frame, text=message, text_color=color, wraplength=320, font=("Segoe UI", 12)).pack(pady=(10, 8))
 
+        # OK button to dismiss
         ctk.CTkButton(frame, text="OK", command=self.destroy, corner_radius=12, font=("Segoe UI", 12)).pack(pady=(4, 6))
 
-        self.grab_set()
+        self.grab_set()  # Make window modal
         self.wait_window()
 
 class SettingsWindow(ctk.CTkToplevel):
@@ -189,58 +260,129 @@ class SettingsWindow(ctk.CTkToplevel):
             show_info("Success", "Username changed!")
 
 def show_error(title, msg):
+    """Show error message dialog (red text)."""
     CTkMessageBox(title=title, message=msg, error=True)
 
 def show_info(title, msg):
+    """Show info message dialog (white text)."""
     CTkMessageBox(title=title, message=msg, error=False)
 
-# ------------------------------------------------------------------
-# UI Modernisée
-# ------------------------------------------------------------------
+# ==================================================================
+# MAIN CHAT CLIENT UI
+# ==================================================================
 class ChatClientUI:
-    # Palette de couleurs pour les utilisateurs (style Discord)
+    """
+    Main GUI class for the WebSocket chat client.
+    
+    Features:
+    - Multi-room chat interface (Discord-style)
+    - Real-time message display with user colors
+    - Room management (create, join, leave, delete)
+    - User status tracking (Current, Viewing, Joined)
+    - Member count display per room
+    - Emoji picker for messages
+    
+    Data Structure:
+    - self.room_chats: Dict[room_name] -> list of messages
+    - self.room_last_senders: Dict[room_name] -> last sender (to avoid repeating names)
+    - self.room_counts: Dict[room_name] -> user count
+    - self.joined_rooms: Set of room names the user is member of
+    - self.viewed_room: Currently displayed room (can be view-only)
+    """
+    
+    # User color palette (Discord-style colors)
     USER_COLORS = [
-        "#5865F2",  # Bleu Discord
-        "#57F287",  # Vert
-        "#FEE75C",  # Jaune
+        "#5865F2",  # Discord Blue
+        "#57F287",  # Green
+        "#FEE75C",  # Yellow
         "#F26522",  # Orange
-        "#EB459E",  # Rose
+        "#EB459E",  # Pink
         "#80E7FF",  # Cyan
-        "#B19CD9",  # Violet
-        "#AEE8A0",  # Vert clair
-        "#FF6B6B",  # Rouge
-        "#FFB347",  # Orange clair
+        "#B19CD9",  # Purple
+        "#AEE8A0",  # Light Green
+        "#FF6B6B",  # Red
+        "#FFB347",  # Light Orange
     ]
     
     def __init__(self, master):
+        """
+        Initialize the chat client UI.
+        
+        Args:
+            master: The root Tkinter window
+        """
         self.master = master
         master.title("Chatbox")
         master.geometry("920x600")
         master.minsize(820, 520)
 
+        # Set dark theme
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("dark-blue")
 
-        self.last_sender = None  # Pour espacement des messages
-        self.last_sender_time = None  # Pour ne pas réafficher le pseudo + heure si même utilisateur
-        self.user_colors = {}  # Dictionnaire pour stocker les couleurs des utilisateurs
-        self.color_index = 0  # Index pour la prochaine couleur
-        self.current_room_label = None  # Pour afficher le nom du salon actuel
-        # Messages par room et état des rooms jointes/visualisées
-        self.room_chats = {}  # Dictionnaire pour stocker les messages de chaque room {room_name: [{sender,message,system}, ...]}
-        self.room_last_senders = {}  # Dictionnaire pour tracker le dernier sender par room
-        self.joined_rooms = set(["default"])  # Rooms auxquelles l'utilisateur est inscrit
-        self.viewed_room = None  # Room actuellement affichée dans l'UI (peut être view-only)
-        # Initialiser la room par défaut
+        # Message display state
+        self.last_sender = None              # Track last sender to avoid repetition
+        self.last_sender_time = None         # Track time to avoid showing time repeatedly
+        self.user_colors = {}                # Maps username -> color_index
+        self.color_index = 0                 # Next color to assign to new user
+        
+        # Multi-room message storage
+        self.room_chats = {}                 # Maps room_name -> list of message dicts
+        self.room_last_senders = {}          # Maps room_name -> last sender (per-room)
+        self.room_counts = {}                # Maps room_name -> user count (from server)
+        
+        # Room membership and viewing
+        self.joined_rooms = set(["default"]) # Set of rooms user is member of
+        self.viewed_room = None              # Currently displayed room (can be view-only)
+        
+        # Initialize default room
         self.room_chats["default"] = []
         self.room_last_senders["default"] = None
+        self.room_counts["default"] = 0
 
         # Configure grid weights for proper resizing
-        master.grid_rowconfigure(1, weight=1)  # Make middle expandable
+        master.grid_rowconfigure(1, weight=1)  # Make middle section expandable
         master.grid_rowconfigure(0, weight=0)  # Top stays fixed
         master.grid_rowconfigure(2, weight=0)  # Bottom stays fixed
         master.grid_columnconfigure(0, weight=1)
+        
+        # Build the user interface
+        self.build_ui()
 
+    def create_hover_button(self, parent, text, command, **kwargs):
+        """
+        Create a button with standard hover effect (color change).
+        
+        Args:
+            parent: The parent widget
+            text: Button text
+            command: Function to call on click
+            **kwargs: Additional button parameters
+            
+        Returns:
+            The created CTkButton widget
+        """
+        font = kwargs.pop('font', ("Segoe UI", 12))
+        btn = ctk.CTkButton(parent, text=text, command=command, font=font, **kwargs)
+        return btn
+
+    # ==================================================================
+    # UI BUILDING
+    # ==================================================================
+    def build_ui(self):
+        """
+        Build the complete user interface.
+        
+        Layout:
+        - Top: Connection controls (host, port, username, connect button, settings)
+        - Middle: Three-column layout
+            - Left: Room list, buttons (create, join, leave, delete)
+            - Center: Chat display area
+            - Right: (future expansion)
+        - Bottom: Message input field and send button
+        """
+        master = self.master
+        
         # ------------------------------------------------------------------
         # TOP CONNECTION
         # ------------------------------------------------------------------
@@ -261,7 +403,7 @@ class ChatClientUI:
         self.username_var = ctk.StringVar(value="")
         ctk.CTkEntry(top, textvariable=self.username_var, width=120, corner_radius=10, font=("Segoe UI", 12)).grid(row=0, column=5, padx=4)
 
-        ctk.CTkButton(top, text="Connect", command=self.on_connect, corner_radius=12, font=("Segoe UI", 12)).grid(row=0, column=6, padx=8)
+        self.create_hover_button(top, text="Connect", command=self.on_connect, corner_radius=12, font=("Segoe UI", 12)).grid(row=0, column=6, padx=8)
 
         # Status frame with indicator light
         status_frame = ctk.CTkFrame(top, fg_color="transparent")
@@ -273,7 +415,7 @@ class ChatClientUI:
         self.status_label = ctk.CTkLabel(status_frame, text="Not connected", text_color="red", font=("Segoe UI", 12))
         self.status_label.pack(side="left")
 
-        ctk.CTkButton(top, text="⚙️", command=self.open_settings, corner_radius=8, font=("Segoe UI", 16), width=40, height=40).grid(row=0, column=9, padx=8, sticky="e")
+        self.create_hover_button(top, text="⚙️", command=self.open_settings, corner_radius=8, font=("Segoe UI", 16), width=40, height=40).grid(row=0, column=9, padx=8, sticky="e")
 
         # ------------------------------------------------------------------
         # MIDDLE
@@ -344,9 +486,10 @@ class ChatClientUI:
         for seq in ("<Key>", "<Control-v>", "<Button-2>", "<Button-3>"):
             self.rooms_listbox.bind(seq, lambda e: "break")
         
-        # Ajouter binding pour voir les messages d'une room quand on la sélectionne (single click)
-        # Utiliser l'événement virtuel <<ListboxSelect>> qui se déclenche après la sélection
-        self.rooms_listbox.bind("<<ListboxSelect>>", self.on_room_click)
+        # Ajouter binding pour voir les messages d'une room quand on clique dessus (single click)
+        # Utiliser <Button-1> avec délai pour attraper les clics sur room déjà sélectionnée
+        # <<ListboxSelect>> ne se déclenche que si la sélection change, ce qui cause le bug
+        self.rooms_listbox.bind("<Button-1>", lambda e: self.master.after(10, lambda: self.on_room_click(e)))
 
         # RIGHT – Chat frame
         chat_frame = ctk.CTkFrame(middle, corner_radius=12, fg_color="#2B2D31")
@@ -355,9 +498,17 @@ class ChatClientUI:
         lbl_chat = ctk.CTkLabel(chat_frame, text="CHAT", font=("Segoe UI", 16, "bold"))
         lbl_chat.pack(pady=(10, 6), fill="x")
 
-        # Current room info
-        self.current_room_label = ctk.CTkLabel(chat_frame, text="No room selected", text_color="#72767D", font=("Segoe UI", 11))
-        self.current_room_label.pack(pady=(0, 6), padx=10, fill="x")
+        # Current room info frame (centered display)
+        room_info_frame = ctk.CTkFrame(chat_frame, fg_color="transparent")
+        room_info_frame.pack(pady=(0, 6), padx=10, fill="x")
+
+        # Label centralisé pour le nom du salon + count
+        self.room_name_label = ctk.CTkLabel(room_info_frame, text="No room selected", text_color="#72767D", font=("Segoe UI", 11), justify="left")
+        self.room_name_label.pack(side="left", fill="x", expand=True)
+
+        # Label droit vide (gardé pour compatibilité)
+        self.room_count_label = ctk.CTkLabel(room_info_frame, text="", text_color="#72767D", font=("Segoe UI", 11), justify="right")
+        self.room_count_label.pack(side="right")
 
         # Chat Text + Scrollbar
         self.chat_container = tk.Frame(chat_frame, bg="#2B2D31")
@@ -395,7 +546,10 @@ class ChatClientUI:
         self.msg_entry.pack(side="left", padx=10, fill="x", expand=True)
         self.msg_entry.bind("<Return>", lambda e: self.send_message())
 
-        ctk.CTkButton(bottom, text="Send", command=self.send_message, corner_radius=12, font=("Segoe UI", 12)).pack(side="left", padx=(0,10))
+        self.create_hover_button(bottom, text="Send", command=self.send_message, corner_radius=12, font=("Segoe UI", 12)).pack(side="right", padx=(5,0))
+        
+        # Bouton emoji transparent
+        ctk.CTkButton(bottom, text="😀", command=self.show_emoji_panel, corner_radius=8, font=("Segoe UI", 16), width=40, height=40, fg_color="transparent", hover_color="#404249", border_width=0).pack(side="left", padx=5)
 
         # ------------------------------------------------------------------
         # BUTTONS FRAME (in left container, below rooms)
@@ -404,30 +558,48 @@ class ChatClientUI:
         buttons_frame.grid(row=1, column=0, sticky="ew", pady=10)
 
         btn_font = ("Segoe UI", 12)
-        ctk.CTkButton(buttons_frame, text="Create room", command=self.create_room_prompt, corner_radius=12, font=btn_font).pack(fill="x", pady=(0,4), padx=10)
-        ctk.CTkButton(buttons_frame, text="Join selected", command=self.join_selected_room, corner_radius=12, font=btn_font).pack(fill="x", pady=4, padx=10)
-        ctk.CTkButton(buttons_frame, text="Leave room", command=self.leave_room, corner_radius=12, font=btn_font).pack(fill="x", pady=4, padx=10)
-        ctk.CTkButton(buttons_frame, text="Delete room", command=self.delete_room, corner_radius=12, font=btn_font).pack(fill="x", pady=(4,0), padx=10)
+        self.create_hover_button(buttons_frame, text="Create room", command=self.create_room_prompt, corner_radius=12, font=btn_font).pack(fill="x", pady=(0,4), padx=10)
+        self.create_hover_button(buttons_frame, text="Join selected", command=self.join_selected_room, corner_radius=12, font=btn_font).pack(fill="x", pady=4, padx=10)
+        self.create_hover_button(buttons_frame, text="Leave room", command=self.leave_room, corner_radius=12, font=btn_font).pack(fill="x", pady=4, padx=10)
+        self.create_hover_button(buttons_frame, text="Delete room", command=self.delete_room, corner_radius=12, font=btn_font).pack(fill="x", pady=(4,0), padx=10)
 
         self.master.after(100, self.poll_incoming)
 
-    # ------------------------------------------------------------------
-    # CALLBACKS
-    # ------------------------------------------------------------------
+    # ==================================================================
+    # CALLBACK FUNCTIONS & MESSAGE HANDLERS
+    # ==================================================================
     def get_room_name(self, room_display):
-        """Extract room name from display text (format: 'room_name (count)')"""
-        if ' (' in room_display:
-            return room_display.rsplit(' (', 1)[0]
-        return room_display
+        """
+        Extract room name from display string.
+        Helper function to handle any special formatting.
+        
+        Args:
+            room_display (str): The displayed room name (possibly with extra whitespace)
+            
+        Returns:
+            str: Cleaned room name
+        """
+        return room_display.strip()
 
     def on_room_click(self, event):
-        """Affiche les messages d'une room quand on clique dessus (sans rejoindre)"""
+        """
+        Handle room list click - display messages from selected room.
+        
+        This allows viewing a room's chat without joining it.
+        When clicked, the room's messages are displayed and member count is shown.
+        
+        Args:
+            event: Tkinter event from button click
+        """
         sel = self.rooms_listbox.curselection()
         if not sel:
             return
         
         room_display = self.rooms_listbox.get(sel[0])
         room = self.get_room_name(room_display)
+        
+        # Get member count from server data
+        count = self.room_counts.get(room)
         
         # Initialiser la room si elle n'existe pas
         if room not in self.room_chats:
@@ -437,8 +609,8 @@ class ChatClientUI:
         # Afficher les messages de cette room (sans la rejoindre)
         self.viewed_room = room
         self.display_room_chat(room)
-        # Mettre à jour le label en fonction si l'on a déjà rejoint la room
-        self.update_room_info(room)
+        # Mettre à jour le label avec le count du serveur
+        self.update_room_info(room, count)
 
     def on_connect(self):
         if connected:
@@ -540,6 +712,65 @@ class ChatClientUI:
         room = self.get_room_name(room_display)
         send_action("deleteRoom", {"room": room})
 
+    def show_emoji_panel(self):
+        """
+        Toggle display of emoji picker dropdown.
+        
+        Shows/hides a grid of common emojis that can be clicked to insert into message.
+        Panel appears as overlay near the input bar.
+        """
+        emojis = [
+            "😀", "😂", "😍", "🥰", "😎", "🤔", "😢", "😡",
+            "👍", "👎", "❤️", "🔥", "✨", "🎉", "🎊", "💯",
+            "🚀", "💪", "🙏", "👏", "😴", "🤐", "🤢", "🤮",
+            "😈", "👿", "💀", "☠️", "💩", "🤡", "👻", "🎃",
+            "😺", "😸", "😻", "😼", "😽", "😾", "😿", "🙀",
+            "🍔", "🍕", "🍣", "🍜", "🍰", "🎂", "☕", "🍷"
+        ]
+        
+        # Toggle: close panel if already open
+        if hasattr(self, 'emoji_panel') and self.emoji_panel.winfo_exists():
+            self.emoji_panel.destroy()
+            return
+        
+        # Create overlay panel near bottom-right of screen
+        self.emoji_panel = ctk.CTkFrame(self.master, fg_color="#2B2D31", corner_radius=12, width=320, height=250)
+        self.emoji_panel.place(x=self.master.winfo_width() - 340, y=self.master.winfo_height() - 280)
+        
+        # Create 8-column grid of emoji buttons
+        for idx, emoji in enumerate(emojis):
+            row = idx // 8
+            col = idx % 8
+            btn = ctk.CTkButton(
+                self.emoji_panel, 
+                text=emoji, 
+                font=("Segoe UI", 18),
+                width=30, 
+                height=30,
+                fg_color="transparent",
+                hover_color="#404249",
+                border_width=0,
+                command=lambda e=emoji: self.insert_emoji(e)
+            )
+            btn.grid(row=row, column=col, padx=3, pady=3)
+        
+        # Fermer le panel si on clique ailleurs
+        self.master.after(100, lambda: self.master.bind("<Button-1>", self.close_emoji_panel_on_click))
+    
+    def close_emoji_panel_on_click(self, event):
+        """Ferme le panel d'emoji si on clique ailleurs"""
+        if hasattr(self, 'emoji_panel') and self.emoji_panel.winfo_exists():
+            # Vérifier si le clic est sur le panel ou ses enfants
+            widget = self.master.winfo_containing(event.x_root, event.y_root)
+            if widget and "emoji_panel" not in str(widget):
+                self.emoji_panel.destroy()
+    
+    def insert_emoji(self, emoji):
+        """Insère un emoji dans le champ de texte et ferme le panel"""
+        self.msg_entry.insert(tk.END, emoji)
+        if hasattr(self, 'emoji_panel') and self.emoji_panel.winfo_exists():
+            self.emoji_panel.destroy()
+
     def send_message(self):
         # Envoi d'un message vers la room actuellement visualisée
         if not connected:
@@ -557,20 +788,29 @@ class ChatClientUI:
         text = self.msg_entry.get().strip()
         if not text:
             return
-        # Envoyer le message en précisant la room cible
+        # Send message to viewed room
         send_action("sendMessage", {"message": text, "room": self.viewed_room})
         self.msg_entry.delete(0, "end")
 
-    # ------------------------------------------------------------------
-    # Append chat avec pseudo + heure
-    # ------------------------------------------------------------------
+    # ==================================================================
+    # MESSAGE STORAGE & DISPLAY
+    # ==================================================================
     def append_chat(self, sender, message, room=None, system=False):
-        """Ajoute un message dans l'historique de la room donnée.
-        Si la room correspond à la room affichée, rafraîchit l'affichage."""
-        # Déterminer la room cible pour le stockage
+        """
+        Add a message to room history.
+        
+        Stores message in self.room_chats and refreshes display if currently viewing that room.
+        
+        Args:
+            sender (str): Username of sender (or "SYSTEM" for system messages)
+            message (str): The message text
+            room (str): Target room (defaults to viewed_room or "default")
+            system (bool): Whether this is a system message (styled differently)
+        """
+        # Determine target room for storage
         target_room = room or self.viewed_room or "default"
 
-        # Initialiser la room si nécessaire
+        # Initialize room if needed
         if target_room not in self.room_chats:
             self.room_chats[target_room] = []
             self.room_last_senders[target_room] = None
@@ -647,29 +887,55 @@ class ChatClientUI:
         # Afficher en utilisant refresh (qui prend en compte self.viewed_room)
         self.refresh_chat_display()
 
-    def update_room_info(self, room):
+    def update_room_info(self, room, count=None):
         """Update the room info label and highlight the active room"""
         if not room:
-            self.current_room_label.configure(text="No room selected", text_color="#72767D")
+            self.room_name_label.configure(text="No room selected", text_color="#72767D")
+            self.room_count_label.configure(text="")
             return
 
-        # Si on visualise cette room
+        # Construire le texte du count avec séparateur
+        members_text = f"  |  Members: {count}" if count is not None else ""
+
+        # Déterminer la couleur et le label du nom selon l'état
         if room == self.viewed_room:
             if room in self.joined_rooms:
-                self.current_room_label.configure(text=f"📍 Current room: {room}", text_color="white")
+                name_text = f"📍 Current room: {room}"
+                name_color = "white"
             else:
-                self.current_room_label.configure(text=f"Viewing: {room}", text_color="#72767D")
+                name_text = f"👁️ Viewing: {room}"
+                name_color = "#72767D"
         else:
             # Si pas visualisée mais jointe
             if room in self.joined_rooms:
-                self.current_room_label.configure(text=f"Joined: {room}", text_color="white")
+                name_text = f"✓ Joined: {room}"
+                name_color = "white"
             else:
-                self.current_room_label.configure(text=f"{room}", text_color="#72767D")
+                name_text = f"{room}"
+                name_color = "#72767D"
 
-    # ------------------------------------------------------------------
-    # Poll incoming
-    # ------------------------------------------------------------------
+        # Mettre à jour les labels avec tout sur la gauche
+        combined_text = name_text + members_text
+        self.room_name_label.configure(text=combined_text, text_color=name_color)
+        self.room_count_label.configure(text="")  # Vider le label droit
+
+    # ==================================================================
+    # NETWORK MESSAGE POLLING (Main event loop)
+    # ==================================================================
     def poll_incoming(self):
+        """
+        Poll incoming messages from the network thread and process them.
+        
+        This method is called repeatedly (every 100ms) and handles:
+        - Room list updates (with member counts)
+        - Join/leave confirmations
+        - Chat messages from other users
+        - User membership changes
+        - Error messages
+        - Connection events
+        
+        This bridges async network thread with sync Tkinter GUI.
+        """
         
         while not in_queue.empty():
             obj = in_queue.get()
@@ -677,29 +943,34 @@ class ChatClientUI:
             payload = obj.get("payload", {})
 
             if action == "roomsList":
-                # Préserver la room actuellement visualisée
+                # Update room list while preserving current view
                 prev_viewed = self.viewed_room
 
                 self.rooms_listbox.delete(0, tk.END)
                 rooms_data = obj.get("rooms", {})
                 
-                # Si rooms_data est une liste (ancien format), utiliser le nouveau format dict
+                # Handle both old list format and new dict format (with counts)
                 if isinstance(rooms_data, list):
                     for r in rooms_data:
                         self.rooms_listbox.insert(tk.END, r)
                 else:
-                    # Nouveau format: dict avec room_name: count
+                    # New format: dict with room_name -> user_count
+                    # Save counts for room info display
+                    self.room_counts = rooms_data.copy()
+                    # Display room names only (counts shown in room info section)
                     for room_name, user_count in sorted(rooms_data.items()):
-                        self.rooms_listbox.insert(tk.END, f"{room_name} ({user_count})")
+                        self.rooms_listbox.insert(tk.END, room_name)
 
-                # Restaurer la sélection si possible
+                # Restore selection to previously viewed room
                 if prev_viewed:
                     for i in range(self.rooms_listbox.size()):
                         item = self.rooms_listbox.get(i)
-                        if item.startswith(prev_viewed + " (") or item == prev_viewed:
+                        if item == prev_viewed:
                             self.rooms_listbox.selection_clear(0, tk.END)
                             self.rooms_listbox.selection_set(i)
                             self.rooms_listbox.see(i)
+                            # Mettre à jour avec le nouveau count
+                            self.update_room_info(prev_viewed, self.room_counts.get(prev_viewed))
                             break
 
             elif action == "joined":
@@ -718,7 +989,7 @@ class ChatClientUI:
                 # Si l'utilisateur visualise cette room, rafraîchir et indiquer qu'elle est jointe
                 if self.viewed_room == room:
                     self.refresh_chat_display()
-                    self.update_room_info(room)
+                    self.update_room_info(room, self.room_counts.get(room))
 
             elif action == "left":
                 room = payload.get("room")
@@ -747,15 +1018,17 @@ class ChatClientUI:
                 show_error("Server error", f"{reason}\n{detail}")
                 self.append_chat("SYSTEM", f"{reason} {detail}", system=True)
 
-            else:
-                self.append_chat("SYSTEM", f"[DEBUG] {obj}", system=True)
-
+        # Schedule next poll in 100ms
         self.master.after(100, self.poll_incoming)
 
-# ------------------------------------------------------------------
-# MAIN
-# ------------------------------------------------------------------
+# ==================================================================
+# APPLICATION ENTRY POINT
+# ==================================================================
 def main():
+    """
+    Initialize and run the chat client application.
+    Creates the main window and starts the UI event loop.
+    """
     root = ctk.CTk()
     ChatClientUI(root)
     root.mainloop()

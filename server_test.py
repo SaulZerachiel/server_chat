@@ -1,33 +1,53 @@
+"""
+WebSocket Chat Server
+====================
+Multi-room async WebSocket server for real-time chat application.
+
+Features:
+- Multi-room support with per-room user tracking
+- Real-time room list broadcasting with user counts
+- User identification and renaming
+- Room creation, joining, leaving, deletion
+- Message broadcasting to room members only
+- Automatic user count synchronization
+
+Protocol: JSON-based WebSocket messages
+Port: 20200
+"""
+
 import asyncio 
 import websockets as ws
 import json
 import datetime
 import logging
 
-# Notes:
-# ° variable "websocket" is a websocket connection object that represents one connected client (like an ID)
-# ° List of actions: "createRoom, joinRoom, leaveRoom, sendMessage, receiveMessage, identify, rename, typing"
+# ==================================================================
+# SERVER STATE MANAGEMENT
+# ==================================================================
+connected_clients = set()       # Set of all connected websocket clients
+rooms = {"default": set()}      # Maps room_name -> set of clients in that room
+client_rooms = dict()           # Maps websocket -> set of rooms client has joined
+users = dict()                  # Maps websocket -> username
+typing_users = dict()           # Maps websocket -> room (for typing indicator, future feature)
 
-connected_clients = set()   # Build unordered object of unique elements
-rooms = {"default": set()}   # Default room has clients in room
-                                # when a client sends a message all other clients in same room receive that message
-client_rooms = dict()  # maps websocket -> set of rooms the client has joined
-users = dict()
-typing_users = dict()  # Track users typing: {socket: room}
-
-# Setup logging
+# ==================================================================
+# LOGGING SETUP
+# ==================================================================
 logging.basicConfig(
     filename="server.log",
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s: %(message)s"
 )
 
-# Overwrite previous logs
+# Clear previous logs
 with open("server.log", "w+"):
     pass
 
-# Get IP-address
+# ==================================================================
+# UTILITY FUNCTIONS
+# ==================================================================
 def getIPAddress():
+    """Get the server's public IP address."""
     import socket
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
@@ -36,10 +56,20 @@ def getIPAddress():
     return ipaddress
 
 ipaddress = getIPAddress()
-print(ipaddress)
+print(f"Server IP: {ipaddress}")
 
-# CLI
+# ==================================================================
+# COMMAND LINE INTERFACE
+# ==================================================================
 async def cli(server):
+    """
+    Interactive CLI for server administration.
+    
+    Commands:
+    - rooms: List all rooms and their user counts
+    - clients: Show connected clients
+    - quit/exit: Gracefully shutdown server
+    """
     while True:
         cmd = await asyncio.get_event_loop().run_in_executor(None, input, "> ")
 
@@ -50,30 +80,55 @@ async def cli(server):
                 print(f"Connected clients: {connected_clients}, count: {len(connected_clients)}")
             case "quit" | "exit":
                 print(f"Shutting down server...")
-                # Close client connections
+                # Close all client connections
                 for client in list(connected_clients):
                     await client.close()
-                # Close server
+                # Shutdown server
                 server.close()
                 await server.wait_closed()
                 break
             case _:
                 print("Not a command.")
 
-# Converts python object to json text
-# And send json object to specific client
+# ==================================================================
+# MESSAGE SENDING & BROADCASTING
+# ==================================================================
 async def sendjson(websocket, obj):
+    """
+    Send a JSON object to a specific client.
+    
+    Args:
+        websocket: The target client websocket
+        obj: Python dict to serialize as JSON and send
+    """
     await websocket.send(json.dumps(obj))
 
-# Get room list with user counts
 def get_rooms_with_counts():
+    """
+    Get all rooms with their current user counts.
+    
+    Returns:
+        dict: Maps room_name -> user_count
+    """
     rooms_data = {}
     for room_name, room_clients in rooms.items():
         rooms_data[room_name] = len(room_clients)
     return rooms_data
 
-# This function is called each time a new client connects
+# ==================================================================
+# CLIENT CONNECTION HANDLER
+# ==================================================================
 async def handle_client(websocket):
+    """
+    Main handler for each connected client.
+    
+    Manages client lifecycle:
+    1. Registration and identification
+    2. Message routing and broadcasting
+    3. Room management (join/leave/create/delete)
+    4. User presence tracking
+    5. Cleanup on disconnect
+    """
     # Send the IP-address of the server to the client
     # await sendjson(websocket, {"action": "getIP", "IP": ipaddress})
 
@@ -82,17 +137,20 @@ async def handle_client(websocket):
     connected_clients.add(websocket)
     logging.info(f"Connected clients: {len(connected_clients)}")
     
-    # Give random username to client
+    # Assign default username (temporary, client can rename via "identify" action)
     users[websocket] = "User_" + str(datetime.datetime.now().timestamp())
     logging.info(f"User: {users[websocket]}")
 
-    # Add client to "default" room.
+    # Auto-join client to "default" room on connection
     rooms["default"].add(websocket)
     client_rooms[websocket] = set(["default"])
 
     try:
-        # Send initial room list to client
-        await sendjson(websocket, {"action": "roomsList", "rooms": get_rooms_with_counts()})
+        # Send current room list with user counts to the new client
+        await sendjson(websocket, {
+            "action": "roomsList", 
+            "payload": {"rooms": get_rooms_with_counts()}
+        })
 
         async for raw in websocket:
             action = json.loads(raw)
