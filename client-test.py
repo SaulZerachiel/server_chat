@@ -24,9 +24,11 @@ import threading
 import queue
 import customtkinter as ctk
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, filedialog
 import websockets
 from datetime import datetime
+from PIL import Image, ImageTk, ImageDraw
+import os
 
 # ==================================================================
 # GLOBAL STATE - Inter-thread communication
@@ -216,19 +218,22 @@ class CTkMessageBox(ctk.CTkToplevel):
         self.wait_window()
 
 class SettingsWindow(ctk.CTkToplevel):
-    def __init__(self, title="Settings", on_username_change=None):
+    def __init__(self, title="Settings", on_username_change=None, on_avatar_change=None, current_username=None, current_avatar_path=None):
         super().__init__()
         self.title(title)
-        self.geometry("400x160")
+        self.geometry("400x350")
         self.resizable(False, False)
         self.on_username_change = on_username_change
+        self.on_avatar_change = on_avatar_change
+        self.current_username = current_username
+        self.current_avatar_path = current_avatar_path
         
         # Centrer la fenêtre sur l'écran
         self.update_idletasks()
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
         window_width = 400
-        window_height = 160
+        window_height = 350
         x = (screen_width - window_width) // 2
         y = (screen_height - window_height) // 2
         self.geometry(f"+{x}+{y}")
@@ -247,8 +252,28 @@ class SettingsWindow(ctk.CTkToplevel):
         
         ctk.CTkButton(username_frame, text="Save", command=self.save_username, corner_radius=10, font=("Segoe UI", 11), width=60).pack(side="left")
 
+        # Avatar section
+        ctk.CTkLabel(frame, text="Profile Picture", font=("Segoe UI", 14, "bold")).pack(pady=(15, 8), anchor="w", padx=15)
+        
+        # Avatar preview
+        avatar_preview_frame = ctk.CTkFrame(frame, fg_color="transparent")
+        avatar_preview_frame.pack(fill="x", padx=15, pady=(0, 10))
+        
+        # Créer et afficher l'avatar actuel
+        if self.current_username:
+            current_avatar = create_default_avatar(self.current_username, size=64, custom_image_path=self.current_avatar_path)
+            self.avatar_label = ctk.CTkLabel(avatar_preview_frame, text="", image=current_avatar)
+            self.avatar_label.image = current_avatar  # Garder une référence
+            self.avatar_label.pack(side="left", padx=(0, 15))
+        
+        avatar_buttons_frame = ctk.CTkFrame(avatar_preview_frame, fg_color="transparent")
+        avatar_buttons_frame.pack(side="left", fill="both", expand=True)
+        
+        ctk.CTkButton(avatar_buttons_frame, text="Choose Avatar", command=self.choose_avatar, corner_radius=10, font=("Segoe UI", 11)).pack(pady=(0, 5), fill="x")
+        ctk.CTkButton(avatar_buttons_frame, text="Reset to Default", command=self.reset_avatar, corner_radius=10, font=("Segoe UI", 11)).pack(fill="x")
+
         # Close button
-        ctk.CTkButton(frame, text="Close", command=self.destroy, corner_radius=12, font=("Segoe UI", 12)).pack(pady=(10, 0))
+        ctk.CTkButton(frame, text="Close", command=self.destroy, corner_radius=12, font=("Segoe UI", 12)).pack(pady=(15, 0))
 
         self.grab_set()
 
@@ -258,6 +283,33 @@ class SettingsWindow(ctk.CTkToplevel):
             self.on_username_change(username)
             self.username_entry.delete(0, "end")
             show_info("Success", "Username changed!")
+    
+    def choose_avatar(self):
+        """Ouvre un dialogue pour choisir une image comme avatar"""
+        file_path = filedialog.askopenfilename(
+            title="Choose Avatar",
+            filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp")]
+        )
+        if file_path and self.on_avatar_change:
+            self.current_avatar_path = file_path
+            self.on_avatar_change(file_path)
+            self.update_avatar_preview()
+            show_info("Success", "Avatar changed!")
+    
+    def reset_avatar(self):
+        """Réinitialise l'avatar par défaut"""
+        if self.on_avatar_change:
+            self.current_avatar_path = None
+            self.on_avatar_change(None)
+            self.update_avatar_preview()
+            show_info("Success", "Avatar reset to default!")
+    
+    def update_avatar_preview(self):
+        """Met à jour la prévisualisation de l'avatar"""
+        if self.current_username and hasattr(self, 'avatar_label'):
+            new_avatar = create_default_avatar(self.current_username, size=64, custom_image_path=self.current_avatar_path)
+            self.avatar_label.configure(image=new_avatar)
+            self.avatar_label.image = new_avatar
 
 def show_error(title, msg):
     """Show error message dialog (red text)."""
@@ -266,6 +318,69 @@ def show_error(title, msg):
 def show_info(title, msg):
     """Show info message dialog (white text)."""
     CTkMessageBox(title=title, message=msg, error=False)
+
+def create_default_avatar(username, size=32, custom_image_path=None):
+    """
+    Crée un avatar par défaut avec les initiales de l'utilisateur ou une image personnalisée.
+    
+    Args:
+        username (str): Nom de l'utilisateur
+        size (int): Taille de l'avatar en pixels
+        custom_image_path (str): Chemin vers une image personnalisée (optionnel)
+    
+    Returns:
+        PhotoImage: Avatar généré
+    """
+    # Si une image personnalisée est fournie, l'utiliser
+    if custom_image_path and os.path.exists(custom_image_path):
+        try:
+            img = Image.open(custom_image_path)
+            img = img.convert('RGBA')
+            # Redimensionner l'image pour qu'elle soit carrée
+            img = img.resize((size, size), Image.LANCZOS)
+            
+            # Créer un masque circulaire
+            mask = Image.new('L', (size, size), 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse([0, 0, size, size], fill=255)
+            
+            # Créer une image de sortie avec fond transparent
+            output = Image.new('RGBA', (size, size), (0, 0, 0, 0))
+            output.paste(img, (0, 0))
+            output.putalpha(mask)
+            
+            return ImageTk.PhotoImage(output)
+        except Exception as e:
+            print(f"Erreur lors du chargement de l'avatar: {e}")
+            # Continuer avec l'avatar par défaut en cas d'erreur
+    
+    # Créer une image ronde avec un fond coloré (avatar par défaut)
+    img = Image.new('RGBA', (size, size), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    
+    # Couleur de fond basée sur le hash du username
+    colors = [
+        (88, 101, 242),   # Bleu Discord
+        (235, 69, 158),   # Rose
+        (254, 231, 92),   # Jaune
+        (87, 242, 135),   # Vert
+        (242, 101, 34),   # Orange
+    ]
+    color = colors[hash(username) % len(colors)]
+    
+    # Dessiner un cercle
+    draw.ellipse([0, 0, size, size], fill=color)
+    
+    # Obtenir les initiales (max 2 lettres)
+    initials = ''.join([word[0].upper() for word in username.split()[:2]])
+    if not initials:
+        initials = username[0].upper() if username else '?'
+    
+    # Ajouter le texte (initiales) - pour simplifier, on utilise un texte par défaut
+    # Note: pour un texte correct, il faudrait charger une police
+    # Ici on simplifie sans texte pour éviter les problèmes de police
+    
+    return ImageTk.PhotoImage(img)
 
 # ==================================================================
 # MAIN CHAT CLIENT UI
@@ -334,6 +449,11 @@ class ChatClientUI:
         # Room membership and viewing
         self.joined_rooms = set(["default"]) # Set of rooms user is member of
         self.viewed_room = None              # Currently displayed room (can be view-only)
+        
+        # Profile pictures
+        self.user_avatars = {}               # Maps username -> PhotoImage avatar
+        self.current_avatar_path = None      # Path to current user's avatar
+        self.my_username = ""                # Current user's username
         
         # Initialize default room
         self.room_chats["default"] = []
@@ -521,7 +641,7 @@ class ChatClientUI:
             self.chat_container,
             bg="#2B2D31",
             fg="white",
-            font=("Segoe UI", 12),
+            font=("Segoe UI", 18),
             state="disabled",
             wrap="word",
             yscrollcommand=self.chat_scrollbar.set,
@@ -531,12 +651,12 @@ class ChatClientUI:
         self.chat_box.pack(side="left", fill="both", expand=True)
         self.chat_scrollbar.config(command=self.chat_box.yview)
 
-        self.chat_box.tag_configure("pseudo", font=("Segoe UI", 12, "bold"))
-        self.chat_box.tag_configure("system", font=("Segoe UI", 12, "italic"), foreground="#ff6b6b")
+        self.chat_box.tag_configure("pseudo", font=("Segoe UI", 18, "bold"))
+        self.chat_box.tag_configure("system", font=("Segoe UI", 18, "italic"), foreground="#ff6b6b")
         
         # Configure user color tags
         for i, color in enumerate(self.USER_COLORS):
-            self.chat_box.tag_configure(f"user_color_{i}", foreground=color, font=("Segoe UI", 12, "bold"))
+            self.chat_box.tag_configure(f"user_color_{i}", foreground=color, font=("Segoe UI", 18, "bold"))
 
         # BOTTOM
         bottom = ctk.CTkFrame(master, corner_radius=12)
@@ -631,6 +751,7 @@ class ChatClientUI:
             show_error("Error", "Invalid port")
             return
 
+        self.my_username = username  # Stocker le username actuel
         start_network_thread(host, port, username)
         self.status_indicator.configure(text_color="orange")
         self.status_label.configure(text="Connecting...", text_color="orange")
@@ -687,11 +808,51 @@ class ChatClientUI:
     def open_settings(self):
         SettingsWindow(
             title="Settings",
-            on_username_change=self.handle_username_change
+            on_username_change=self.handle_username_change,
+            on_avatar_change=self.handle_avatar_change,
+            current_username=self.my_username,
+            current_avatar_path=self.current_avatar_path
         )
 
     def handle_username_change(self, username):
+        self.my_username = username  # Mettre à jour le username local
         send_action("rename", {"newUsername": username})
+    
+    def handle_avatar_change(self, avatar_path):
+        """Gère le changement d'avatar"""
+        self.current_avatar_path = avatar_path
+        # Effacer l'avatar en cache pour forcer le rechargement
+        if self.my_username in self.user_avatars:
+            del self.user_avatars[self.my_username]
+        # Rafraîchir l'affichage
+        self.refresh_chat_display()
+        # Note: L'avatar est local uniquement, pas envoyé au serveur
+        # Pour une implémentation complète, il faudrait modifier le protocole
+    
+    def get_user_avatar(self, username, size=32):
+        """
+        Obtient ou crée l'avatar d'un utilisateur.
+        
+        Args:
+            username (str): Nom de l'utilisateur
+            size (int): Taille de l'avatar
+        
+        Returns:
+            PhotoImage: Avatar de l'utilisateur
+        """
+        # Si l'avatar existe déjà, le retourner
+        if username in self.user_avatars:
+            return self.user_avatars[username]
+        
+        # Si c'est l'utilisateur actuel et qu'il a un avatar personnalisé, l'utiliser
+        custom_path = None
+        if username == self.my_username and self.current_avatar_path:
+            custom_path = self.current_avatar_path
+        
+        # Sinon, créer un avatar par défaut
+        avatar = create_default_avatar(username, size, custom_path)
+        self.user_avatars[username] = avatar
+        return avatar
 
     def change_username(self):
         newUsername = ask_string("Change Username", "New username:")
@@ -717,59 +878,88 @@ class ChatClientUI:
         Toggle display of emoji picker dropdown.
         
         Shows/hides a grid of common emojis that can be clicked to insert into message.
-        Panel appears as overlay near the input bar.
+        Panel appears at center of the window.
         """
-        emojis = [
-            "😀", "😂", "😍", "🥰", "😎", "🤔", "😢", "😡",
-            "👍", "👎", "❤️", "🔥", "✨", "🎉", "🎊", "💯",
-            "🚀", "💪", "🙏", "👏", "😴", "🤐", "🤢", "🤮",
-            "😈", "👿", "💀", "☠️", "💩", "🤡", "👻", "🎃",
-            "😺", "😸", "😻", "😼", "😽", "😾", "😿", "🙀",
-            "🍔", "🍕", "🍣", "🍜", "🍰", "🎂", "☕", "🍷"
-        ]
+        emojis = ["😀", "👍", "❤", "🔥", "🎉"]
         
         # Toggle: close panel if already open
         if hasattr(self, 'emoji_panel') and self.emoji_panel.winfo_exists():
             self.emoji_panel.destroy()
+            # Unbind the click handler
+            self.master.unbind("<Button-1>")
             return
         
-        # Create overlay panel near bottom-right of screen
-        self.emoji_panel = ctk.CTkFrame(self.master, fg_color="#2B2D31", corner_radius=12, width=320, height=250)
-        self.emoji_panel.place(x=self.master.winfo_width() - 340, y=self.master.winfo_height() - 280)
+        # Force window update to get correct dimensions
+        self.master.update_idletasks()
         
-        # Create 8-column grid of emoji buttons
-        for idx, emoji in enumerate(emojis):
-            row = idx // 8
-            col = idx % 8
+        # Get window dimensions and position
+        window_width = self.master.winfo_width()
+        window_height = self.master.winfo_height()
+        
+        # Calculate adaptive panel size
+        panel_width = max(200, min(300, int(window_width * 0.5)))
+        panel_height = 120
+        
+        # Padding from edges
+        padding = 10
+        
+        # Position panel in the MIDDLE of the screen (not at bottom which is cut)
+        # This ensures it's always visible
+        panel_x = max(padding, (window_width - panel_width) // 2)
+        panel_y = max(padding, (window_height - panel_height) // 2)
+        
+        # Create overlay panel with adaptive dimensions
+        self.emoji_panel = ctk.CTkFrame(
+            self.master, 
+            fg_color="#2B2D31", 
+            corner_radius=12, 
+            width=panel_width, 
+            height=panel_height
+        )
+        self.emoji_panel.place(x=panel_x, y=panel_y)
+        
+        # Create scrollable frame for emojis
+        emoji_container = ctk.CTkFrame(self.emoji_panel, fg_color="#2B2D31")
+        emoji_container.pack(fill="both", expand=True, padx=5, pady=5)
+        
+        # Create emoji buttons in a row
+        for emoji in emojis:
             btn = ctk.CTkButton(
-                self.emoji_panel, 
+                emoji_container, 
                 text=emoji, 
-                font=("Segoe UI", 18),
-                width=30, 
-                height=30,
+                font=("Segoe UI", 20),
+                width=40, 
+                height=40,
                 fg_color="transparent",
                 hover_color="#404249",
                 border_width=0,
                 command=lambda e=emoji: self.insert_emoji(e)
             )
-            btn.grid(row=row, column=col, padx=3, pady=3)
+            btn.pack(side="left", padx=3, pady=3)
         
-        # Fermer le panel si on clique ailleurs
-        self.master.after(100, lambda: self.master.bind("<Button-1>", self.close_emoji_panel_on_click))
+        # Raise panel to front (z-order)
+        self.emoji_panel.lift()
+        
+        # Bind click handler to close panel when clicking outside
+        # Use a unique function reference to avoid conflicts
+        self.master.bind("<Button-1>", self.close_emoji_panel_on_click)
     
     def close_emoji_panel_on_click(self, event):
         """Ferme le panel d'emoji si on clique ailleurs"""
         if hasattr(self, 'emoji_panel') and self.emoji_panel.winfo_exists():
             # Vérifier si le clic est sur le panel ou ses enfants
             widget = self.master.winfo_containing(event.x_root, event.y_root)
-            if widget and "emoji_panel" not in str(widget):
+            if widget is None or "emoji_panel" not in str(widget):
                 self.emoji_panel.destroy()
+                self.master.unbind("<Button-1>")
     
     def insert_emoji(self, emoji):
         """Insère un emoji dans le champ de texte et ferme le panel"""
         self.msg_entry.insert(tk.END, emoji)
         if hasattr(self, 'emoji_panel') and self.emoji_panel.winfo_exists():
             self.emoji_panel.destroy()
+        # Unbind the click handler
+        self.master.unbind("<Button-1>")
 
     def send_message(self):
         # Envoi d'un message vers la room actuellement visualisée
@@ -865,9 +1055,19 @@ class ChatClientUI:
                             self.user_colors[sender] = self.color_index % len(self.USER_COLORS)
                             self.color_index += 1
 
+                        # Obtenir et afficher l'avatar
+                        avatar = self.get_user_avatar(sender, size=48)
+                        self.chat_box.image_create("end", image=avatar)
+                        self.chat_box.insert("end", " ")  # Espace entre avatar et pseudo
+                        
                         color_tag = f"user_color_{self.user_colors[sender]}"
                         self.chat_box.insert("end", f"{sender} [{now}]\n", color_tag)
-                    self.chat_box.insert("end", f"{message}\n")
+                    
+                    # Indentation du message pour aligner avec le pseudo (avatar + espace)
+                    if show_header:
+                        self.chat_box.insert("end", f"      {message}\n")
+                    else:
+                        self.chat_box.insert("end", f"      {message}\n")
 
                 last_sender = sender
 
