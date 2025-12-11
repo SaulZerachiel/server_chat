@@ -1,492 +1,85 @@
-2025-12-11 02:57:14,510 - DEBUG: Using proactor: IocpProactor
-2025-12-11 02:57:14,589 - INFO: server listening on 0.0.0.0:20200
-2025-12-11 02:57:14,589 - INFO: Server running.
-2025-12-11 02:57:32,564 - DEBUG: = connection is CONNECTING
-2025-12-11 02:57:32,564 - DEBUG: < GET / HTTP/1.1
-2025-12-11 02:57:32,564 - DEBUG: < Host: 192.168.129.4:20200
-2025-12-11 02:57:32,564 - DEBUG: < Upgrade: websocket
-2025-12-11 02:57:32,564 - DEBUG: < Connection: Upgrade
-2025-12-11 02:57:32,564 - DEBUG: < Sec-WebSocket-Key: NwvUiqfebO1tn1cT/26TZQ==
-2025-12-11 02:57:32,564 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-11 02:57:32,564 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-11 02:57:32,564 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-11 02:57:32,564 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-11 02:57:32,564 - DEBUG: > Date: Thu, 11 Dec 2025 01:57:32 GMT
-2025-12-11 02:57:32,564 - DEBUG: > Upgrade: websocket
-2025-12-11 02:57:32,564 - DEBUG: > Connection: Upgrade
-2025-12-11 02:57:32,568 - DEBUG: > Sec-WebSocket-Accept: cPJBwplNkewYf6DrgwRX6Jo6JHc=
-2025-12-11 02:57:32,568 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-11 02:57:32,568 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-11 02:57:32,568 - DEBUG: = connection is OPEN
-2025-12-11 02:57:32,568 - INFO: connection open
-2025-12-11 02:57:32,568 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000014A70D8B1A0>
-2025-12-11 02:57:32,568 - INFO: Connected clients: 1
-2025-12-11 02:57:32,568 - INFO: User: User_1765418252.568606
-2025-12-11 02:57:32,568 - DEBUG: > TEXT '{"action": "roomsList", "payload": {"rooms": {"default": 1}}}' [61 bytes]
-2025-12-11 02:57:32,568 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lo"}}' [53 bytes]
-2025-12-11 02:57:32,952 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-11 02:57:32,952 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1}}' [48 bytes]
-2025-12-11 02:57:38,414 - DEBUG: < TEXT '{"room": "hey", "action": "createRoom"}' [39 bytes]
-2025-12-11 02:57:38,414 - INFO: Created room: hey
-2025-12-11 02:57:38,414 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 0}}' [58 bytes]
-2025-12-11 02:57:41,065 - DEBUG: < TEXT '{"room": "hey", "action": "joinRoom"}' [37 bytes]
-2025-12-11 02:57:41,065 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "hey"}}' [48 bytes]
-2025-12-11 02:57:41,065 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 1}}' [58 bytes]
-2025-12-11 02:57:45,097 - DEBUG: < TEXT '{"message": "ccc", "room": "hey", "action": "sendMessage"}' [58 bytes]
-2025-12-11 02:57:45,099 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lo",...ey", "message": "ccc"}}' [81 bytes]
-2025-12-11 02:57:52,582 - DEBUG: > PING 95 99 2e e9 [binary, 4 bytes]
-2025-12-11 02:57:52,582 - DEBUG: % sent keepalive ping
-2025-12-11 02:57:52,584 - DEBUG: < PING 12 2e 69 97 [binary, 4 bytes]
-2025-12-11 02:57:52,584 - DEBUG: > PONG 12 2e 69 97 [binary, 4 bytes]
-2025-12-11 02:57:52,584 - DEBUG: < PONG 95 99 2e e9 [binary, 4 bytes]
-2025-12-11 02:57:52,584 - DEBUG: % received keepalive pong
-2025-12-11 02:58:12,594 - DEBUG: > PING c6 f1 a0 9a [binary, 4 bytes]
-2025-12-11 02:58:12,594 - DEBUG: % sent keepalive ping
-2025-12-11 02:58:12,596 - DEBUG: < PING cb c0 54 97 [binary, 4 bytes]
-2025-12-11 02:58:12,597 - DEBUG: > PONG cb c0 54 97 [binary, 4 bytes]
-2025-12-11 02:58:12,598 - DEBUG: < PONG c6 f1 a0 9a [binary, 4 bytes]
-2025-12-11 02:58:12,598 - DEBUG: % received keepalive pong
-2025-12-11 02:58:32,592 - DEBUG: < PING 8e b2 a6 d8 [binary, 4 bytes]
-2025-12-11 02:58:32,592 - DEBUG: > PONG 8e b2 a6 d8 [binary, 4 bytes]
-2025-12-11 02:58:32,594 - DEBUG: > PING 8a 9a af 68 [binary, 4 bytes]
-2025-12-11 02:58:32,594 - DEBUG: % sent keepalive ping
-2025-12-11 02:58:32,597 - DEBUG: < PONG 8a 9a af 68 [binary, 4 bytes]
-2025-12-11 02:58:32,597 - DEBUG: % received keepalive pong
-2025-12-11 02:58:52,587 - DEBUG: < PING d5 ed 44 8c [binary, 4 bytes]
-2025-12-11 02:58:52,589 - DEBUG: > PONG d5 ed 44 8c [binary, 4 bytes]
-2025-12-11 02:58:52,589 - DEBUG: > PING b7 c6 f9 a2 [binary, 4 bytes]
-2025-12-11 02:58:52,591 - DEBUG: % sent keepalive ping
-2025-12-11 02:58:52,591 - DEBUG: < PONG b7 c6 f9 a2 [binary, 4 bytes]
-2025-12-11 02:58:52,593 - DEBUG: % received keepalive pong
-2025-12-11 02:59:12,600 - DEBUG: > PING ab a4 dd fd [binary, 4 bytes]
-2025-12-11 02:59:12,600 - DEBUG: % sent keepalive ping
-2025-12-11 02:59:12,600 - DEBUG: < PING 52 42 64 83 [binary, 4 bytes]
-2025-12-11 02:59:12,600 - DEBUG: > PONG 52 42 64 83 [binary, 4 bytes]
-2025-12-11 02:59:12,600 - DEBUG: < PONG ab a4 dd fd [binary, 4 bytes]
-2025-12-11 02:59:12,600 - DEBUG: % received keepalive pong
-2025-12-11 02:59:32,597 - DEBUG: < PING a0 2d c1 45 [binary, 4 bytes]
-2025-12-11 02:59:32,597 - DEBUG: > PONG a0 2d c1 45 [binary, 4 bytes]
-2025-12-11 02:59:32,600 - DEBUG: > PING c0 9d ff d1 [binary, 4 bytes]
-2025-12-11 02:59:32,600 - DEBUG: % sent keepalive ping
-2025-12-11 02:59:32,600 - DEBUG: < PONG c0 9d ff d1 [binary, 4 bytes]
-2025-12-11 02:59:32,600 - DEBUG: % received keepalive pong
-2025-12-11 02:59:52,612 - DEBUG: > PING c3 5c 3e bf [binary, 4 bytes]
-2025-12-11 02:59:52,613 - DEBUG: % sent keepalive ping
-2025-12-11 02:59:52,615 - DEBUG: < PING 66 fa c3 8f [binary, 4 bytes]
-2025-12-11 02:59:52,617 - DEBUG: > PONG 66 fa c3 8f [binary, 4 bytes]
-2025-12-11 02:59:52,617 - DEBUG: < PONG c3 5c 3e bf [binary, 4 bytes]
-2025-12-11 02:59:52,619 - DEBUG: % received keepalive pong
-2025-12-11 02:59:59,540 - DEBUG: < EOF
-2025-12-11 02:59:59,540 - DEBUG: > EOF
-2025-12-11 02:59:59,540 - DEBUG: < EOF
-2025-12-11 02:59:59,540 - DEBUG: = connection is CLOSED
-2025-12-11 02:59:59,540 - ERROR: Error handling client: no close frame received or sent
+2025-12-11 12:20:00,590 - DEBUG: Using proactor: IocpProactor
+2025-12-11 12:20:00,679 - INFO: server listening on 0.0.0.0:20200
+2025-12-11 12:20:00,679 - INFO: Server running.
+2025-12-11 12:20:30,456 - DEBUG: = connection is CONNECTING
+2025-12-11 12:20:30,457 - DEBUG: < GET / HTTP/1.1
+2025-12-11 12:20:30,457 - DEBUG: < Host: 192.168.1.25:20200
+2025-12-11 12:20:30,457 - DEBUG: < Upgrade: websocket
+2025-12-11 12:20:30,457 - DEBUG: < Connection: Upgrade
+2025-12-11 12:20:30,457 - DEBUG: < Sec-WebSocket-Key: Fuve28vcZCQNaRiRx8Or+w==
+2025-12-11 12:20:30,457 - DEBUG: < Sec-WebSocket-Version: 13
+2025-12-11 12:20:30,458 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-12-11 12:20:30,458 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
+2025-12-11 12:20:30,459 - DEBUG: > HTTP/1.1 101 Switching Protocols
+2025-12-11 12:20:30,459 - DEBUG: > Date: Thu, 11 Dec 2025 11:20:30 GMT
+2025-12-11 12:20:30,459 - DEBUG: > Upgrade: websocket
+2025-12-11 12:20:30,459 - DEBUG: > Connection: Upgrade
+2025-12-11 12:20:30,459 - DEBUG: > Sec-WebSocket-Accept: xZ4IytzAuocza29XYkIBNqa0O3k=
+2025-12-11 12:20:30,459 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-12-11 12:20:30,459 - DEBUG: > Server: Python/3.12 websockets/15.0.1
+2025-12-11 12:20:30,459 - DEBUG: = connection is OPEN
+2025-12-11 12:20:30,459 - INFO: connection open
+2025-12-11 12:20:30,459 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000026030DB0CB0>
+2025-12-11 12:20:30,459 - INFO: Connected clients: 1
+2025-12-11 12:20:30,459 - INFO: User: User_1765452030.459796
+2025-12-11 12:20:30,460 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-11 12:20:30,460 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "niels"}}' [56 bytes]
+2025-12-11 12:20:30,900 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
+2025-12-11 12:20:30,900 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default"]}' [45 bytes]
+2025-12-11 12:20:50,437 - DEBUG: < PING 3a c1 6f ea [binary, 4 bytes]
+2025-12-11 12:20:50,437 - DEBUG: > PONG 3a c1 6f ea [binary, 4 bytes]
+2025-12-11 12:20:50,437 - DEBUG: > PING a0 c1 90 3a [binary, 4 bytes]
+2025-12-11 12:20:50,438 - DEBUG: % sent keepalive ping
+2025-12-11 12:20:50,438 - DEBUG: < PONG a0 c1 90 3a [binary, 4 bytes]
+2025-12-11 12:20:50,438 - DEBUG: % received keepalive pong
+2025-12-11 12:20:51,742 - DEBUG: < TEXT '{"room": "test", "action": "createRoom"}' [40 bytes]
+2025-12-11 12:20:51,743 - INFO: Created room: test
+2025-12-11 12:20:51,743 - DEBUG: > TEXT '{"action": "roomsList", "rooms": ["default", "test"]}' [53 bytes]
+2025-12-11 12:20:54,847 - DEBUG: < TEXT '{"room": "test", "action": "joinRoom"}' [38 bytes]
+2025-12-11 12:20:54,847 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "test"}}' [49 bytes]
+2025-12-11 12:20:58,029 - DEBUG: < TEXT '{"message": "hello", "room": "test", "action": "sendMessage"}' [61 bytes]
+2025-12-11 12:20:58,030 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "niel...", "message": "hello"}}' [87 bytes]
+2025-12-11 12:21:03,067 - DEBUG: < TEXT '{"message": "\\ud83d\\udd25", "room": "test", "action": "sendMessage"}' [68 bytes]
+2025-12-11 12:21:03,068 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "niel...ge": "\\ud83d\\udd25"}}' [94 bytes]
+2025-12-11 12:21:10,456 - DEBUG: > PING 86 fd a6 22 [binary, 4 bytes]
+2025-12-11 12:21:10,456 - DEBUG: % sent keepalive ping
+2025-12-11 12:21:10,456 - DEBUG: < PING 82 6b 3e 49 [binary, 4 bytes]
+2025-12-11 12:21:10,456 - DEBUG: > PONG 82 6b 3e 49 [binary, 4 bytes]
+2025-12-11 12:21:10,457 - DEBUG: < PONG 86 fd a6 22 [binary, 4 bytes]
+2025-12-11 12:21:10,457 - DEBUG: % received keepalive pong
+2025-12-11 12:21:14,132 - DEBUG: < EOF
+2025-12-11 12:21:14,132 - DEBUG: > EOF
+2025-12-11 12:21:14,132 - DEBUG: < EOF
+2025-12-11 12:21:14,132 - DEBUG: = connection is CLOSED
+2025-12-11 12:21:14,133 - ERROR: Error handling client: no close frame received or sent
 Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
     return ov.getresult()
            ^^^^^^^^^^^^^^
-OSError: [WinError 64] Le nom réseau spécifié n’est plus disponible
+OSError: [WinError 64] The specified network name is no longer available
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
     length = fut.result()
              ^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
     value = callback(transferred, key, ov)
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
+  File "C:\Users\niels\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
     raise ConnectionResetError(*exc.args)
-ConnectionResetError: [WinError 64] Le nom réseau spécifié n’est plus disponible
+ConnectionResetError: [WinError 64] The specified network name is no longer available
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "c:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\server_test.py", line 155, in handle_client
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\server.py", line 92, in handle_client
     async for raw in websocket:
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
     yield await self.recv()
           ^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
+  File "C:\Users\niels\OneDrive\Documents\Bac_2_Info\réseau\server_chat\server_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
     raise self.protocol.close_exc from self.recv_exc
 websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-11 02:59:59,556 - WARNING: Client disconnected.
-2025-12-11 03:00:47,455 - DEBUG: = connection is CONNECTING
-2025-12-11 03:00:47,455 - DEBUG: < GET / HTTP/1.1
-2025-12-11 03:00:47,455 - DEBUG: < Host: 192.168.129.4:20200
-2025-12-11 03:00:47,455 - DEBUG: < Upgrade: websocket
-2025-12-11 03:00:47,455 - DEBUG: < Connection: Upgrade
-2025-12-11 03:00:47,455 - DEBUG: < Sec-WebSocket-Key: OqIFag+OnnnFSvaMemm2+w==
-2025-12-11 03:00:47,455 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-11 03:00:47,455 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-11 03:00:47,455 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-11 03:00:47,455 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-11 03:00:47,455 - DEBUG: > Date: Thu, 11 Dec 2025 02:00:47 GMT
-2025-12-11 03:00:47,455 - DEBUG: > Upgrade: websocket
-2025-12-11 03:00:47,455 - DEBUG: > Connection: Upgrade
-2025-12-11 03:00:47,455 - DEBUG: > Sec-WebSocket-Accept: EeNvIm4hIfvt5nz5PqkPhaJcrcU=
-2025-12-11 03:00:47,455 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-11 03:00:47,455 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-11 03:00:47,455 - DEBUG: = connection is OPEN
-2025-12-11 03:00:47,455 - INFO: connection open
-2025-12-11 03:00:47,455 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000014A70C39A30>
-2025-12-11 03:00:47,455 - INFO: Connected clients: 1
-2025-12-11 03:00:47,455 - INFO: User: User_1765418447.455598
-2025-12-11 03:00:47,455 - DEBUG: > TEXT '{"action": "roomsList", "payload": {"rooms": {"default": 1, "hey": 0}}}' [71 bytes]
-2025-12-11 03:00:47,455 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "lo"}}' [53 bytes]
-2025-12-11 03:00:47,892 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-11 03:00:47,892 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 0}}' [58 bytes]
-2025-12-11 03:00:53,641 - DEBUG: < TEXT '{"room": "hey", "action": "joinRoom"}' [37 bytes]
-2025-12-11 03:00:53,641 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "hey"}}' [48 bytes]
-2025-12-11 03:00:53,641 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 1}}' [58 bytes]
-2025-12-11 03:00:58,208 - DEBUG: < TEXT '{"message": "cc", "room": "hey", "action": "sendMessage"}' [57 bytes]
-2025-12-11 03:00:58,208 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "lo",...hey", "message": "cc"}}' [80 bytes]
-2025-12-11 03:01:07,457 - DEBUG: < PING 8a e9 c4 7a [binary, 4 bytes]
-2025-12-11 03:01:07,457 - DEBUG: > PONG 8a e9 c4 7a [binary, 4 bytes]
-2025-12-11 03:01:07,457 - DEBUG: > PING 6f 17 e4 35 [binary, 4 bytes]
-2025-12-11 03:01:07,457 - DEBUG: % sent keepalive ping
-2025-12-11 03:01:07,457 - DEBUG: < PONG 6f 17 e4 35 [binary, 4 bytes]
-2025-12-11 03:01:07,457 - DEBUG: % received keepalive pong
-2025-12-11 03:01:27,457 - DEBUG: < PING be 8c 29 eb [binary, 4 bytes]
-2025-12-11 03:01:27,457 - DEBUG: > PONG be 8c 29 eb [binary, 4 bytes]
-2025-12-11 03:01:27,459 - DEBUG: > PING 17 66 bc e0 [binary, 4 bytes]
-2025-12-11 03:01:27,459 - DEBUG: % sent keepalive ping
-2025-12-11 03:01:27,459 - DEBUG: < PONG 17 66 bc e0 [binary, 4 bytes]
-2025-12-11 03:01:27,459 - DEBUG: % received keepalive pong
-2025-12-11 03:01:47,466 - DEBUG: > PING '\x1d?}-' [text, 4 bytes]
-2025-12-11 03:01:47,468 - DEBUG: % sent keepalive ping
-2025-12-11 03:01:47,469 - DEBUG: < PONG '\x1d?}-' [text, 4 bytes]
-2025-12-11 03:01:47,469 - DEBUG: < PING e2 5c c2 3a [binary, 4 bytes]
-2025-12-11 03:01:47,469 - DEBUG: > PONG e2 5c c2 3a [binary, 4 bytes]
-2025-12-11 03:01:47,469 - DEBUG: % received keepalive pong
-2025-12-11 03:02:07,466 - DEBUG: > PING 0b c8 e2 d4 [binary, 4 bytes]
-2025-12-11 03:02:07,466 - DEBUG: % sent keepalive ping
-2025-12-11 03:02:07,466 - DEBUG: < PONG 0b c8 e2 d4 [binary, 4 bytes]
-2025-12-11 03:02:07,466 - DEBUG: % received keepalive pong
-2025-12-11 03:02:07,466 - DEBUG: < PING 1e 31 d9 18 [binary, 4 bytes]
-2025-12-11 03:02:07,466 - DEBUG: > PONG 1e 31 d9 18 [binary, 4 bytes]
-2025-12-11 03:02:27,472 - DEBUG: > PING 8d b1 7d f0 [binary, 4 bytes]
-2025-12-11 03:02:27,472 - DEBUG: % sent keepalive ping
-2025-12-11 03:02:27,474 - DEBUG: < PING 85 22 4f 2d [binary, 4 bytes]
-2025-12-11 03:02:27,475 - DEBUG: > PONG 85 22 4f 2d [binary, 4 bytes]
-2025-12-11 03:02:27,475 - DEBUG: < PONG 8d b1 7d f0 [binary, 4 bytes]
-2025-12-11 03:02:27,477 - DEBUG: % received keepalive pong
-2025-12-11 03:02:47,149 - DEBUG: < EOF
-2025-12-11 03:02:47,149 - DEBUG: > EOF
-2025-12-11 03:02:47,149 - DEBUG: < EOF
-2025-12-11 03:02:47,149 - DEBUG: = connection is CLOSED
-2025-12-11 03:02:47,149 - ERROR: Error handling client: no close frame received or sent
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
-    return ov.getresult()
-           ^^^^^^^^^^^^^^
-OSError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
-    length = fut.result()
-             ^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
-    value = callback(transferred, key, ov)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
-    raise ConnectionResetError(*exc.args)
-ConnectionResetError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "c:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\server_test.py", line 155, in handle_client
-    async for raw in websocket:
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
-    yield await self.recv()
-          ^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
-    raise self.protocol.close_exc from self.recv_exc
-websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-11 03:02:47,149 - WARNING: Client disconnected.
-2025-12-11 03:02:58,542 - DEBUG: = connection is CONNECTING
-2025-12-11 03:02:58,542 - DEBUG: < GET / HTTP/1.1
-2025-12-11 03:02:58,542 - DEBUG: < Host: 192.168.129.4:20200
-2025-12-11 03:02:58,542 - DEBUG: < Upgrade: websocket
-2025-12-11 03:02:58,542 - DEBUG: < Connection: Upgrade
-2025-12-11 03:02:58,542 - DEBUG: < Sec-WebSocket-Key: uzVin/DAyGD2IbZqWc//uA==
-2025-12-11 03:02:58,542 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-11 03:02:58,542 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-11 03:02:58,542 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-11 03:02:58,542 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-11 03:02:58,542 - DEBUG: > Date: Thu, 11 Dec 2025 02:02:58 GMT
-2025-12-11 03:02:58,542 - DEBUG: > Upgrade: websocket
-2025-12-11 03:02:58,542 - DEBUG: > Connection: Upgrade
-2025-12-11 03:02:58,542 - DEBUG: > Sec-WebSocket-Accept: OatDTFBGtR/dcu8jeXCYFLSiULY=
-2025-12-11 03:02:58,542 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-11 03:02:58,542 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-11 03:02:58,542 - DEBUG: = connection is OPEN
-2025-12-11 03:02:58,542 - INFO: connection open
-2025-12-11 03:02:58,542 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000014A70EB67B0>
-2025-12-11 03:02:58,542 - INFO: Connected clients: 1
-2025-12-11 03:02:58,542 - INFO: User: User_1765418578.542759
-2025-12-11 03:02:58,542 - DEBUG: > TEXT '{"action": "roomsList", "payload": {"rooms": {"default": 1, "hey": 0}}}' [71 bytes]
-2025-12-11 03:02:58,542 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lo"}}' [53 bytes]
-2025-12-11 03:02:58,974 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-11 03:02:58,976 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 0}}' [58 bytes]
-2025-12-11 03:03:02,025 - DEBUG: < TEXT '{"room": "hey", "action": "joinRoom"}' [37 bytes]
-2025-12-11 03:03:02,025 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "hey"}}' [48 bytes]
-2025-12-11 03:03:02,025 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 1}}' [58 bytes]
-2025-12-11 03:03:18,547 - DEBUG: > PING 4e 1a f1 3b [binary, 4 bytes]
-2025-12-11 03:03:18,547 - DEBUG: % sent keepalive ping
-2025-12-11 03:03:18,547 - DEBUG: < PING d5 d8 f9 c9 [binary, 4 bytes]
-2025-12-11 03:03:18,547 - DEBUG: > PONG d5 d8 f9 c9 [binary, 4 bytes]
-2025-12-11 03:03:18,547 - DEBUG: < PONG 4e 1a f1 3b [binary, 4 bytes]
-2025-12-11 03:03:18,547 - DEBUG: % received keepalive pong
-2025-12-11 03:03:19,566 - DEBUG: < TEXT '{"message": "wqhh", "room": "hey", "action": "sendMessage"}' [59 bytes]
-2025-12-11 03:03:19,566 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lo",...y", "message": "wqhh"}}' [82 bytes]
-2025-12-11 03:03:38,547 - DEBUG: < PING 36 dd b3 dd [binary, 4 bytes]
-2025-12-11 03:03:38,549 - DEBUG: > PONG 36 dd b3 dd [binary, 4 bytes]
-2025-12-11 03:03:38,549 - DEBUG: > PING 2f fe a6 56 [binary, 4 bytes]
-2025-12-11 03:03:38,551 - DEBUG: % sent keepalive ping
-2025-12-11 03:03:38,551 - DEBUG: < PONG 2f fe a6 56 [binary, 4 bytes]
-2025-12-11 03:03:38,552 - DEBUG: % received keepalive pong
-2025-12-11 03:03:58,557 - DEBUG: > PING 3a fe ed 3b [binary, 4 bytes]
-2025-12-11 03:03:58,557 - DEBUG: % sent keepalive ping
-2025-12-11 03:03:58,557 - DEBUG: < PING bc 40 fb 84 [binary, 4 bytes]
-2025-12-11 03:03:58,557 - DEBUG: > PONG bc 40 fb 84 [binary, 4 bytes]
-2025-12-11 03:03:58,557 - DEBUG: < PONG 3a fe ed 3b [binary, 4 bytes]
-2025-12-11 03:03:58,557 - DEBUG: % received keepalive pong
-2025-12-11 03:04:18,545 - DEBUG: < PING 3c 12 ce de [binary, 4 bytes]
-2025-12-11 03:04:18,545 - DEBUG: > PONG 3c 12 ce de [binary, 4 bytes]
-2025-12-11 03:04:18,545 - DEBUG: > PING 84 5d c1 ca [binary, 4 bytes]
-2025-12-11 03:04:18,545 - DEBUG: % sent keepalive ping
-2025-12-11 03:04:18,550 - DEBUG: < PONG 84 5d c1 ca [binary, 4 bytes]
-2025-12-11 03:04:18,550 - DEBUG: % received keepalive pong
-2025-12-11 03:04:38,544 - DEBUG: > PING b3 68 94 20 [binary, 4 bytes]
-2025-12-11 03:04:38,544 - DEBUG: % sent keepalive ping
-2025-12-11 03:04:38,544 - DEBUG: < PING 47 d5 f1 77 [binary, 4 bytes]
-2025-12-11 03:04:38,544 - DEBUG: > PONG 47 d5 f1 77 [binary, 4 bytes]
-2025-12-11 03:04:38,544 - DEBUG: < PONG b3 68 94 20 [binary, 4 bytes]
-2025-12-11 03:04:38,544 - DEBUG: % received keepalive pong
-2025-12-11 03:04:58,545 - DEBUG: < PING 26 f1 bd 72 [binary, 4 bytes]
-2025-12-11 03:04:58,545 - DEBUG: > PONG 26 f1 bd 72 [binary, 4 bytes]
-2025-12-11 03:04:58,545 - DEBUG: > PING c4 31 46 cd [binary, 4 bytes]
-2025-12-11 03:04:58,545 - DEBUG: % sent keepalive ping
-2025-12-11 03:04:58,545 - DEBUG: < PONG c4 31 46 cd [binary, 4 bytes]
-2025-12-11 03:04:58,545 - DEBUG: % received keepalive pong
-2025-12-11 03:05:18,540 - DEBUG: < PING 'xhy\x07' [text, 4 bytes]
-2025-12-11 03:05:18,540 - DEBUG: > PONG 'xhy\x07' [text, 4 bytes]
-2025-12-11 03:05:18,543 - DEBUG: > PING 8d f4 82 71 [binary, 4 bytes]
-2025-12-11 03:05:18,544 - DEBUG: % sent keepalive ping
-2025-12-11 03:05:18,544 - DEBUG: < PONG 8d f4 82 71 [binary, 4 bytes]
-2025-12-11 03:05:18,546 - DEBUG: % received keepalive pong
-2025-12-11 03:05:38,554 - DEBUG: > PING 6b d3 10 5d [binary, 4 bytes]
-2025-12-11 03:05:38,554 - DEBUG: % sent keepalive ping
-2025-12-11 03:05:38,556 - DEBUG: < PING 7a 44 17 b9 [binary, 4 bytes]
-2025-12-11 03:05:38,556 - DEBUG: > PONG 7a 44 17 b9 [binary, 4 bytes]
-2025-12-11 03:05:38,556 - DEBUG: < PONG 6b d3 10 5d [binary, 4 bytes]
-2025-12-11 03:05:38,556 - DEBUG: % received keepalive pong
-2025-12-11 03:05:58,553 - DEBUG: < PING 82 fd 3f ff [binary, 4 bytes]
-2025-12-11 03:05:58,554 - DEBUG: > PONG 82 fd 3f ff [binary, 4 bytes]
-2025-12-11 03:05:58,554 - DEBUG: > PING aa 6f da b3 [binary, 4 bytes]
-2025-12-11 03:05:58,554 - DEBUG: % sent keepalive ping
-2025-12-11 03:05:58,556 - DEBUG: < PONG aa 6f da b3 [binary, 4 bytes]
-2025-12-11 03:05:58,556 - DEBUG: % received keepalive pong
-2025-12-11 03:06:18,542 - DEBUG: < PING a3 45 c2 be [binary, 4 bytes]
-2025-12-11 03:06:18,542 - DEBUG: > PONG a3 45 c2 be [binary, 4 bytes]
-2025-12-11 03:06:18,542 - DEBUG: > PING 93 be 21 40 [binary, 4 bytes]
-2025-12-11 03:06:18,542 - DEBUG: % sent keepalive ping
-2025-12-11 03:06:18,542 - DEBUG: < PONG 93 be 21 40 [binary, 4 bytes]
-2025-12-11 03:06:18,542 - DEBUG: % received keepalive pong
-2025-12-11 03:06:38,548 - DEBUG: > PING '%tuF' [text, 4 bytes]
-2025-12-11 03:06:38,549 - DEBUG: % sent keepalive ping
-2025-12-11 03:06:38,549 - DEBUG: < PING 50 24 e3 cc [binary, 4 bytes]
-2025-12-11 03:06:38,549 - DEBUG: > PONG 50 24 e3 cc [binary, 4 bytes]
-2025-12-11 03:06:38,550 - DEBUG: < PONG '%tuF' [text, 4 bytes]
-2025-12-11 03:06:38,550 - DEBUG: % received keepalive pong
-2025-12-11 03:06:44,042 - DEBUG: < EOF
-2025-12-11 03:06:44,042 - DEBUG: > EOF
-2025-12-11 03:06:44,043 - DEBUG: < EOF
-2025-12-11 03:06:44,043 - DEBUG: = connection is CLOSED
-2025-12-11 03:06:44,045 - ERROR: Error handling client: no close frame received or sent
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
-    return ov.getresult()
-           ^^^^^^^^^^^^^^
-OSError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
-    length = fut.result()
-             ^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
-    value = callback(transferred, key, ov)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
-    raise ConnectionResetError(*exc.args)
-ConnectionResetError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "c:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\server_test.py", line 155, in handle_client
-    async for raw in websocket:
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
-    yield await self.recv()
-          ^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
-    raise self.protocol.close_exc from self.recv_exc
-websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-11 03:06:44,048 - WARNING: Client disconnected.
-2025-12-11 03:06:54,995 - DEBUG: = connection is CONNECTING
-2025-12-11 03:06:54,995 - DEBUG: < GET / HTTP/1.1
-2025-12-11 03:06:54,995 - DEBUG: < Host: 192.168.129.4:20200
-2025-12-11 03:06:54,995 - DEBUG: < Upgrade: websocket
-2025-12-11 03:06:54,995 - DEBUG: < Connection: Upgrade
-2025-12-11 03:06:54,995 - DEBUG: < Sec-WebSocket-Key: h6CNY9HBo9+4tp8ZSAFRAw==
-2025-12-11 03:06:54,995 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-11 03:06:54,995 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-11 03:06:54,995 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-11 03:06:54,995 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-11 03:06:54,995 - DEBUG: > Date: Thu, 11 Dec 2025 02:06:54 GMT
-2025-12-11 03:06:54,995 - DEBUG: > Upgrade: websocket
-2025-12-11 03:06:54,995 - DEBUG: > Connection: Upgrade
-2025-12-11 03:06:54,995 - DEBUG: > Sec-WebSocket-Accept: MmtInwLtVd/dKrFjXEi/nxZbe2g=
-2025-12-11 03:06:54,995 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-11 03:06:54,995 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-11 03:06:54,995 - DEBUG: = connection is OPEN
-2025-12-11 03:06:54,995 - INFO: connection open
-2025-12-11 03:06:54,995 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000014A70EB6CF0>
-2025-12-11 03:06:54,995 - INFO: Connected clients: 1
-2025-12-11 03:06:54,995 - INFO: User: User_1765418814.995807
-2025-12-11 03:06:54,995 - DEBUG: > TEXT '{"action": "roomsList", "payload": {"rooms": {"default": 1, "hey": 0}}}' [71 bytes]
-2025-12-11 03:06:54,995 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "Lo"}}' [53 bytes]
-2025-12-11 03:06:55,440 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-11 03:06:55,440 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 0}}' [58 bytes]
-2025-12-11 03:06:59,087 - DEBUG: < TEXT '{"room": "hey", "action": "joinRoom"}' [37 bytes]
-2025-12-11 03:06:59,089 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "hey"}}' [48 bytes]
-2025-12-11 03:06:59,089 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 1}}' [58 bytes]
-2025-12-11 03:07:03,391 - DEBUG: < TEXT '{"message": "Bonjour", "room": "hey", "action": "sendMessage"}' [62 bytes]
-2025-12-11 03:07:03,391 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "Lo",... "message": "Bonjour"}}' [85 bytes]
-2025-12-11 03:07:14,937 - DEBUG: < EOF
-2025-12-11 03:07:14,939 - DEBUG: > EOF
-2025-12-11 03:07:14,939 - DEBUG: < EOF
-2025-12-11 03:07:14,939 - DEBUG: = connection is CLOSED
-2025-12-11 03:07:14,941 - ERROR: Error handling client: no close frame received or sent
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
-    return ov.getresult()
-           ^^^^^^^^^^^^^^
-OSError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
-    length = fut.result()
-             ^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
-    value = callback(transferred, key, ov)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
-    raise ConnectionResetError(*exc.args)
-ConnectionResetError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "c:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\server_test.py", line 155, in handle_client
-    async for raw in websocket:
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
-    yield await self.recv()
-          ^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
-    raise self.protocol.close_exc from self.recv_exc
-websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-11 03:07:14,947 - WARNING: Client disconnected.
-2025-12-11 03:09:05,687 - DEBUG: = connection is CONNECTING
-2025-12-11 03:09:05,687 - DEBUG: < GET / HTTP/1.1
-2025-12-11 03:09:05,687 - DEBUG: < Host: 192.168.129.4:20200
-2025-12-11 03:09:05,687 - DEBUG: < Upgrade: websocket
-2025-12-11 03:09:05,687 - DEBUG: < Connection: Upgrade
-2025-12-11 03:09:05,689 - DEBUG: < Sec-WebSocket-Key: RPAlm9lYMieWyWFx6kAXPQ==
-2025-12-11 03:09:05,689 - DEBUG: < Sec-WebSocket-Version: 13
-2025-12-11 03:09:05,689 - DEBUG: < Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
-2025-12-11 03:09:05,689 - DEBUG: < User-Agent: Python/3.12 websockets/15.0.1
-2025-12-11 03:09:05,689 - DEBUG: > HTTP/1.1 101 Switching Protocols
-2025-12-11 03:09:05,689 - DEBUG: > Date: Thu, 11 Dec 2025 02:09:05 GMT
-2025-12-11 03:09:05,689 - DEBUG: > Upgrade: websocket
-2025-12-11 03:09:05,689 - DEBUG: > Connection: Upgrade
-2025-12-11 03:09:05,689 - DEBUG: > Sec-WebSocket-Accept: +l2/k+zqBwS3FJ/q9FHy/dS7mLw=
-2025-12-11 03:09:05,689 - DEBUG: > Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
-2025-12-11 03:09:05,689 - DEBUG: > Server: Python/3.12 websockets/15.0.1
-2025-12-11 03:09:05,689 - DEBUG: = connection is OPEN
-2025-12-11 03:09:05,689 - INFO: connection open
-2025-12-11 03:09:05,691 - INFO: Client connected: <websockets.asyncio.server.ServerConnection object at 0x0000014A70EB7230>
-2025-12-11 03:09:05,691 - INFO: Connected clients: 1
-2025-12-11 03:09:05,691 - INFO: User: User_1765418945.69197
-2025-12-11 03:09:05,691 - DEBUG: > TEXT '{"action": "roomsList", "payload": {"rooms": {"default": 1, "hey": 0}}}' [71 bytes]
-2025-12-11 03:09:05,691 - DEBUG: < TEXT '{"action": "identify", "payload": {"username": "cccc"}}' [55 bytes]
-2025-12-11 03:09:06,123 - DEBUG: < TEXT '{"action": "roomsList"}' [23 bytes]
-2025-12-11 03:09:06,123 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 0}}' [58 bytes]
-2025-12-11 03:09:09,253 - DEBUG: < TEXT '{"room": "hey", "action": "joinRoom"}' [37 bytes]
-2025-12-11 03:09:09,253 - DEBUG: > TEXT '{"action": "joined", "payload": {"room": "hey"}}' [48 bytes]
-2025-12-11 03:09:09,253 - DEBUG: > TEXT '{"action": "roomsList", "rooms": {"default": 1, "hey": 1}}' [58 bytes]
-2025-12-11 03:09:12,552 - DEBUG: < TEXT '{"message": "wqhh", "room": "hey", "action": "sendMessage"}' [59 bytes]
-2025-12-11 03:09:12,553 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "cccc...y", "message": "wqhh"}}' [84 bytes]
-2025-12-11 03:09:16,675 - DEBUG: < TEXT '{"message": "de fou", "room": "hey", "action": "sendMessage"}' [61 bytes]
-2025-12-11 03:09:16,675 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "cccc..., "message": "de fou"}}' [86 bytes]
-2025-12-11 03:09:18,724 - DEBUG: < TEXT '{"message": "mdrrr", "room": "hey", "action": "sendMessage"}' [60 bytes]
-2025-12-11 03:09:18,724 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "cccc...", "message": "mdrrr"}}' [85 bytes]
-2025-12-11 03:09:25,696 - DEBUG: > PING 1c 7b 73 9b [binary, 4 bytes]
-2025-12-11 03:09:25,696 - DEBUG: % sent keepalive ping
-2025-12-11 03:09:25,698 - DEBUG: < PONG 1c 7b 73 9b [binary, 4 bytes]
-2025-12-11 03:09:25,698 - DEBUG: % received keepalive pong
-2025-12-11 03:09:25,698 - DEBUG: < PING 2f a3 ac 2f [binary, 4 bytes]
-2025-12-11 03:09:25,698 - DEBUG: > PONG 2f a3 ac 2f [binary, 4 bytes]
-2025-12-11 03:09:45,690 - DEBUG: < PING 58 c2 3a 8b [binary, 4 bytes]
-2025-12-11 03:09:45,690 - DEBUG: > PONG 58 c2 3a 8b [binary, 4 bytes]
-2025-12-11 03:09:45,690 - DEBUG: > PING 9c bc 85 e1 [binary, 4 bytes]
-2025-12-11 03:09:45,692 - DEBUG: % sent keepalive ping
-2025-12-11 03:09:45,692 - DEBUG: < PONG 9c bc 85 e1 [binary, 4 bytes]
-2025-12-11 03:09:45,694 - DEBUG: % received keepalive pong
-2025-12-11 03:09:47,197 - DEBUG: < TEXT '{"message": "\\ud83d\\udd25", "room": "hey", "action": "sendMessage"}' [67 bytes]
-2025-12-11 03:09:47,197 - DEBUG: > TEXT '{"action": "message", "payload": {"from": "cccc...ge": "\\ud83d\\udd25"}}' [92 bytes]
-2025-12-11 03:09:50,097 - DEBUG: < EOF
-2025-12-11 03:09:50,097 - DEBUG: > EOF
-2025-12-11 03:09:50,097 - DEBUG: < EOF
-2025-12-11 03:09:50,097 - DEBUG: = connection is CLOSED
-2025-12-11 03:09:50,097 - ERROR: Error handling client: no close frame received or sent
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
-    return ov.getresult()
-           ^^^^^^^^^^^^^^
-OSError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
-    length = fut.result()
-             ^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
-    value = callback(transferred, key, ov)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
-    raise ConnectionResetError(*exc.args)
-ConnectionResetError: [WinError 64] Le nom réseau spécifié n’est plus disponible
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "c:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\server_test.py", line 155, in handle_client
-    async for raw in websocket:
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 242, in __aiter__
-    yield await self.recv()
-          ^^^^^^^^^^^^^^^^^
-  File "C:\Users\loher\OneDrive\Bureau\COURS\2ieme\Réseaux\projet_chat\.venv\Lib\site-packages\websockets\asyncio\connection.py", line 322, in recv
-    raise self.protocol.close_exc from self.recv_exc
-websockets.exceptions.ConnectionClosedError: no close frame received or sent
-2025-12-11 03:09:50,097 - WARNING: Client disconnected.
+2025-12-11 12:21:14,168 - WARNING: Client disconnected.
